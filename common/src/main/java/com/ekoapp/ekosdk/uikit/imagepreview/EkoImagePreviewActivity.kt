@@ -69,7 +69,7 @@ class EkoImagePreviewActivity : AppCompatActivity() {
             supportActionBar?.setDisplayShowTitleEnabled(false)
         } else {
             supportActionBar?.title =
-                String.format(getString(R.string.amity_image_preview_title, position + 1, ekoImages.size))
+                    String.format(getString(R.string.amity_image_preview_title, position + 1, ekoImages.size))
         }
     }
 
@@ -87,10 +87,10 @@ class EkoImagePreviewActivity : AppCompatActivity() {
         private const val EXTRA_SHOW_IMAGE_COUNT = "show_image_count"
 
         fun newIntent(
-            context: Context,
-            imagePosition: Int,
-            showImageCount: Boolean,
-            images: ArrayList<PreviewImage>
+                context: Context,
+                imagePosition: Int,
+                showImageCount: Boolean,
+                images: ArrayList<PreviewImage>
         ): Intent {
             val intent = Intent(context, EkoImagePreviewActivity::class.java)
             intent.putParcelableArrayListExtra(EXTRA_IMAGES, ArrayList(images))

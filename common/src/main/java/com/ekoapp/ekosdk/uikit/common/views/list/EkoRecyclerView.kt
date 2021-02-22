@@ -11,8 +11,8 @@ class EkoRecyclerView : RecyclerView {
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet)
 
     constructor(context: Context, attributeSet: AttributeSet?, defStyle: Int) : super(
-        context,
-        attributeSet,
-        defStyle
+            context,
+            attributeSet,
+            defStyle
     )
 }

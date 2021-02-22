@@ -30,9 +30,9 @@ class EkoTabLayout : ConstraintLayout {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            context,
+            attrs,
+            defStyleAttr
     ) {
         init()
     }
@@ -43,8 +43,8 @@ class EkoTabLayout : ConstraintLayout {
         viewPager2 = rootView.findViewById(R.id.eko_viewPager)
         val divider = rootView.findViewById<View>(R.id.divider)
         divider.setBackgroundColor(
-            ContextCompat.getColor(context, R.color.amityColorBase),
-            ColorShade.SHADE4
+                ContextCompat.getColor(context, R.color.amityColorBase),
+                ColorShade.SHADE4
         )
     }
 
@@ -53,21 +53,22 @@ class EkoTabLayout : ConstraintLayout {
         viewPager2.adapter = mAdapter
 
         tabLayout.setTabTextColors(
-            ColorPaletteUtil.getColor(
-                ContextCompat.getColor(context, R.color.amityColorBase),
-                ColorShade.SHADE3
-            ), ContextCompat.getColor(
+                ColorPaletteUtil.getColor(
+                        ContextCompat.getColor(context, R.color.amityColorBase),
+                        ColorShade.SHADE3
+                ), ContextCompat.getColor(
                 context,
                 R.color.amityColorPrimary
-            )
         )
-        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-            tab.text = mAdapter.getTitle(position)
-        }.attach()
-    }
+        )
 
-    fun setOffscreenPageLimit(limit: Int) {
-        viewPager2.offscreenPageLimit = limit
+        try {
+            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                tab.text = mAdapter.getTitle(position)
+            }.attach()
+        } catch (ex: Exception) {
+            // log
+        }
     }
 
     fun switchTab(position: Int) {

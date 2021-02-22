@@ -39,7 +39,7 @@ class EkoTextStyle : Style {
             getColor(R.color.amityColorBase)
         )
         textStyle = typedArray.getInt(
-            R.styleable.Text_textStyle,
+            R.styleable.Text_textStyleValue,
             Typeface.NORMAL
         )
 

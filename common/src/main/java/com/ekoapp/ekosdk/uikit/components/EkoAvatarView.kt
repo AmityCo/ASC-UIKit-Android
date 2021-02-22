@@ -41,9 +41,9 @@ class EkoAvatarView : FrameLayout {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            context,
+            attrs,
+            defStyleAttr
     ) {
         init()
     }
@@ -73,10 +73,10 @@ class EkoAvatarView : FrameLayout {
 
 
         Glide.with(this)
-            .load(mUri ?: mUrl)
-            .dontAnimate()
-            .signature(ObjectKey(signatureString))
-            .into(mAvatarImageView)
+                .load(mUri ?: mUrl)
+                .dontAnimate()
+                .signature(ObjectKey(signatureString))
+                .into(mAvatarImageView)
     }
 
     /**

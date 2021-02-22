@@ -16,9 +16,13 @@ import kotlinx.android.synthetic.main.amity_activity_base_toolbar_fragment_conta
 abstract class EkoBaseToolbarFragmentContainerActivity : AppCompatActivity(),
         EkoToolBarClickListener {
     lateinit var binding: AmityActivityBaseToolbarFragmentContainerBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.amity_activity_base_toolbar_fragment_container)
+        binding = DataBindingUtil.setContentView(
+                this,
+                R.layout.amity_activity_base_toolbar_fragment_container
+        )
         if (savedInstanceState == null) {
             val fragmentManager = supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()

@@ -7,20 +7,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class EkoBaseRecyclerViewAdapter<T> :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val list: ArrayList<T> = arrayListOf()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        getViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                viewType, parent, false
-            ), viewType
-        )
+            getViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                            viewType,
+                            parent,
+                            false
+                    ),
+                    viewType
+            )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-        (holder as IBinder<T>).bind(list[position], position)
+            (holder as IBinder<T>).bind(list[position], position)
 
     override fun getItemViewType(position: Int): Int = getLayoutId(position, list[position])
 

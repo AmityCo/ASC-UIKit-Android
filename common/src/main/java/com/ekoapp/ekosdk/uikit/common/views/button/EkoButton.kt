@@ -12,9 +12,9 @@ class EkoButton : AppCompatButton {
 
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
+            context,
+            attrs,
+            defStyle
     ) {
         parseStyle(attrs)
     }

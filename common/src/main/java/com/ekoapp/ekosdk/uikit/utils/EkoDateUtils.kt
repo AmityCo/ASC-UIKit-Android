@@ -19,17 +19,17 @@ object EkoDateUtils {
     private var formatter = SimpleDateFormat(TIME_MINUTE_FORMAT, Locale.getDefault())
 
     private fun getTimeStr(timestamp: Long): String =
-        SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(Date(timestamp))
+            SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(Date(timestamp))
 
     fun getRelativeDate(timestamp: Long): String = when {
         DateUtils.isToday(timestamp) -> EkoConstants.TODAY
         isYesterday(timestamp) -> EkoConstants.YESTERDAY
         isCurrentYear(timestamp) -> SimpleDateFormat(
-            "$MONTH_WITH_DATE, $YEAR", Locale.getDefault()
+                "$MONTH_WITH_DATE, $YEAR", Locale.getDefault()
         ).format(Date(timestamp))
         else -> SimpleDateFormat(
-            DAY_OF_WEEK + " " + EkoConstants.DOT_SEPARATOR +
-                    " " + MONTH_WITH_DATE + ", " + YEAR, Locale.getDefault()
+                DAY_OF_WEEK + " " + EkoConstants.DOT_SEPARATOR +
+                        " " + MONTH_WITH_DATE + ", " + YEAR, Locale.getDefault()
         ).format(Date(timestamp))
     }
 
@@ -37,12 +37,12 @@ object EkoDateUtils {
         getTimeStr(timestamp)
     } else {
         SimpleDateFormat(
-            "dd/MM/yy", Locale.getDefault()
+                "dd/MM/yy", Locale.getDefault()
         ).format(Date(timestamp))
     }
 
     private fun isYesterday(time: Long): Boolean =
-        DateUtils.isToday(time + TimeUnit.DAYS.toMillis(1))
+            DateUtils.isToday(time + TimeUnit.DAYS.toMillis(1))
 
     private fun isCurrentYear(timestamp: Long): Boolean {
         val year = Calendar.getInstance().get(Calendar.YEAR)

@@ -24,7 +24,7 @@ class EkoAvatarViewStyle : Style {
 
     private fun parseStyle(context: Context, attrs: AttributeSet) {
         val typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.Avatar)
+                context.obtainStyledAttributes(attrs, R.styleable.Avatar)
         parse(typedArray)
     }
 
@@ -35,12 +35,12 @@ class EkoAvatarViewStyle : Style {
 
     private fun parse(typedArray: TypedArray) {
         avatarHeight = typedArray.getDimensionPixelSize(
-            R.styleable.Avatar_avatarHeight,
-            getDimensionPixelSize(R.dimen.avatar_default_height)
+                R.styleable.Avatar_avatarHeight,
+                getDimensionPixelSize(R.dimen.avatar_default_height)
         )
         avatarWidth = typedArray.getDimensionPixelSize(
-            R.styleable.Avatar_avatarWidth,
-            getDimensionPixelSize(R.dimen.avatar_default_width)
+                R.styleable.Avatar_avatarWidth,
+                getDimensionPixelSize(R.dimen.avatar_default_width)
         )
         avatarShape = typedArray.getInt(R.styleable.Avatar_avatarShape, AvatarShape.Circle)
         avatarDrawable = typedArray.getResourceId(R.styleable.Avatar_avatarDrawable, -1);

@@ -14,7 +14,7 @@ object ColorPaletteUtil {
         val hslColor = FloatArray(3)
         ColorUtils.colorToHSL(color, hslColor)
         hslColor[2] = hslColor[2] + getLumenValue(
-            shade
+                shade
         )
 
         val calculatedColor = ColorUtils.HSLToColor(hslColor)

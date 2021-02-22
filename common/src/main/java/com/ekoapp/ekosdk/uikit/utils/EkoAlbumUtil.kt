@@ -17,59 +17,59 @@ object EkoAlbumUtil {
 
     fun pickMultipleImage(activity: AppCompatActivity, currentCount: Int, resultCode: Int) {
         val pickImagePermission =
-            activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it) {
-                    if (currentCount == MAX_SELECTION_COUNT) {
-                        Toast.makeText(
-                            activity,
-                            activity.getString(R.string.amity_max_image_selected),
-                            Toast.LENGTH_LONG
-                        ).show()
+                activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                    if (it) {
+                        if (currentCount == MAX_SELECTION_COUNT) {
+                            Toast.makeText(
+                                    activity,
+                                    activity.getString(R.string.amity_max_image_selected),
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            Matisse.from(activity)
+                                    .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                                    .countable(true)
+                                    .maxSelectable(MAX_SELECTION_COUNT - currentCount)
+                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                                    .imageEngine(GlideEngine())
+                                    .theme(R.style.ImagePickerTheme)
+                                    .forResult(resultCode)
+                        }
                     } else {
-                        Matisse.from(activity)
-                            .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
-                            .countable(true)
-                            .maxSelectable(MAX_SELECTION_COUNT - currentCount)
-                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                            .imageEngine(GlideEngine())
-                            .theme(R.style.ImagePickerTheme)
-                            .forResult(resultCode)
+                        Toast.makeText(activity, "Permission denied", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(activity, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
-            }
         pickImagePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     fun pickMultipleImage(fragment: Fragment, currentCount: Int, resultCode: Int) {
         val pickImagePermission =
-            fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it) {
-                    if (currentCount == MAX_SELECTION_COUNT) {
-                        Toast.makeText(
-                            fragment.requireContext(),
-                            fragment.getString(R.string.amity_max_image_selected),
-                            Toast.LENGTH_LONG
-                        ).show()
+                fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                    if (it) {
+                        if (currentCount == MAX_SELECTION_COUNT) {
+                            Toast.makeText(
+                                    fragment.requireContext(),
+                                    fragment.getString(R.string.amity_max_image_selected),
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            Matisse.from(fragment)
+                                    .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
+                                    .countable(true)
+                                    .maxSelectable(MAX_SELECTION_COUNT - currentCount)
+                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                                    .imageEngine(GlideEngine())
+                                    .theme(R.style.ImagePickerTheme)
+                                    .forResult(resultCode)
+                        }
                     } else {
-                        Matisse.from(fragment)
-                            .choose(MimeType.of(MimeType.JPEG, MimeType.PNG, MimeType.GIF))
-                            .countable(true)
-                            .maxSelectable(MAX_SELECTION_COUNT - currentCount)
-                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                            .imageEngine(GlideEngine())
-                            .theme(R.style.ImagePickerTheme)
-                            .forResult(resultCode)
+                        Toast.makeText(
+                                fragment.requireContext(),
+                                "Permission denied",
+                                Toast.LENGTH_SHORT
+                        ).show()
                     }
-                } else {
-                    Toast.makeText(
-                        fragment.requireContext(),
-                        "Permission denied",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
-            }
         pickImagePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 }

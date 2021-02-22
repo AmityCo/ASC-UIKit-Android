@@ -22,7 +22,7 @@
 
     <declare-styleable name="Text">
         <attr name="textColor" format="color|reference" />
-        <attr name="textStyle">
+        <attr name="textStyleValue">
             <flag name="bold" value="1"></flag>
             <flag name="italic" value="2"></flag>
             <flag name="normal" value="0"></flag>

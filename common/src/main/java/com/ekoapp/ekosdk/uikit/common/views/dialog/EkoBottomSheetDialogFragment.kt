@@ -21,7 +21,11 @@ class EkoBottomSheetDialogFragment private constructor() : BottomSheetDialogFrag
         menu = requireArguments().getInt(EXTRA_PARAM_NAV_MENU)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.amity_dialog_bottom_sheet, container, false)
     }
 

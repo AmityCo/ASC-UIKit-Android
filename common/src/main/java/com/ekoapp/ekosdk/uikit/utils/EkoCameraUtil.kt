@@ -15,9 +15,9 @@ class EkoCameraUtil {
         fun createPhotoUri(context: Context, file: File): Uri? {
 
             return FileProvider.getUriForFile(
-                context,
-                context.packageName,
-                file
+                    context,
+                    context.packageName,
+                    file
             )
 
         }
@@ -26,12 +26,12 @@ class EkoCameraUtil {
 
             return try {
                 val timeStamp: String =
-                    SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+                        SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
                 val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
                 return File.createTempFile(
-                    "JPEG_${timeStamp}_", /* prefix */
-                    ".jpg", /* suffix */
-                    storageDir /* directory */
+                        "JPEG_${timeStamp}_", /* prefix */
+                        ".jpg", /* suffix */
+                        storageDir /* directory */
                 )
             } catch (ex: IOException) {
                 Log.e("EkoPickerFragment", " Exception ${ex.localizedMessage}")
