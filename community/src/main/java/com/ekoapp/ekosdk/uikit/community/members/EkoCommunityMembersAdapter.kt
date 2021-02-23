@@ -21,16 +21,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class EkoCommunityMembersAdapter(
-    private val context: Context,
-    private val listener: IMemberClickListener,
-    private val communityMemberViewModel: EkoCommunityMembersViewModel
+        private val context: Context,
+        private val listener: IMemberClickListener,
+        private val communityMemberViewModel: EkoCommunityMembersViewModel
 ) :
-    EkoBaseRecyclerViewPagedAdapter<EkoCommunityMembership>(diffCallBack) {
+        EkoBaseRecyclerViewPagedAdapter<EkoCommunityMembership>(diffCallBack) {
 
     private var isJoined: Boolean = false
 
     override fun getLayoutId(position: Int, obj: EkoCommunityMembership?): Int =
-        R.layout.amity_item_community_membership
+            R.layout.amity_item_community_membership
 
     override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
         val itemViewModel = EkoMembershipItemViewModel()
@@ -44,17 +44,17 @@ class EkoCommunityMembersAdapter(
     }
 
     inner class EkoMembershipViewHolder(
-        itemView: View, private val context: Context,
-        private val listener: IMemberClickListener,
-        private val itemViewModel: EkoMembershipItemViewModel
+            itemView: View, private val context: Context,
+            private val listener: IMemberClickListener,
+            private val itemViewModel: EkoMembershipItemViewModel
     ) :
-        EkoCommunityMembersBaseViewHolder(
-            itemView,
-            context,
-            itemViewModel,
-            communityMemberViewModel
-        ),
-        Binder<EkoCommunityMembership> {
+            EkoCommunityMembersBaseViewHolder(
+                    itemView,
+                    context,
+                    itemViewModel,
+                    communityMemberViewModel
+            ),
+            Binder<EkoCommunityMembership> {
         private val binding: AmityItemCommunityMembershipBinding? = DataBindingUtil.bind(itemView)
 
         override fun bind(data: EkoCommunityMembership?, position: Int) {
@@ -75,49 +75,49 @@ class EkoCommunityMembersAdapter(
 
         private fun getUser(userId: String) {
             itemViewModel.getUser(userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .firstOrError()
-                .doOnError {
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .firstOrError()
+                    .doOnError {
 
-                }
-                .doOnSuccess { ekoUser ->
-                    showBottomSheet(context, ekoUser)
-                }
-                .subscribe()
+                    }
+                    .doOnSuccess { ekoUser ->
+                        showBottomSheet(context, ekoUser)
+                    }
+                    .subscribe()
         }
 
         private fun showBottomSheet(context: Context, ekoUser: EkoUser) {
             val itemList = arrayListOf<EkoMenuItem>()
             if (itemViewModel.isModerator.get()) {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_PROMOTE_MODERATOR,
-                        context.getString(R.string.amity_promote_moderator)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_PROMOTE_MODERATOR,
+                                context.getString(R.string.amity_promote_moderator)
+                        )
                 )
             }
             if (ekoUser.isFlaggedByMe()) {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_UN_REPORT_USER,
-                        context.getString(R.string.amity_unreport_user)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_UN_REPORT_USER,
+                                context.getString(R.string.amity_unreport_user)
+                        )
                 )
             } else {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_REPORT_USER,
-                        context.getString(R.string.amity_report_user)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_REPORT_USER,
+                                context.getString(R.string.amity_report_user)
+                        )
                 )
             }
             if (itemViewModel.isModerator.get()) {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_REMOVE_USER,
-                        context.getString(R.string.amity_remove_user)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_REMOVE_USER,
+                                context.getString(R.string.amity_remove_user)
+                        )
                 )
             }
             val manager = (context as AppCompatActivity).supportFragmentManager
@@ -138,13 +138,13 @@ class EkoCommunityMembersAdapter(
 
         private fun promoteModerator(ekoUser: EkoUser) {
             itemViewModel.assignRole(EkoConstants.MODERATOR_ROLE, listOf(ekoUser.getUserId()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete {
 
-                }.doOnError {
-                    handleNoPermissionError(it)
-                }.subscribe()
+                    }.doOnError {
+                        handleNoPermissionError(it)
+                    }.subscribe()
 
         }
     }
@@ -152,13 +152,13 @@ class EkoCommunityMembersAdapter(
     companion object {
         private val diffCallBack = object : DiffUtil.ItemCallback<EkoCommunityMembership>() {
             override fun areItemsTheSame(
-                oldItem: EkoCommunityMembership,
-                newItem: EkoCommunityMembership
+                    oldItem: EkoCommunityMembership,
+                    newItem: EkoCommunityMembership
             ): Boolean = oldItem.getUserId() == newItem.getUserId()
 
             override fun areContentsTheSame(
-                oldItem: EkoCommunityMembership,
-                newItem: EkoCommunityMembership
+                    oldItem: EkoCommunityMembership,
+                    newItem: EkoCommunityMembership
             ): Boolean = oldItem == newItem
         }
     }

@@ -13,18 +13,17 @@ import com.ekoapp.ekosdk.uikit.community.data.SelectMemberItem
 import com.ekoapp.ekosdk.uikit.community.ui.clickListener.EkoAddedMemberClickListener
 
 class EkoAddedMemberWithAddButtonViewHolder(
-    itemView: View,
-    private val mClickListener: EkoAddedMemberClickListener
-) :
-    RecyclerView.ViewHolder(itemView), EkoBaseRecyclerViewAdapter.IBinder<SelectMemberItem> {
+        itemView: View,
+        private val mClickListener: EkoAddedMemberClickListener
+) : RecyclerView.ViewHolder(itemView), EkoBaseRecyclerViewAdapter.IBinder<SelectMemberItem> {
 
     private val ivAdd: ImageView = itemView.findViewById(R.id.ivAdd)
 
     init {
         ivAdd.toCircularShape(
-            ColorPaletteUtil.getColor(
-                ContextCompat.getColor(itemView.context, R.color.amityColorBase), ColorShade.SHADE4
-            )
+                ColorPaletteUtil.getColor(
+                        ContextCompat.getColor(itemView.context, R.color.amityColorBase), ColorShade.SHADE4
+                )
         )
     }
 

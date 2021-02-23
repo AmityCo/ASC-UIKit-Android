@@ -14,36 +14,6 @@
         tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/cbLike"
-            style="@style/TextStyleEkoBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@drawable/amity_ic_like_selector"
-            android:paddingStart="@dimen/five"
-            android:text="@string/amity_like"
-            app:checkBoxCheckedColor="@{@color/amityColorPrimary}"
-            app:checkBoxDefaultColor="@{@color/amityColorBase}"
-            app:checkBoxDefaultShade="@{ColorShade.SHADE2}" />
-
-        <TextView
-            android:id="@+id/reply"
-            style="@style/TextStyleEkoBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twelve"
-            android:drawableStart="@drawable/amity_ic_reply"
-            android:drawablePadding="@dimen/eight"
-            android:gravity="center_vertical"
-            android:text="@string/amity_reply"
-            android:textColor="@{@color/amityColorBase}"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/cbLike"
-            app:layout_constraintStart_toEndOf="@id/cbLike"
-            app:layout_constraintTop_toTopOf="@id/cbLike"
-            app:textColorShade="@{ColorShade.SHADE2}" />
-
-
         <ImageButton
             android:id="@+id/btnCommentAction"
             android:layout_width="wrap_content"
@@ -55,6 +25,36 @@
             app:layout_constraintBottom_toBottomOf="@id/reply"
             app:layout_constraintStart_toEndOf="@id/reply"
             app:layout_constraintTop_toTopOf="@id/reply" />
+
+        <TextView
+            android:id="@+id/reply"
+            style="@style/TextStyleEkoBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twelve"
+            android:drawablePadding="@dimen/eight"
+            android:drawableStart="@drawable/amity_ic_reply"
+            android:gravity="center_vertical"
+            android:text="@string/amity_reply"
+            android:textColor="@{@color/amityColorBase}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/cbLike"
+            app:layout_constraintStart_toEndOf="@id/cbLike"
+            app:layout_constraintTop_toTopOf="@id/cbLike"
+            app:textColorShade="@{ColorShade.SHADE2}" />
+
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbLike"
+            style="@style/TextStyleEkoBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/amity_ic_like_selector"
+            android:paddingStart="@dimen/five"
+            android:text="@string/amity_like"
+            app:checkBoxCheckedColor="@{@color/amityColorPrimary}"
+            app:checkBoxDefaultColor="@{@color/amityColorBase}"
+            app:checkBoxDefaultShade="@{ColorShade.SHADE2}" />
 
     </merge>
 </layout>

@@ -6,17 +6,17 @@
     </style>
 
     <style name="EkoCommunityHeaderDisplayNameStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorBlack</item>
     </style>
 
     <style name="EkoCommunityNameStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorBlack</item>
     </style>
 
     <style name="EkoCommunityFollowerStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorWhite</item>
     </style>
 
@@ -33,17 +33,17 @@
     </style>
 
     <style name="EkoTrendingCommunityNameStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorBlack</item>
     </style>
 
     <style name="EkoTrendingCommunityDescriptionStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorBlack</item>
     </style>
 
     <style name="EkoTrendingCommunityFollowerStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
     </style>
 
     <style name="EkoTrendingCommunityFollowButtonStyle">
@@ -66,12 +66,12 @@
     </style>
 
     <style name="EkoCommunityCategoryNameStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorBlack</item>
     </style>
 
     <style name="EkoCommunitySubCategoryNameStyle">
-        <item name="textStyle">normal</item>
+        <item name="textStyleValue">normal</item>
         <item name="textColor">@color/amityColorBlack</item>
     </style>
 

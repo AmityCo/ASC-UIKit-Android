@@ -17,6 +17,22 @@
         android:layout_height="wrap_content"
         tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
+        <TextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/four"
+            android:layout_marginStart="@dimen/eight"
+            android:ellipsize="end"
+            android:gravity="start|center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/amityColorBase"
+            app:layout_constraintBottom_toBottomOf="@id/categoryAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/categoryAvatar"
+            app:layout_constraintTop_toTopOf="@id/categoryAvatar"
+            tools:text="Travel" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/categoryAvatar"
             style="@style/CircularAvatarStyle"
@@ -28,22 +44,6 @@
             android:layout_height="@dimen/forty"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvCategoryName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/eight"
-            android:layout_marginEnd="@dimen/four"
-            android:ellipsize="end"
-            android:gravity="start|center_vertical"
-            android:maxLines="1"
-            android:textColor="@color/amityColorBase"
-            app:layout_constraintBottom_toBottomOf="@id/categoryAvatar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/categoryAvatar"
-            app:layout_constraintTop_toTopOf="@id/categoryAvatar"
-            tools:text="Travel" />
 
     </merge>
 </layout>

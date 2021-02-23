@@ -33,7 +33,8 @@ class EkoCommunityFeedFragment : EkoBaseFeedFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProvider(requireActivity()).get(EkoCommunityTimelineViewModel::class.java)
+        mViewModel =
+                ViewModelProvider(requireActivity()).get(EkoCommunityTimelineViewModel::class.java)
         arguments.let {
             mViewModel.communityId = it?.getString(ARG_COMMUNITY_ID)
             mViewModel.community = it?.getParcelable(ARG_COMMUNITY)
@@ -46,7 +47,8 @@ class EkoCommunityFeedFragment : EkoBaseFeedFragment() {
     }
 
     private fun getCommunityDetails() {
-        val communityDisposable = mViewModel.getCommunity(mViewModel.communityId!!)
+        val communityDisposable = mViewModel
+                .getCommunity(mViewModel.communityId!!)
                 ?.subscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.doOnSuccess {
@@ -76,14 +78,28 @@ class EkoCommunityFeedFragment : EkoBaseFeedFragment() {
     }
 
     private fun getOtherUserEmptyFeed(): View {
-        val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val mBinding: AmityViewOtherUserTimelineEmptyBinding = DataBindingUtil.inflate(inflater, R.layout.amity_view_other_user_timeline_empty, getRootView(), false)
+        val inflater =
+                requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val mBinding: AmityViewOtherUserTimelineEmptyBinding =
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.amity_view_other_user_timeline_empty,
+                        getRootView(),
+                        false
+                )
         return mBinding.root
     }
 
     private fun getAdminUserEmptyFeed(): View {
-        val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val mBinding: AmityViewMyTimelineFeedEmptyBinding = DataBindingUtil.inflate(inflater, R.layout.amity_view_my_timeline_feed_empty, getRootView(), false)
+        val inflater =
+                context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val mBinding: AmityViewMyTimelineFeedEmptyBinding =
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.amity_view_my_timeline_feed_empty,
+                        getRootView(),
+                        false
+                )
         return mBinding.root
     }
 
@@ -110,7 +126,7 @@ class EkoCommunityFeedFragment : EkoBaseFeedFragment() {
             fragment.mViewModel = ViewModelProvider(activity).get(EkoCommunityTimelineViewModel::class.java)
             fragment.mViewModel.avatarClickListener = avatarClickListener
 
-            if(postShareClickListener != null){
+            if (postShareClickListener != null) {
                 fragment.mViewModel.postShareClickListener = postShareClickListener
             }
 

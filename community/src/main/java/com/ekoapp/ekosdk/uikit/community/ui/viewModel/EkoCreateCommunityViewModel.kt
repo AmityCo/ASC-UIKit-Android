@@ -67,10 +67,10 @@ class EkoCreateCommunityViewModel : EkoBaseViewModel() {
                 builder.categoryIds(listOf(category.get()?.categoryId!!))
             }
             builder.isPublic(isPublic.get())
-                .description(description.get()?.trim() ?: "")
-                .userIds(userIdList)
-                .build()
-                .create()
+                    .description(description.get()?.trim() ?: "")
+                    .userIds(userIdList)
+                    .build()
+                    .create()
         } else {
             val builder = communityRepository.createCommunity(communityName.get()!!.trim())
             if (ekoImage != null) {
@@ -80,10 +80,10 @@ class EkoCreateCommunityViewModel : EkoBaseViewModel() {
                 builder.categoryIds(listOf(category.get()?.categoryId!!))
             }
             builder.isPublic(isPublic.get())
-                .description(description.get()?.trim() ?: "")
-                .userIds(userIdList)
-                .build()
-                .create()
+                    .description(description.get()?.trim() ?: "")
+                    .userIds(userIdList)
+                    .build()
+                    .create()
         }
     }
 
@@ -97,9 +97,9 @@ class EkoCreateCommunityViewModel : EkoBaseViewModel() {
             builder.categoryIds(listOf(category.get()?.categoryId!!))
         }
         return builder.displayName(communityName.get()!!.trim())
-            .isPublic(isPublic.get())
-            .description(description.get()?.trim() ?: "")
-            .build().update()
+                .isPublic(isPublic.get())
+                .description(description.get()?.trim() ?: "")
+                .build().update()
     }
 
     fun getCommunityDetail(): Flowable<EkoCommunity> {
@@ -117,8 +117,8 @@ class EkoCreateCommunityViewModel : EkoBaseViewModel() {
         description.set(ekoCommunity.getDescription())
         isPublic.set(ekoCommunity.isPublic())
         category.set(
-            SelectCategoryItem(
-                name = ekoCommunity.getCategories().joinToString(separator = " ") { it.getName() })
+                SelectCategoryItem(
+                        name = ekoCommunity.getCategories().joinToString(separator = " ") { it.getName() })
         )
     }
 

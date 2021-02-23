@@ -6,15 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ekoapp.ekosdk.uikit.community.ui.viewHolder.EkoMemberListHeaderViewHolder
 
 class SelectMembersItemDecoration(
-    private val headerMargin: Int,
-    private val itemMargin: Int
+        private val headerMargin: Int,
+        private val itemMargin: Int
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
-        outRect: Rect,
-        view: View,
-        parent: RecyclerView,
-        state: RecyclerView.State
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
     ) {
         with(outRect) {
             when (parent.getChildViewHolder(view)) {

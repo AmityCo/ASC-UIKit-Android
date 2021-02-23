@@ -3,17 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <variable
-            name="viewModel"
-            type="com.ekoapp.ekosdk.uikit.community.explore.viewmodel.EkoExploreCommunityViewModel" />
-    </data>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -59,5 +48,16 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="viewModel"
+            type="com.ekoapp.ekosdk.uikit.community.explore.viewmodel.EkoExploreCommunityViewModel" />
+    </data>
 
 </layout>

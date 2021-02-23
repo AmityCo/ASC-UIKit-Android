@@ -13,23 +13,22 @@ import com.ekoapp.ekosdk.uikit.community.databinding.AmityItemCommunitySelection
 import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.ICreatePostCommunitySelectionListener
 
 class EkoCreatePostCommunitySelectionAdapter(private val listener: ICreatePostCommunitySelectionListener) :
-    EkoBaseRecyclerViewPagedAdapter<EkoCommunity>(diffCallBack) {
+        EkoBaseRecyclerViewPagedAdapter<EkoCommunity>(diffCallBack) {
 
     override fun getLayoutId(position: Int, obj: EkoCommunity?): Int =
-        R.layout.amity_item_community_selection_list
+            R.layout.amity_item_community_selection_list
 
     override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
         return EkoCommunityViewHolder(view, listener)
     }
 
     class EkoCommunityViewHolder(
-        itemView: View,
-        private val listener: ICreatePostCommunitySelectionListener?
-    ) :
-        RecyclerView.ViewHolder(itemView), Binder<EkoCommunity> {
+            itemView: View,
+            private val listener: ICreatePostCommunitySelectionListener?
+    ) : RecyclerView.ViewHolder(itemView), Binder<EkoCommunity> {
 
         private val binding: AmityItemCommunitySelectionListBinding? =
-            DataBindingUtil.bind(itemView)
+                DataBindingUtil.bind(itemView)
 
         override fun bind(data: EkoCommunity?, position: Int) {
             if (data != null) {
@@ -45,17 +44,17 @@ class EkoCreatePostCommunitySelectionAdapter(private val listener: ICreatePostCo
             var rightDrawable: Drawable? = null
             if (!data.isPublic()) {
                 leftDrawable =
-                    ContextCompat.getDrawable(itemView.context, R.drawable.amity_ic_lock2)
+                        ContextCompat.getDrawable(itemView.context, R.drawable.amity_ic_lock2)
             }
             if (data.isOfficial()) {
                 rightDrawable =
-                    ContextCompat.getDrawable(itemView.context, R.drawable.amity_ic_verified)
+                        ContextCompat.getDrawable(itemView.context, R.drawable.amity_ic_verified)
             }
             binding?.tvCommunityName?.setCompoundDrawablesWithIntrinsicBounds(
-                leftDrawable,
-                null,
-                rightDrawable,
-                null
+                    leftDrawable,
+                    null,
+                    rightDrawable,
+                    null
             )
         }
 
@@ -69,12 +68,12 @@ class EkoCreatePostCommunitySelectionAdapter(private val listener: ICreatePostCo
         private val diffCallBack = object : DiffUtil.ItemCallback<EkoCommunity>() {
 
             override fun areItemsTheSame(oldItem: EkoCommunity, newItem: EkoCommunity): Boolean =
-                oldItem.getCommunityId() == newItem.getCommunityId()
+                    oldItem.getCommunityId() == newItem.getCommunityId()
 
             override fun areContentsTheSame(oldItem: EkoCommunity, newItem: EkoCommunity): Boolean =
-                oldItem.getAvatar()?.getUrl() == newItem.getAvatar()?.getUrl()
-                        && oldItem.getDisplayName() == newItem.getDisplayName()
-                        && oldItem.isOfficial() == newItem.isOfficial()
+                    oldItem.getAvatar()?.getUrl() == newItem.getAvatar()?.getUrl()
+                            && oldItem.getDisplayName() == newItem.getDisplayName()
+                            && oldItem.isOfficial() == newItem.isOfficial()
         }
     }
 }

@@ -9,7 +9,7 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.ICreatePostImageActio
 import com.ekoapp.ekosdk.uikit.community.newsfeed.model.FeedImage
 
 class EkoCreatePostImageAdapter(private val listener: ICreatePostImageActionListener) :
-    EkoBaseRecyclerViewAdapter<FeedImage>(), IListItemChangeListener {
+        EkoBaseRecyclerViewAdapter<FeedImage>(), IListItemChangeListener {
 
     override fun getLayoutId(position: Int, obj: FeedImage?): Int {
         return R.layout.amity_item_create_post_image
@@ -30,8 +30,8 @@ class EkoCreatePostImageAdapter(private val listener: ICreatePostImageActionList
 
 
     class DiffCallback(
-        private val oldList: List<FeedImage>,
-        private val newList: List<FeedImage>
+            private val oldList: List<FeedImage>,
+            private val newList: List<FeedImage>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

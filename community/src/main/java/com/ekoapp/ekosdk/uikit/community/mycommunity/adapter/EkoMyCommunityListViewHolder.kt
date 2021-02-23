@@ -14,8 +14,8 @@ import com.ekoapp.ekosdk.uikit.community.mycommunity.listener.IMyCommunityItemCl
 
 
 class EkoMyCommunityListViewHolder(
-    itemView: View,
-    private val listener: IMyCommunityItemClickListener
+        itemView: View,
+        private val listener: IMyCommunityItemClickListener
 ) : RecyclerView.ViewHolder(itemView), EkoBaseRecyclerViewPagedAdapter.Binder<EkoCommunity> {
     private val binding: AmityItemMyCommunityBinding? = DataBindingUtil.bind(itemView)
 
@@ -31,8 +31,8 @@ class EkoMyCommunityListViewHolder(
             binding?.ekoCommunity = data
             binding?.listener = listener
             binding?.ivAvatar?.loadImage(
-                data?.getAvatar()?.getUrl(),
-                R.drawable.amity_ic_default_community_avatar_small
+                    data?.getAvatar()?.getUrl(),
+                    R.drawable.amity_ic_default_community_avatar_small
             )
         }
     }

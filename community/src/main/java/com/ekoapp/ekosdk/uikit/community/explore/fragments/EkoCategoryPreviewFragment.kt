@@ -25,20 +25,20 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.amity_fragment_category_preview.*
 
 class EkoCategoryPreviewFragment internal constructor() : EkoBaseFragment(),
-    IEkoCategoryItemClickListener {
+        IEkoCategoryItemClickListener {
 
     private val TAG = EkoCategoryPreviewFragment::class.java.canonicalName
     private lateinit var mViewModel: EkoExploreCommunityViewModel
     private lateinit var mAdapter: EkoCommunityCategoryAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
         val binding: AmityFragmentCategoryPreviewBinding = DataBindingUtil.inflate(
-            inflater, R.layout.amity_fragment_category_preview, container, false
+                inflater, R.layout.amity_fragment_category_preview, container, false
         )
         return binding.root
     }
@@ -61,9 +61,9 @@ class EkoCategoryPreviewFragment internal constructor() : EkoBaseFragment(),
         rvCommunityCategory.layoutManager = GridLayoutManager(requireContext(), 2)
         rvCommunityCategory.adapter = mAdapter
         rvCommunityCategory.addItemDecoration(
-            EkoRecyclerViewItemDecoration(
-                requireContext().resources.getDimensionPixelSize(R.dimen.twelve)
-            )
+                EkoRecyclerViewItemDecoration(
+                        requireContext().resources.getDimensionPixelSize(R.dimen.twelve)
+                )
         )
         rvCommunityCategory.itemAnimator = null
         rvCommunityCategory.hasFixedSize()
@@ -72,13 +72,13 @@ class EkoCategoryPreviewFragment internal constructor() : EkoBaseFragment(),
 
     private fun getCategories() {
         disposable.add(mViewModel.getCommunityCategory().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                mViewModel.emptyCategoryList.set(it.size == 0)
-                mAdapter.submitList(it)
-            }.doOnError {
-                Log.e(TAG, "getCommunityCategory: ${it.localizedMessage}")
-            }.subscribe()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    mViewModel.emptyCategoryList.set(it.size == 0)
+                    mAdapter.submitList(it)
+                }.doOnError {
+                    Log.e(TAG, "getCommunityCategory: ${it.localizedMessage}")
+                }.subscribe()
         )
     }
 
@@ -97,7 +97,7 @@ class EkoCategoryPreviewFragment internal constructor() : EkoBaseFragment(),
         fun build(activity: AppCompatActivity): EkoCategoryPreviewFragment {
             val fragment = EkoCategoryPreviewFragment()
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
             fragment.mViewModel.categoryItemClickListener = categoryItemClickListener
             return fragment
         }

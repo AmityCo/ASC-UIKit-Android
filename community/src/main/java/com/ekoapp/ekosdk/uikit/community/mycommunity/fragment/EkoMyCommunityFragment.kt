@@ -33,7 +33,7 @@ private const val ARG_SHOW_SEARCH = "ARG_SHOW_SEARCH"
 private const val ARG_SHOW_OPTIONS_MENU = "ARG_SHOW_OPTIONS_MENU"
 
 class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
-    IMyCommunityItemClickListener {
+        IMyCommunityItemClickListener {
     private val TAG = EkoMyCommunityFragment::class.java.simpleName
     private lateinit var mViewModel: EkoMyCommunityListViewModel
     lateinit var mBinding: AmityFragmentMyCommunityBinding
@@ -49,18 +49,18 @@ class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoMyCommunityListViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoMyCommunityListViewModel::class.java)
         mBinding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.amity_fragment_my_community,
-                container,
-                false
-            )
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.amity_fragment_my_community,
+                        container,
+                        false
+                )
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.viewModel = mViewModel
         return mBinding.root
@@ -81,8 +81,8 @@ class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
 
     private fun handleEditTextInput() {
         etSearch.setShape(
-            null, null, null, null,
-            R.color.amityColorBase, null, ColorShade.SHADE4
+                null, null, null, null,
+                R.color.amityColorBase, null, ColorShade.SHADE4
         )
         etSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -113,13 +113,13 @@ class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
     private fun searchCommunity() {
         disposable.clear()
         disposable.add(mViewModel.getCommunityList().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { list ->
-                mViewModel.emptyCommunity.set(list.size == 0)
-                mAdapter.submitList(list)
-            }.doOnError {
-                Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
-            }.subscribe()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { list ->
+                    mViewModel.emptyCommunity.set(list.size == 0)
+                    mAdapter.submitList(list)
+                }.doOnError {
+                    Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
+                }.subscribe()
         )
     }
 
@@ -128,35 +128,35 @@ class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
         rvMyCommunities.layoutManager = LinearLayoutManager(requireContext())
         rvMyCommunities.adapter = mAdapter
         rvMyCommunities.addItemDecoration(
-            EkoRecyclerViewItemDecoration(
-                resources.getDimensionPixelSize(R.dimen.eight),
-                0, resources.getDimensionPixelSize(R.dimen.eight), 0
-            )
+                EkoRecyclerViewItemDecoration(
+                        resources.getDimensionPixelSize(R.dimen.eight),
+                        0, resources.getDimensionPixelSize(R.dimen.eight), 0
+                )
         )
         rvMyCommunities.setHasFixedSize(true)
 
         disposable.add(mViewModel.getCommunityList().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { list ->
-                mViewModel.emptyCommunity.set(list.size == 0)
-                mAdapter.submitList(list)
-            }.doOnError {
-                Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
-            }.subscribe()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { list ->
+                    mViewModel.emptyCommunity.set(list.size == 0)
+                    mAdapter.submitList(list)
+                }.doOnError {
+                    Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
+                }.subscribe()
         )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.amity_ic_add)
         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.amity_add))
-            ?.setIcon(drawable)
-            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                ?.setIcon(drawable)
+                ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val createCommunityIntent =
-            Intent(requireActivity(), EkoCommunityCreateActivity::class.java)
+                Intent(requireActivity(), EkoCommunityCreateActivity::class.java)
         startActivity(createCommunityIntent)
         return super.onOptionsItemSelected(item)
     }
@@ -172,8 +172,8 @@ class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
     private fun navigateToCommunityDetails(ekoCommunity: EkoCommunity?) {
         if (ekoCommunity != null) {
             val detailIntent = EkoCommunityPageActivity.newIntent(
-                requireContext(),
-                ekoCommunity.getCommunityId()
+                    requireContext(),
+                    ekoCommunity.getCommunityId()
             )
             startActivity(detailIntent)
         }
@@ -193,7 +193,7 @@ class EkoMyCommunityFragment internal constructor() : EkoBaseFragment(),
                 }
             }
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoMyCommunityListViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoMyCommunityListViewModel::class.java)
             fragment.mViewModel.myCommunityItemClickListener = myCommunityItemClickListener
             return fragment
         }

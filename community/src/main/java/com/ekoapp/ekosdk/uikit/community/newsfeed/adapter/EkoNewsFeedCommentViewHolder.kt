@@ -16,17 +16,17 @@ import kotlinx.android.synthetic.main.amity_item_comment_news_feed.view.*
 
 
 class EkoNewsFeedCommentViewHolder(
-    itemView: View,
-    private val itemCount: Int?,
-    private val itemClickListener: INewsFeedCommentItemClickListener?,
-    private val showAllReplyListener: INewsFeedCommentShowAllReplyListener?,
-    private val showMoreActionListener: INewsFeedCommentShowMoreActionListener?,
-    private val preExpandCommentId: String? = null,
-    var readOnlyMode: Boolean
+        itemView: View,
+        private val itemCount: Int?,
+        private val itemClickListener: INewsFeedCommentItemClickListener?,
+        private val showAllReplyListener: INewsFeedCommentShowAllReplyListener?,
+        private val showMoreActionListener: INewsFeedCommentShowMoreActionListener?,
+        private val preExpandCommentId: String? = null,
+        var readOnlyMode: Boolean
 ) : RecyclerView.ViewHolder(itemView), EkoBaseRecyclerViewAdapter.IBinder<EkoComment> {
     private var newsFeedCommentAdapter: EkoNewsFeedCommentAdapter? = null
     private val ekoNewsFeedComment: EkoNewsFeedCommentView =
-        itemView.findViewById(R.id.ekoNewsFeedComment)
+            itemView.findViewById(R.id.ekoNewsFeedComment)
     private val rvReply: RecyclerView = itemView.findViewById(R.id.rvReply)
 
     override fun bind(data: EkoComment?, position: Int) {
@@ -66,7 +66,7 @@ class EkoNewsFeedCommentViewHolder(
 
     private fun addCommentActionListener(comment: EkoComment, position: Int) {
         ekoNewsFeedComment.setCommentActionListener(object :
-            EkoNewsFeedCommentView.ICommentActionListener {
+                EkoNewsFeedCommentView.ICommentActionListener {
             override fun showAllReplies() {
                 if (showAllReplyListener == null) {
                     handleShowAllReply(comment)
@@ -106,12 +106,12 @@ class EkoNewsFeedCommentViewHolder(
 
     private fun initEkoPostCommentRecyclerview(size: Int) {
         newsFeedCommentAdapter = EkoNewsFeedCommentAdapter(
-            size,
-            itemClickListener,
-            showAllReplyListener,
-            showMoreActionListener,
-            null,
-            readOnlyMode
+                size,
+                itemClickListener,
+                showAllReplyListener,
+                showMoreActionListener,
+                null,
+                readOnlyMode
         )
         rvReply.layoutManager = LinearLayoutManager(itemView.context)
         rvReply.adapter = newsFeedCommentAdapter

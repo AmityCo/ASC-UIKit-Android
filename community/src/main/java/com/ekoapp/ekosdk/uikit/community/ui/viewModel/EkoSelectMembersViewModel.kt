@@ -25,13 +25,13 @@ class EkoSelectMembersViewModel : EkoBaseViewModel() {
     fun getAllUsers(): Flowable<PagedList<EkoUser>> {
         val userRepo = EkoClient.newUserRepository()
         return userRepo.searchUserByDisplayName("")
-            .build().query()
+                .build().query()
     }
 
     fun searchUser(): Flowable<PagedList<EkoUser>> {
         val userRepo = EkoClient.newUserRepository()
         return userRepo.searchUserByDisplayName(searchString.get() ?: "")
-            .build().query()
+                .build().query()
     }
 
     fun prepareSelectedMembersList(member: SelectMemberItem, isSelected: Boolean) {

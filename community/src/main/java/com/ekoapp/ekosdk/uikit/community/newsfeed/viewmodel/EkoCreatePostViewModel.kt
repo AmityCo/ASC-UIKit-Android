@@ -78,24 +78,24 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
             when (postChildren.first().getData()) {
                 is EkoPost.Data.IMAGE -> {
                     postChildren
-                        .map { getPostImage(it) }
-                        .forEach { image ->
-                            image?.let {
-                                val feedImage = mapEkoImageToFeedImage(it)
-                                imageMap[feedImage.url.toString()] = feedImage
+                            .map { getPostImage(it) }
+                            .forEach { image ->
+                                image?.let {
+                                    val feedImage = mapEkoImageToFeedImage(it)
+                                    imageMap[feedImage.url.toString()] = feedImage
+                                }
                             }
-                        }
                     liveDataImage.value = imageMap.values.toMutableList()
                 }
                 is EkoPost.Data.FILE -> {
                     postChildren
-                        .map { getPostFile(it) }
-                        .forEach { file ->
-                            file?.let {
-                                val attachment = mapEkoFileToFileAttachment(it)
-                                filesMap[attachment.uri.toString()] = attachment
+                            .map { getPostFile(it) }
+                            .forEach { file ->
+                                file?.let {
+                                    val attachment = mapEkoFileToFileAttachment(it)
+                                    filesMap[attachment.uri.toString()] = attachment
+                                }
                             }
-                        }
 
                     liveDataFiles.value = filesMap.values.toMutableList()
                 }
@@ -106,33 +106,33 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
     private fun mapEkoFileToFileAttachment(ekoFile: EkoFile): FileAttachment {
         val fileSize = ekoFile.getFileSize()?.toLong() ?: 0L
         return FileAttachment(
-            ekoFile.getFileId(),
-            null,
-            ekoFile.getFileName() ?: "",
-            fileSize,
-            Uri.parse(ekoFile.getUrl()),
-            FileUtils.humanReadableByteCount(fileSize, true)!!,
-            ekoFile.getMimeType() ?: "",
-            FileUploadState.COMPLETE,
-            100
+                ekoFile.getFileId(),
+                null,
+                ekoFile.getFileName() ?: "",
+                fileSize,
+                Uri.parse(ekoFile.getUrl()),
+                FileUtils.humanReadableByteCount(fileSize, true)!!,
+                ekoFile.getMimeType() ?: "",
+                FileUploadState.COMPLETE,
+                100
         )
     }
 
     private fun mapEkoFileToFileAttachment(
-        fileAttachment: FileAttachment,
-        ekoFile: EkoFile
+            fileAttachment: FileAttachment,
+            ekoFile: EkoFile
     ): FileAttachment {
         val fileSize = ekoFile.getFileSize()?.toLong() ?: 0L
         return FileAttachment(
-            ekoFile.getFileId(),
-            fileAttachment.uploadId,
-            ekoFile.getFileName() ?: "",
-            fileSize,
-            fileAttachment.uri,
-            FileUtils.humanReadableByteCount(fileSize, true)!!,
-            ekoFile.getMimeType() ?: "",
-            FileUploadState.COMPLETE,
-            100
+                ekoFile.getFileId(),
+                fileAttachment.uploadId,
+                ekoFile.getFileName() ?: "",
+                fileSize,
+                fileAttachment.uri,
+                FileUtils.humanReadableByteCount(fileSize, true)!!,
+                ekoFile.getMimeType() ?: "",
+                FileUploadState.COMPLETE,
+                100
         )
     }
 
@@ -167,15 +167,15 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
     fun updatePostText(postText: String): Completable {
         val textData = newsFeed!!.getData() as EkoPost.Data.TEXT
         return textData.edit()
-            .text(postText)
-            .build()
-            .apply()
+                .text(postText)
+                .build()
+                .apply()
     }
 
     private fun createPostText(postText: String): Single<EkoPost> {
         return if (community != null) {
             feedRepository.createPost().targetCommunity(community!!.getCommunityId()).text(postText)
-                .build().post()
+                    .build().post()
         } else {
             feedRepository.createPost().targetMe().text(postText).build().post()
         }
@@ -185,14 +185,14 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
         val imageArray = images.toTypedArray()
         return if (community != null) {
             feedRepository.createPost()
-                .targetCommunity(community!!.getCommunityId())
-                .image(*imageArray)
-                .text(postText).build().post()
+                    .targetCommunity(community!!.getCommunityId())
+                    .image(*imageArray)
+                    .text(postText).build().post()
         } else {
             feedRepository.createPost()
-                .targetMe()
-                .image(*imageArray)
-                .text(postText).build().post()
+                    .targetMe()
+                    .image(*imageArray)
+                    .text(postText).build().post()
         }
     }
 
@@ -200,56 +200,56 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
         val fileArray = files.toTypedArray()
         return if (community != null) {
             feedRepository.createPost()
-                .targetCommunity(community!!.getCommunityId())
-                .file(*fileArray)
-                .text(postText).build().post()
+                    .targetCommunity(community!!.getCommunityId())
+                    .file(*fileArray)
+                    .text(postText).build().post()
         } else {
             feedRepository.createPost()
-                .targetMe()
-                .file(*fileArray)
-                .text(postText).build().post()
+                    .targetMe()
+                    .file(*fileArray)
+                    .text(postText).build().post()
         }
     }
 
     fun uploadImage(feedImage: FeedImage): Flowable<EkoUploadResult<EkoImage>> {
         return fileRepository
-            .uploadImage(feedImage.url)
-            .uploadId(feedImage.uploadId!!)
-            .isFullImage(true).build().transfer()
+                .uploadImage(feedImage.url)
+                .uploadId(feedImage.uploadId!!)
+                .isFullImage(true).build().transfer()
     }
 
     fun uploadFile(attachment: FileAttachment): Flowable<EkoUploadResult<EkoFile>> {
         return fileRepository
-            .uploadFile(attachment.uri)
-            .uploadId(attachment.uploadId!!)
-            .build().transfer()
+                .uploadFile(attachment.uri)
+                .uploadId(attachment.uploadId!!)
+                .build().transfer()
     }
 
     fun deleteImageOrFileInPost(
     ): Completable {
         return newsFeed?.getChildren()?.let { ekoPostItems ->
             Observable.fromIterable(ekoPostItems)
-                .map { ekoPostItem ->
-                    when (val postData = ekoPostItem.getData()) {
-                        is EkoPost.Data.IMAGE -> {
-                            if (postData.getImage()?.getFileId() in deletedImageIds) {
-                                ekoPostItem.delete()
-                            } else {
+                    .map { ekoPostItem ->
+                        when (val postData = ekoPostItem.getData()) {
+                            is EkoPost.Data.IMAGE -> {
+                                if (postData.getImage()?.getFileId() in deletedImageIds) {
+                                    ekoPostItem.delete()
+                                } else {
+                                    Completable.complete()
+                                }
+                            }
+                            is EkoPost.Data.FILE -> {
+                                if (postData.getFile()?.getFileId() in deletedFileIds) {
+                                    ekoPostItem.delete()
+                                } else {
+                                    Completable.complete()
+                                }
+                            }
+                            else -> {
                                 Completable.complete()
                             }
                         }
-                        is EkoPost.Data.FILE -> {
-                            if (postData.getFile()?.getFileId() in deletedFileIds) {
-                                ekoPostItem.delete()
-                            } else {
-                                Completable.complete()
-                            }
-                        }
-                        else -> {
-                            Completable.complete()
-                        }
-                    }
-                }.ignoreElements()
+                    }.ignoreElements()
         } ?: kotlin.run {
             Completable.complete()
         }
@@ -263,7 +263,7 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
         images.forEach { uriItem ->
             if (!imageMap.containsKey(uriItem.toString())) {
                 imageMap[uriItem.toString()] =
-                    FeedImage(null, UUID.randomUUID().toString(), uriItem)
+                        FeedImage(null, UUID.randomUUID().toString(), uriItem)
             }
         }
         val currentImages = imageMap.values.toMutableList()
@@ -305,11 +305,11 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
         when (ekoImageUpload) {
             is EkoUploadResult.PROGRESS -> {
                 val updatedFeedImage = FeedImage(
-                    feedImage.id,
-                    feedImage.uploadId,
-                    feedImage.url,
-                    FileUploadState.UPLOADING,
-                    ekoImageUpload.getUploadInfo().getProgressPercentage()
+                        feedImage.id,
+                        feedImage.uploadId,
+                        feedImage.url,
+                        FileUploadState.UPLOADING,
+                        ekoImageUpload.getUploadInfo().getProgressPercentage()
                 )
                 updateList(updatedFeedImage)
             }
@@ -317,11 +317,11 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
                 uploadFailedImages.remove(feedImage.url.toString())
                 uploadedImageMap[ekoImageUpload.getFile().getFileId()] = ekoImageUpload.getFile()
                 val updatedFeedImage = FeedImage(
-                    ekoImageUpload.getFile().getFileId(),
-                    feedImage.uploadId,
-                    feedImage.url,
-                    FileUploadState.COMPLETE,
-                    100
+                        ekoImageUpload.getFile().getFileId(),
+                        feedImage.uploadId,
+                        feedImage.url,
+                        FileUploadState.COMPLETE,
+                        100
                 )
                 updateList(updatedFeedImage)
                 if (!hasPendingImageToUpload() && hasFirstTimeFailedToUploadImages()) {
@@ -333,14 +333,14 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
                 if (imageMap.containsKey(feedImage.url.toString())) {
 
                     val updatedFeedImage = FeedImage(
-                        feedImage.id,
-                        feedImage.uploadId,
-                        feedImage.url,
-                        FileUploadState.FAILED,
-                        0
+                            feedImage.id,
+                            feedImage.uploadId,
+                            feedImage.url,
+                            FileUploadState.FAILED,
+                            0
                     )
                     var firstTimeFailedToUpload =
-                        !uploadFailedImages.containsKey(updatedFeedImage.url.toString())
+                            !uploadFailedImages.containsKey(updatedFeedImage.url.toString())
                     uploadFailedImages[updatedFeedImage.url.toString()] = firstTimeFailedToUpload
                     updateList(updatedFeedImage)
                     if (!hasPendingImageToUpload() && hasFirstTimeFailedToUploadImages()) {
@@ -377,8 +377,8 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
         return when {
             uploadedImageMap.isNotEmpty() -> {
                 createPostTextAndImages(
-                    postText,
-                    uploadedImageMap.values.toList()
+                        postText,
+                        uploadedImageMap.values.toList()
                 )
             }
             uploadedFilesMap.isNotEmpty() -> {
@@ -392,11 +392,11 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
 
     private fun mapEkoImageToFeedImage(ekoImage: EkoImage): FeedImage {
         return FeedImage(
-            ekoImage.getFileId(),
-            null,
-            Uri.parse(ekoImage.getUrl(EkoImage.Size.LARGE)),
-            FileUploadState.COMPLETE,
-            100
+                ekoImage.getFileId(),
+                null,
+                Uri.parse(ekoImage.getUrl(EkoImage.Size.LARGE)),
+                FileUploadState.COMPLETE,
+                100
         )
     }
 
@@ -486,26 +486,26 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
     }
 
     fun updateFileUploadStatus(
-        fileAttachment: FileAttachment,
-        fileUpload: EkoUploadResult<EkoFile>
+            fileAttachment: FileAttachment,
+            fileUpload: EkoUploadResult<EkoFile>
     ) {
         when (fileUpload) {
             is EkoUploadResult.PROGRESS -> {
                 Log.d(
-                    TAG,
-                    "File upload progress " + fileAttachment.name + fileUpload.getUploadInfo()
-                        .getProgressPercentage()
+                        TAG,
+                        "File upload progress " + fileAttachment.name + fileUpload.getUploadInfo()
+                                .getProgressPercentage()
                 )
                 val updatedFileAttachment = FileAttachment(
-                    fileAttachment.id,
-                    fileAttachment.uploadId,
-                    fileAttachment.name,
-                    fileAttachment.size,
-                    fileAttachment.uri,
-                    fileAttachment.readableSize,
-                    fileAttachment.mimeType,
-                    FileUploadState.UPLOADING,
-                    fileUpload.getUploadInfo().getProgressPercentage()
+                        fileAttachment.id,
+                        fileAttachment.uploadId,
+                        fileAttachment.name,
+                        fileAttachment.size,
+                        fileAttachment.uri,
+                        fileAttachment.readableSize,
+                        fileAttachment.mimeType,
+                        FileUploadState.UPLOADING,
+                        fileUpload.getUploadInfo().getProgressPercentage()
                 )
                 updateList(updatedFileAttachment)
             }
@@ -513,7 +513,7 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
                 Log.d(TAG, "File upload Complete " + fileAttachment.name)
                 uploadedFilesMap[fileUpload.getFile().getFileId()] = fileUpload.getFile()
                 val updatedFileAttachment =
-                    mapEkoFileToFileAttachment(fileAttachment, fileUpload.getFile())
+                        mapEkoFileToFileAttachment(fileAttachment, fileUpload.getFile())
                 updateList(updatedFileAttachment)
                 if (!hasPendingFileToUpload() && hasFirstTimeFailedToUploadFiles()) {
                     triggerFileUploadFailedEvent()
@@ -523,18 +523,18 @@ class EkoCreatePostViewModel : EkoBaseViewModel() {
                 Log.d(TAG, "File upload error " + fileAttachment.name)
                 if (filesMap.containsKey(fileAttachment.uri.toString())) {
                     val updatedFileAttachment = FileAttachment(
-                        fileAttachment.id,
-                        fileAttachment.uploadId,
-                        fileAttachment.name,
-                        fileAttachment.size,
-                        fileAttachment.uri,
-                        fileAttachment.readableSize,
-                        fileAttachment.mimeType,
-                        FileUploadState.FAILED,
-                        0
+                            fileAttachment.id,
+                            fileAttachment.uploadId,
+                            fileAttachment.name,
+                            fileAttachment.size,
+                            fileAttachment.uri,
+                            fileAttachment.readableSize,
+                            fileAttachment.mimeType,
+                            FileUploadState.FAILED,
+                            0
                     )
                     val firstTimeFailedToUpload =
-                        !uploadFailedFile.containsKey(fileAttachment.uri.toString())
+                            !uploadFailedFile.containsKey(fileAttachment.uri.toString())
 
                     uploadFailedFile[updatedFileAttachment.uri.toString()] = firstTimeFailedToUpload
                     updateList(updatedFileAttachment)

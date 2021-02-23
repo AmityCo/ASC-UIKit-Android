@@ -22,8 +22,8 @@ class EkoEditPostActivity : EkoBaseToolbarFragmentContainerActivity() {
     override fun getContentFragment(): Fragment {
         val postId = intent?.getStringExtra(EXTRA_PARAM_NEWS_FEED_ID)
         return EkoPostEditFragment.Builder()
-            .postId(postId!!)
-            .build(this)
+                .postId(postId!!)
+                .build(this)
     }
 
     class EkoEditPostActivityContract : ActivityResultContract<EkoPost, String?>() {

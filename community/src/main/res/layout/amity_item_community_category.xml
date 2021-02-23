@@ -2,6 +2,39 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onCategorySelected(communityCategory)}">
+
+        <TextView
+            style="@style/TextStyleEkoBodyBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/eight"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{communityCategory.name}"
+            android:textColor="@color/amityColorBase"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            style="@style/CircularAvatarStyle"
+            backgroundColorShade="@{ColorShade.SHADE3}"
+            ekoBackgroundColor="@{@color/amityColorPrimary}"
+            imageUrl="@{avatarUrl}"
+            placeHolder="@{@drawable/amity_ic_default_category_avatar}"
+            android:layout_width="@dimen/forty"
+            android:layout_height="@dimen/forty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <data>
 
         <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
@@ -18,37 +51,4 @@
             name="avatarUrl"
             type="String" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> listener.onCategorySelected(communityCategory)}">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivAvatar"
-            style="@style/CircularAvatarStyle"
-            backgroundColorShade="@{ColorShade.SHADE3}"
-            ekoBackgroundColor="@{@color/amityColorPrimary}"
-            imageUrl="@{avatarUrl}"
-            placeHolder="@{@drawable/amity_ic_default_category_avatar}"
-            android:layout_width="@dimen/forty"
-            android:layout_height="@dimen/forty"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            style="@style/TextStyleEkoBodyBold"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/eight"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{communityCategory.name}"
-            android:textColor="@color/amityColorBase"
-            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivAvatar"
-            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

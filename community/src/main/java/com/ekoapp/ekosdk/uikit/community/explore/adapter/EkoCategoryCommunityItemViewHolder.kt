@@ -11,26 +11,26 @@ import com.ekoapp.ekosdk.uikit.community.databinding.AmityItemCategoryCommunityL
 import com.ekoapp.ekosdk.uikit.community.explore.listener.IEkoCommunityItemClickListener
 
 open class EkoCategoryCommunityItemViewHolder(
-    itemView: View,
-    private val itemClickListener: IEkoCommunityItemClickListener?
+        itemView: View,
+        private val itemClickListener: IEkoCommunityItemClickListener?
 ) : RecyclerView.ViewHolder(itemView),
-    EkoBaseRecyclerViewPagedAdapter.Binder<EkoCommunity> {
+        EkoBaseRecyclerViewPagedAdapter.Binder<EkoCommunity> {
     private val binding: AmityItemCategoryCommunityListBinding? = DataBindingUtil.bind(itemView)
 
     override fun bind(data: EkoCommunity?, position: Int) {
         if (data?.isOfficial() == true) {
             binding?.tvCommunityName?.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                R.drawable.amity_ic_verified,
-                0
+                    0,
+                    0,
+                    R.drawable.amity_ic_verified,
+                    0
             )
         } else {
             binding?.tvCommunityName?.setCompoundDrawablesWithIntrinsicBounds(
-                null,
-                null,
-                null,
-                null
+                    null,
+                    null,
+                    null,
+                    null
             )
         }
 
@@ -52,9 +52,9 @@ open class EkoCategoryCommunityItemViewHolder(
     private fun loadAvatar(data: EkoCommunity) {
         data.getAvatar()?.getUrl()?.let {
             Glide.with(itemView)
-                .load(it)
-                .centerCrop()
-                .into(binding?.communityAvatar!!)
+                    .load(it)
+                    .centerCrop()
+                    .into(binding?.communityAvatar!!)
         }
     }
 }

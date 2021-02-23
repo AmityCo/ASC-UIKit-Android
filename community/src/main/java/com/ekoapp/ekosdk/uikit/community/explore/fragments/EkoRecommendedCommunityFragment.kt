@@ -29,11 +29,11 @@ class EkoRecommendedCommunityFragment : EkoBaseFragment(), IMyCommunityItemClick
     private val TAG = EkoRecommendedCommunityFragment::class.java.canonicalName
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
         return inflater.inflate(R.layout.amity_fragment_recommended_community, container, false)
     }
 
@@ -54,16 +54,16 @@ class EkoRecommendedCommunityFragment : EkoBaseFragment(), IMyCommunityItemClick
     private fun initializeRecyclerView() {
         mAdapter = EkoRecommendedCommunitiesAdapter(this)
         rvRecommCommunity.layoutManager = LinearLayoutManager(
-            requireContext(), LinearLayoutManager.HORIZONTAL, false
+                requireContext(), LinearLayoutManager.HORIZONTAL, false
         )
         rvRecommCommunity.adapter = mAdapter
         rvRecommCommunity.addItemDecoration(
-            EkoRCommunityItemDecoration(
-                requireContext().resources.getDimensionPixelSize(R.dimen.ten),
-                requireContext().resources.getDimensionPixelSize(R.dimen.eight),
-                requireContext().resources.getDimensionPixelSize(R.dimen.eighteen),
-                requireContext().resources.getDimensionPixelSize(R.dimen.eight)
-            )
+                EkoRCommunityItemDecoration(
+                        requireContext().resources.getDimensionPixelSize(R.dimen.ten),
+                        requireContext().resources.getDimensionPixelSize(R.dimen.eight),
+                        requireContext().resources.getDimensionPixelSize(R.dimen.eighteen),
+                        requireContext().resources.getDimensionPixelSize(R.dimen.eight)
+                )
         )
         rvRecommCommunity.setHasFixedSize(true)
 
@@ -72,13 +72,13 @@ class EkoRecommendedCommunityFragment : EkoBaseFragment(), IMyCommunityItemClick
 
     private fun getRecommendedCommunity() {
         disposable.add(mViewModel.getRecommendedCommunity().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                mViewModel.emptyRecommendedList.set(it.size == 0)
-                mAdapter.submitList(it)
-            }.doOnError {
-                Log.e(TAG, "getRecommendedCommunity: ${it.localizedMessage}")
-            }.subscribe()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    mViewModel.emptyRecommendedList.set(it.size == 0)
+                    mAdapter.submitList(it)
+                }.doOnError {
+                    Log.e(TAG, "getRecommendedCommunity: ${it.localizedMessage}")
+                }.subscribe()
         )
     }
 
@@ -94,7 +94,7 @@ class EkoRecommendedCommunityFragment : EkoBaseFragment(), IMyCommunityItemClick
                 } else {
                     when (action) {
                         MotionEvent.ACTION_MOVE -> rv.parent.requestDisallowInterceptTouchEvent(
-                            false
+                                false
                         )
                     }
                     false
@@ -118,11 +118,17 @@ class EkoRecommendedCommunityFragment : EkoBaseFragment(), IMyCommunityItemClick
     }
 
     private fun navigateToCommunityDetails(ekoCommunity: EkoCommunity?) {
-        if (ekoCommunity != null) {
-            val intent =
-                EkoCommunityPageActivity.newIntent(requireContext(), ekoCommunity.getCommunityId())
-            startActivity(intent)
+        ekoCommunity?.let {
+            navigateToCommunityDetails(communityId = ekoCommunity.getCommunityId())
         }
+    }
+
+    private fun navigateToCommunityDetails(communityId: String) {
+        val intent = EkoCommunityPageActivity.newIntent(
+                requireContext(),
+                communityId
+        )
+        startActivity(intent)
     }
 
     class Builder {
@@ -131,7 +137,7 @@ class EkoRecommendedCommunityFragment : EkoBaseFragment(), IMyCommunityItemClick
         fun build(activity: AppCompatActivity): EkoRecommendedCommunityFragment {
             val fragment = EkoRecommendedCommunityFragment()
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
             fragment.mViewModel.recommendedCommunityItemClickListener = communityItemClickListener
             return fragment
         }

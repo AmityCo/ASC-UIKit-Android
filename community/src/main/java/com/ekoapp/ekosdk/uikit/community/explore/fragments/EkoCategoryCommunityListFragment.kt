@@ -27,7 +27,7 @@ const val ARG_CATEGORY_ID = "Category_id"
 const val ARG_CATEGORY_NAME = "Category_name"
 
 class EkoCategoryCommunityListFragment internal constructor() : EkoBaseFragment(),
-    IEkoCommunityItemClickListener {
+        IEkoCommunityItemClickListener {
     private lateinit var mViewModel: EkoCategoryCommunityListViewModel
     private lateinit var adapter: EkoCategoryCommunityListAdapter
     private var categoryId: String? = null
@@ -40,22 +40,22 @@ class EkoCategoryCommunityListFragment internal constructor() : EkoBaseFragment(
         categoryName = requireArguments().getString(ARG_CATEGORY_NAME)
 
         adapter = EkoCategoryCommunityListAdapter(
-            EkoCategoryCommunityListAdapter.EkoCommunityDiffUtil(),
-            this
+                EkoCategoryCommunityListAdapter.EkoCommunityDiffUtil(),
+                this
         )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoCategoryCommunityListViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoCategoryCommunityListViewModel::class.java)
         mBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.amity_fragment_category_community_list,
-            container,
-            false
+                inflater,
+                R.layout.amity_fragment_category_community_list,
+                container,
+                false
         )
         return mBinding.root
     }
@@ -75,7 +75,7 @@ class EkoCategoryCommunityListFragment internal constructor() : EkoBaseFragment(
 
     private fun initView() {
         val itemDecorSpace =
-            EkoRecyclerViewItemDecoration(resources.getDimensionPixelSize(R.dimen.eight))
+                EkoRecyclerViewItemDecoration(resources.getDimensionPixelSize(R.dimen.eight))
         rvCommunity.layoutManager = LinearLayoutManager(requireContext())
         rvCommunity.adapter = adapter
         rvCommunity.addItemDecoration(itemDecorSpace)
@@ -83,20 +83,20 @@ class EkoCategoryCommunityListFragment internal constructor() : EkoBaseFragment(
 
     private fun getCategories() {
         disposable.add(mViewModel.getCommunityByCategory(categoryId!!)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                run {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError {
+                    run {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    }
 
-            }
-            .subscribe { result ->
-                run {
-                    adapter.submitList(result)
-                    handleListVisibility()
                 }
-            })
+                .subscribe { result ->
+                    run {
+                        adapter.submitList(result)
+                        handleListVisibility()
+                    }
+                })
     }
 
     private fun handleListVisibility() {
@@ -110,7 +110,7 @@ class EkoCategoryCommunityListFragment internal constructor() : EkoBaseFragment(
             mViewModel.communityItemClickListener?.onClick(community, position)
         } else {
             val detailIntent = EkoCommunityPageActivity
-                .newIntent(requireContext(), community.getCommunityId())
+                    .newIntent(requireContext(), community.getCommunityId())
             startActivity(detailIntent)
         }
     }
@@ -146,7 +146,7 @@ class EkoCategoryCommunityListFragment internal constructor() : EkoBaseFragment(
                 }
             }
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoCategoryCommunityListViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoCategoryCommunityListViewModel::class.java)
             fragment.mViewModel.communityItemClickListener = communityItemClickListener
             return fragment
         }

@@ -16,11 +16,11 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.model.FileUploadState
 import com.ekoapp.ekosdk.uikit.community.newsfeed.util.EkoTimelineType
 
 class NewsFeedItemAttachmentViewHolder(
-    itemView: View,
-    itemActionLister: INewsFeedItemActionListener,
-    private val loadMoreFilesClickListener: EkoPostViewFileAdapter.ILoadMoreFilesClickListener?,
-    private val fileItemClickListener: IPostFileItemClickListener?,
-    timelineType: EkoTimelineType
+        itemView: View,
+        itemActionLister: INewsFeedItemActionListener,
+        private val loadMoreFilesClickListener: EkoPostViewFileAdapter.ILoadMoreFilesClickListener?,
+        private val fileItemClickListener: IPostFileItemClickListener?,
+        timelineType: EkoTimelineType
 ) : NewsFeedViewHolder(itemView, itemActionLister, timelineType) {
     private val rvAttachment = itemView.findViewById<RecyclerView>(R.id.rvAttachment)
     val space = itemView.context.resources.getDimensionPixelSize(R.dimen.eight)
@@ -47,7 +47,7 @@ class NewsFeedItemAttachmentViewHolder(
 
     private fun initAttachments(data: EkoPost, files: List<EkoFile>) {
         val adapter =
-            EkoPostViewFileAdapter(loadMoreFilesClickListener, fileItemClickListener, data, true)
+                EkoPostViewFileAdapter(loadMoreFilesClickListener, fileItemClickListener, data, true)
         rvAttachment.removeItemDecoration(itemDecor)
         rvAttachment.addItemDecoration(itemDecor)
         rvAttachment.layoutManager = LinearLayoutManager(itemView.context)
@@ -59,15 +59,15 @@ class NewsFeedItemAttachmentViewHolder(
         return ekoFile.map {
             val fileSize = it.getFileSize()?.toLong() ?: 0L
             FileAttachment(
-                it.getFileId(),
-                null,
-                it.getFileName() ?: "",
-                fileSize,
-                Uri.parse(it.getUrl()),
-                FileUtils.humanReadableByteCount(fileSize, true)!!,
-                it.getMimeType() ?: "",
-                FileUploadState.COMPLETE,
-                100
+                    it.getFileId(),
+                    null,
+                    it.getFileName() ?: "",
+                    fileSize,
+                    Uri.parse(it.getUrl()),
+                    FileUtils.humanReadableByteCount(fileSize, true)!!,
+                    it.getMimeType() ?: "",
+                    FileUploadState.COMPLETE,
+                    100
             )
         }
     }

@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,6 +21,13 @@
                 tools:context=".newsfeed.activity.EkoCreatePostActivity">
 
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAttachment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/sixteen"
+                    app:layout_constraintTop_toBottomOf="@id/etPost" />
+
                 <com.ekoapp.ekosdk.uikit.community.views.createpost.EkoPostComposeView
                     android:id="@+id/etPost"
                     android:layout_width="match_parent"
@@ -32,13 +35,6 @@
                     android:layout_margin="@dimen/sixteen"
                     android:textColor="@color/amityColorBase"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvAttachment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/sixteen"
-                    app:layout_constraintTop_toBottomOf="@id/etPost" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
@@ -57,61 +53,57 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <View
-                    style="@style/Divider"
-                    android:layout_marginTop="@dimen/twelve"
-                    android:layout_marginBottom="@dimen/twelve"
-                    app:layout_constraintBottom_toTopOf="@id/layoutPostAsCommunity" />
-
-
                 <TextView
                     style="@style/TextStyleEkoTitleBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/sixteen"
                     android:layout_marginEnd="@dimen/sixteen"
+                    android:layout_marginStart="@dimen/sixteen"
                     android:text="@string/amity_post_as_community" />
+
+
+                <View
+                    style="@style/Divider"
+                    android:layout_marginBottom="@dimen/twelve"
+                    android:layout_marginTop="@dimen/twelve"
+                    app:layout_constraintBottom_toTopOf="@id/layoutPostAsCommunity" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/switchPostAsCommunity"
                     style="@style/TextStyleEkoCaption"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/sixteen"
                     android:layout_marginEnd="@dimen/sixteen"
+                    android:layout_marginStart="@dimen/sixteen"
                     android:text="@string/amity_post_as_community_message" />
             </LinearLayout>
 
-
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/composeBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/layoutPostAsCommunity">
-
-                <View
-                    android:id="@+id/separator"
-                    style="@style/Divider"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="@dimen/twelve" />
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/separator">
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnTakePhoto"
                     style="@style/IconButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/separator"
                     android:layout_alignParentStart="true"
+                    android:layout_below="@id/separator"
+                    android:layout_weight="1"
                     app:icon="@drawable/amity_ic_camera" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnUploadPhotos"
                     style="@style/IconButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/separator"
                     android:layout_centerInParent="true"
+                    android:layout_weight="1"
                     app:icon="@drawable/amity_ic_photo" />
 
                 <com.google.android.material.button.MaterialButton
@@ -119,14 +111,28 @@
                     style="@style/IconButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/separator"
                     android:layout_alignParentEnd="true"
+                    android:layout_below="@id/separator"
+                    android:visibility="gone"
                     app:icon="@drawable/amity_ic_attachment"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="parent" />
-            </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/separator"
+                style="@style/Divider"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/twelve"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutPostAsCommunity" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </RelativeLayout>
+
+    <data>
+
+    </data>
 </layout>

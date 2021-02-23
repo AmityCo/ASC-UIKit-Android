@@ -3,16 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/containerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/amityColorWhite">
+
+        <ImageView
+            android:id="@+id/ivFileIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/sixteen"
+            android:src="@drawable/amity_ic_doc_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+
+        <ImageView
+            android:id="@+id/ivRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginStart="@dimen/eight"
+            android:padding="@dimen/four"
+            android:src="@drawable/amity_ic_cross_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/layoutPreparingFile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:layout_width="@dimen/twenty_four"
+                android:layout_height="@dimen/twenty_four"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/amityColorPrimary" />
+
+            <TextView
+                style="@style/TextStyleEkoCaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/amity_preparing"
+                android:textColor="@color/amityColorBase" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress"
@@ -29,18 +74,6 @@
             android:progressTint="#EBECEF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/ivFileIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/sixteen"
-            android:src="@drawable/amity_ic_doc_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
 
 
         <TextView
@@ -69,6 +102,16 @@
             app:textColorShade="@{ColorShade.SHADE1}"
             tools:text="1.2 MB" />
 
+        <View
+            android:id="@+id/overlay"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:alpha="0.6"
+            android:background="@color/amityColorWhite"
+            android:minHeight="@dimen/fifty_eight"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivError"
@@ -84,53 +127,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/CircleImage" />
 
-        <View
-            android:id="@+id/overlay"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:alpha="0.6"
-            android:background="@color/amityColorWhite"
-            android:minHeight="@dimen/fifty_eight"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/layoutPreparingFile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ProgressBar
-                android:layout_width="@dimen/twenty_four"
-                android:layout_height="@dimen/twenty_four"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/amityColorPrimary" />
-
-            <TextView
-                style="@style/TextStyleEkoCaption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/amity_preparing"
-                android:textColor="@color/amityColorBase" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ivRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/eight"
-            android:layout_marginEnd="@dimen/sixteen"
-            android:padding="@dimen/four"
-            android:src="@drawable/amity_ic_cross_black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+    </data>
 </layout>

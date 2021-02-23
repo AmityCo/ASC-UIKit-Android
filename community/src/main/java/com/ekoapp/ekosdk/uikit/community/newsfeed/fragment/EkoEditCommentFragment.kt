@@ -28,7 +28,7 @@ import io.reactivex.schedulers.Schedulers
 import org.bson.types.ObjectId
 
 class EkoEditCommentFragment internal constructor() : EkoBaseFragment(),
-    EkoAlertDialogFragment.IAlertDialogActionListener {
+        EkoAlertDialogFragment.IAlertDialogActionListener {
     private val ID_MENU_ITEM_ADD_COMMENT: Int = 144
     private var menuItemComment: MenuItem? = null
     private val TAG = EkoEditCommentActivity::class.java.canonicalName
@@ -42,17 +42,17 @@ class EkoEditCommentFragment internal constructor() : EkoBaseFragment(),
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mBinding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.amity_fragment_edit_comment,
-                container,
-                false
-            )
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.amity_fragment_edit_comment,
+                        container,
+                        false
+                )
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.vm = mViewModel
         return mBinding.root
@@ -90,16 +90,16 @@ class EkoEditCommentFragment internal constructor() : EkoBaseFragment(),
     private fun setupToolbar() {
         if (mViewModel.editMode()) {
             (activity as AppCompatActivity).supportActionBar?.title =
-                getString(R.string.amity_edit_comment)
+                    getString(R.string.amity_edit_comment)
         } else {
             (activity as AppCompatActivity).supportActionBar?.title =
-                getString(R.string.amity_add_comment)
+                    getString(R.string.amity_add_comment)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menuItemComment =
-            menu.add(Menu.NONE, ID_MENU_ITEM_ADD_COMMENT, Menu.NONE, getMenuItemCommentTitle())
+                menu.add(Menu.NONE, ID_MENU_ITEM_ADD_COMMENT, Menu.NONE, getMenuItemCommentTitle())
         menuItemComment?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
         updateCommentMenu(mViewModel.hasCommentUpdate.value ?: false)
         super.onCreateOptionsMenu(menu, inflater)
@@ -130,12 +130,12 @@ class EkoEditCommentFragment internal constructor() : EkoBaseFragment(),
             menuItemComment?.isEnabled = enabled
             val s = SpannableString(menuItemComment?.title)
             s.setSpan(
-                ForegroundColorSpan(
-                    EkoOptionMenuColorUtil.getColor(
-                        menuItemComment?.isEnabled ?: false,
-                        requireContext()
-                    )
-                ), 0, s.length, 0
+                    ForegroundColorSpan(
+                            EkoOptionMenuColorUtil.getColor(
+                                    menuItemComment?.isEnabled ?: false,
+                                    requireContext()
+                            )
+                    ), 0, s.length, 0
             )
             menuItemComment?.title = s
         }
@@ -156,57 +156,57 @@ class EkoEditCommentFragment internal constructor() : EkoBaseFragment(),
 
     private fun showExitConfirmationDialog() {
         val exitConfirmationDialogFragment = EkoAlertDialogFragment
-            .newInstance(
-                R.string.amity_discard_comment_title, R.string.amity_discard_comment_message,
-                R.string.amity_discard, R.string.amity_cancel
-            )
+                .newInstance(
+                        R.string.amity_discard_comment_title, R.string.amity_discard_comment_message,
+                        R.string.amity_discard, R.string.amity_cancel
+                )
         exitConfirmationDialogFragment.show(childFragmentManager, EkoAlertDialogFragment.TAG);
         exitConfirmationDialogFragment.listener = this
     }
 
     private fun updateComment() {
         mViewModel.updateComment()
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.doOnSuccess {
-                activity?.setResult(AppCompatActivity.RESULT_OK)
-                backPressFragment()
-            }
-            ?.doOnError {
-                updateCommentMenu(true)
-                Log.d(TAG, it.message ?: "")
-                Toast.makeText(
-                    activity,
-                    getString(R.string.amity_update_comment_error_message),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            ?.subscribe()
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSuccess {
+                    activity?.setResult(AppCompatActivity.RESULT_OK)
+                    backPressFragment()
+                }
+                ?.doOnError {
+                    updateCommentMenu(true)
+                    Log.d(TAG, it.message ?: "")
+                    Toast.makeText(
+                            activity,
+                            getString(R.string.amity_update_comment_error_message),
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                ?.subscribe()
     }
 
     private fun addComment() {
         val commentId = ObjectId.get().toHexString()
         mViewModel.addComment(commentId)
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.doOnSuccess {
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.doOnSuccess {
 
-                activity?.setResult(AppCompatActivity.RESULT_OK)
-                backPressFragment()
-            }
-            ?.doOnError {
-                if (EkoError.from(it) == EkoError.BAN_WORD_FOUND) {
-                    mViewModel.deleteComment(commentId).subscribe()
+                    activity?.setResult(AppCompatActivity.RESULT_OK)
+                    backPressFragment()
                 }
-                updateCommentMenu(true)
-                Log.d(TAG, it.message ?: "")
-                Toast.makeText(
-                    activity,
-                    getString(R.string.amity_add_comment_error_message),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            ?.subscribe()
+                ?.doOnError {
+                    if (EkoError.from(it) == EkoError.BAN_WORD_FOUND) {
+                        mViewModel.deleteComment(commentId).subscribe()
+                    }
+                    updateCommentMenu(true)
+                    Log.d(TAG, it.message ?: "")
+                    Toast.makeText(
+                            activity,
+                            getString(R.string.amity_add_comment_error_message),
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                ?.subscribe()
 
     }
 

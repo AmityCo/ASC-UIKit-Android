@@ -34,13 +34,13 @@ class EkoMembershipItemViewModel : EkoBaseViewModel() {
     fun assignRole(role: String, userIdList: List<String>): Completable {
         val communityRepository = EkoClient.newCommunityRepository()
         return communityRepository.moderate(communityId)
-            .addRole(role, userIdList)
+                .addRole(role, userIdList)
     }
 
     fun removeRole(role: String, userIdList: List<String>): Completable {
         val communityRepository = EkoClient.newCommunityRepository()
         return communityRepository.moderate(communityId)
-            .removeRole(role, userIdList)
+                .removeRole(role, userIdList)
     }
 
     fun getCommunityDetail(): Flowable<EkoCommunity> {

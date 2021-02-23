@@ -12,7 +12,7 @@ class EkoCommunityMemberSettingsActivity : EkoBaseToolbarFragmentContainerActivi
 
     override fun initToolbar() {
         getToolBar()?.setLeftDrawable(
-            ContextCompat.getDrawable(this, R.drawable.amity_ic_arrow_back)
+                ContextCompat.getDrawable(this, R.drawable.amity_ic_arrow_back)
         )
         getToolBar()?.setLeftString(getString(R.string.amity_members_capital))
     }
@@ -23,8 +23,8 @@ class EkoCommunityMemberSettingsActivity : EkoBaseToolbarFragmentContainerActivi
             fragment.community(community).build(this)
         } ?: kotlin.run {
             fragment.communityId(intent?.getStringExtra(COMMUNITY_ID) ?: "")
-                .isMember(intent?.getBooleanExtra(IS_MEMBER, false) ?: false)
-                .build(this)
+                    .isMember(intent?.getBooleanExtra(IS_MEMBER, false) ?: false)
+                    .build(this)
         }
     }
 
@@ -34,14 +34,14 @@ class EkoCommunityMemberSettingsActivity : EkoBaseToolbarFragmentContainerActivi
         private const val COMMUNITY_MODEL = "COMMUNITY_MODEL"
 
         fun newIntent(context: Context, id: String, isMember: Boolean): Intent =
-            Intent(context, EkoCommunityMemberSettingsActivity::class.java).apply {
-                putExtra(COMMUNITY_ID, id)
-                putExtra(IS_MEMBER, isMember)
-            }
+                Intent(context, EkoCommunityMemberSettingsActivity::class.java).apply {
+                    putExtra(COMMUNITY_ID, id)
+                    putExtra(IS_MEMBER, isMember)
+                }
 
         fun newIntent(context: Context, community: EkoCommunity): Intent =
-            Intent(context, EkoCommunityMemberSettingsActivity::class.java).apply {
-                putExtra(COMMUNITY_MODEL, community)
-            }
+                Intent(context, EkoCommunityMemberSettingsActivity::class.java).apply {
+                    putExtra(COMMUNITY_MODEL, community)
+                }
     }
 }

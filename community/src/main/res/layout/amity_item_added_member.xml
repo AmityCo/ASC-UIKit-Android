@@ -2,32 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <variable
-            name="avatarUrl"
-            type="String" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lAddedMemberItem"
         android:layout_width="match_parent"
         android:layout_height="@dimen/forty">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/amAvatar"
-            backgroundColorShade="@{ColorShade.SHADE3}"
-            ekoBackgroundColor="@{@color/amityColorPrimary}"
-            android:layout_width="@dimen/twenty_eight"
-            android:layout_height="@dimen/twenty_eight"
+        <ImageView
+            android:id="@+id/amCross"
+            ekoFillColor="@{@color/amityColorBase}"
+            ekoFillShade="@{ColorShade.SHADE4}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/nine"
             android:layout_marginStart="@dimen/eight"
-            android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/CircleImage" />
+            android:src="@drawable/amity_ic_filled_cross"
+            app:layout_constraintBottom_toBottomOf="@id/amAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/amName"
+            app:layout_constraintTop_toTopOf="@id/amAvatar" />
 
         <TextView
             android:id="@+id/amName"
@@ -43,19 +35,27 @@
             app:layout_constraintStart_toEndOf="@id/amAvatar"
             app:layout_constraintTop_toTopOf="@id/amAvatar" />
 
-        <ImageView
-            android:id="@+id/amCross"
-            ekoFillColor="@{@color/amityColorBase}"
-            ekoFillShade="@{ColorShade.SHADE4}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/amAvatar"
+            backgroundColorShade="@{ColorShade.SHADE3}"
+            ekoBackgroundColor="@{@color/amityColorPrimary}"
+            android:layout_width="@dimen/twenty_eight"
+            android:layout_height="@dimen/twenty_eight"
             android:layout_marginStart="@dimen/eight"
-            android:layout_marginEnd="@dimen/nine"
-            android:src="@drawable/amity_ic_filled_cross"
-            app:layout_constraintBottom_toBottomOf="@id/amAvatar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/amName"
-            app:layout_constraintTop_toTopOf="@id/amAvatar" />
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/CircleImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="avatarUrl"
+            type="String" />
+    </data>
 </layout>

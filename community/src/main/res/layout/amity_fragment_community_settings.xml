@@ -3,39 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <variable
-            name="viewModel"
-            type="com.ekoapp.ekosdk.uikit.community.setting.EkoCommunitySettingViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".setting.EkoCommunitySettingsActivity">
-
-        <View
-            android:id="@+id/divider1"
-            backgroundColorShade="@{ColorShade.SHADE4}"
-            ekoBackgroundColor="@{@color/amityColorBase}"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/groupEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="@{viewModel.isAdmin() ? View.VISIBLE : View.GONE}"
-            app:constraint_referenced_ids="ivEdit,tvEditProfile,ivArrow,divider2"
-            app:layout_constraintBottom_toBottomOf="@id/ivEdit"
-            app:layout_constraintStart_toStartOf="@id/ivEdit"
-            app:layout_constraintTop_toTopOf="@id/ivEdit" />
 
         <ImageView
             android:id="@+id/ivEdit"
@@ -47,6 +18,42 @@
             android:src="@drawable/amity_ic_edit_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="@dimen/twenty_four"
+            android:layout_height="@dimen/twenty_four"
+            android:layout_marginEnd="@dimen/eighteen"
+            android:paddingHorizontal="@dimen/eight"
+            android:paddingVertical="@dimen/six"
+            android:src="@drawable/amity_ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@id/ivEdit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivEdit" />
+
+        <ImageView
+            android:id="@+id/ivMembers"
+            android:layout_width="@dimen/twenty_four"
+            android:layout_height="@dimen/forty_eight"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginTop="@dimen/four"
+            android:paddingVertical="@dimen/twelve"
+            android:src="@drawable/amity_ic_members"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2"
+            app:layout_goneMarginTop="@dimen/eight" />
+
+        <ImageView
+            android:id="@+id/ivArrow1"
+            android:layout_width="@dimen/twenty_four"
+            android:layout_height="@dimen/twenty_four"
+            android:layout_marginEnd="@dimen/eighteen"
+            android:paddingHorizontal="@dimen/eight"
+            android:paddingVertical="@dimen/six"
+            android:src="@drawable/amity_ic_chevron_right"
+            app:layout_constraintBottom_toBottomOf="@id/ivMembers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivMembers" />
 
         <TextView
             android:id="@+id/tvEditProfile"
@@ -61,48 +68,6 @@
             app:layout_constraintEnd_toStartOf="@id/ivArrow"
             app:layout_constraintStart_toEndOf="@id/ivEdit"
             app:layout_constraintTop_toTopOf="@id/ivEdit" />
-
-        <ImageView
-            android:id="@+id/ivArrow"
-            android:layout_width="@dimen/twenty_four"
-            android:layout_height="@dimen/twenty_four"
-            android:layout_marginEnd="@dimen/eighteen"
-            android:paddingHorizontal="@dimen/eight"
-            android:paddingVertical="@dimen/six"
-            android:src="@drawable/amity_ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="@id/ivEdit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ivEdit" />
-
-        <View
-            android:id="@+id/divider2"
-            backgroundColorShade="@{ColorShade.SHADE4}"
-            ekoBackgroundColor="@{@color/amityColorBase}"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/sixteen"
-            app:layout_constraintTop_toBottomOf="@id/tvEditProfile" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/groupMembers"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:constraint_referenced_ids="ivMembers,tvMembers,tvMembersCount,ivArrow1"
-            app:layout_constraintBottom_toBottomOf="@id/ivMembers"
-            app:layout_constraintStart_toStartOf="@id/ivMembers"
-            app:layout_constraintTop_toTopOf="@id/ivMembers" />
-
-        <ImageView
-            android:id="@+id/ivMembers"
-            android:layout_width="@dimen/twenty_four"
-            android:layout_height="@dimen/forty_eight"
-            android:layout_marginStart="@dimen/sixteen"
-            android:layout_marginTop="@dimen/four"
-            android:paddingVertical="@dimen/twelve"
-            android:src="@drawable/amity_ic_members"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider2"
-            app:layout_goneMarginTop="@dimen/eight" />
 
         <TextView
             android:id="@+id/tvMembers"
@@ -133,27 +98,6 @@
             app:layout_constraintStart_toEndOf="@id/tvMembers"
             app:layout_constraintTop_toTopOf="@id/ivMembers" />
 
-        <ImageView
-            android:id="@+id/ivArrow1"
-            android:layout_width="@dimen/twenty_four"
-            android:layout_height="@dimen/twenty_four"
-            android:layout_marginEnd="@dimen/eighteen"
-            android:paddingHorizontal="@dimen/eight"
-            android:paddingVertical="@dimen/six"
-            android:src="@drawable/amity_ic_chevron_right"
-            app:layout_constraintBottom_toBottomOf="@id/ivMembers"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ivMembers" />
-
-        <View
-            android:id="@+id/divider3"
-            backgroundColorShade="@{ColorShade.SHADE4}"
-            ekoBackgroundColor="@{@color/amityColorBase}"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="@dimen/sixteen"
-            app:layout_constraintTop_toBottomOf="@id/tvMembers" />
-
         <TextView
             android:id="@+id/tvLeaveCommunity"
             style="@style/TextStyleEkoBody"
@@ -168,6 +112,32 @@
             app:layout_constraintTop_toBottomOf="@id/divider3" />
 
         <View
+            android:id="@+id/divider1"
+            backgroundColorShade="@{ColorShade.SHADE4}"
+            ekoBackgroundColor="@{@color/amityColorBase}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider2"
+            backgroundColorShade="@{ColorShade.SHADE4}"
+            ekoBackgroundColor="@{@color/amityColorBase}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/sixteen"
+            app:layout_constraintTop_toBottomOf="@id/tvEditProfile" />
+
+        <View
+            android:id="@+id/divider3"
+            backgroundColorShade="@{ColorShade.SHADE4}"
+            ekoBackgroundColor="@{@color/amityColorBase}"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/sixteen"
+            app:layout_constraintTop_toBottomOf="@id/tvMembers" />
+
+        <View
             backgroundColorShade="@{ColorShade.SHADE4}"
             ekoBackgroundColor="@{@color/amityColorBase}"
             android:layout_width="match_parent"
@@ -175,5 +145,35 @@
             android:layout_marginHorizontal="@dimen/sixteen"
             app:layout_constraintTop_toBottomOf="@id/tvLeaveCommunity" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.isAdmin() ? View.VISIBLE : View.GONE}"
+            app:constraint_referenced_ids="ivEdit,tvEditProfile,ivArrow,divider2"
+            app:layout_constraintBottom_toBottomOf="@id/ivEdit"
+            app:layout_constraintStart_toStartOf="@id/ivEdit"
+            app:layout_constraintTop_toTopOf="@id/ivEdit" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupMembers"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="ivMembers,tvMembers,tvMembersCount,ivArrow1"
+            app:layout_constraintBottom_toBottomOf="@id/ivMembers"
+            app:layout_constraintStart_toStartOf="@id/ivMembers"
+            app:layout_constraintTop_toTopOf="@id/ivMembers" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="viewModel"
+            type="com.ekoapp.ekosdk.uikit.community.setting.EkoCommunitySettingViewModel" />
+    </data>
 </layout>

@@ -34,8 +34,8 @@ class EkoModeratorsFragment : EkoBaseFragment(), IMemberClickListener {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.amity_fragment_moderators, container, false)
@@ -50,8 +50,13 @@ class EkoModeratorsFragment : EkoBaseFragment(), IMemberClickListener {
         initRecyclerView()
 
         etSearch.setShape(
-            null, null, null, null,
-            R.color.amityColorBase, null, ColorShade.SHADE4
+                null,
+                null,
+                null,
+                null,
+                R.color.amityColorBase,
+                null,
+                ColorShade.SHADE4
         )
     }
 
@@ -72,23 +77,23 @@ class EkoModeratorsFragment : EkoBaseFragment(), IMemberClickListener {
         rvCommunityModerators.layoutManager = LinearLayoutManager(requireContext())
         rvCommunityModerators.adapter = moderatorAdapter
         rvCommunityModerators.addItemDecoration(
-            EkoRecyclerViewItemDecoration(
-                requireContext().resources.getDimensionPixelSize(R.dimen.sixteen)
-            )
+                EkoRecyclerViewItemDecoration(
+                        requireContext().resources.getDimensionPixelSize(R.dimen.sixteen)
+                )
         )
 
         disposable.add(mViewModel.getCommunityModerators()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                mViewModel.emptyMembersList.set(it.size == 0)
-                moderatorAdapter.submitList(it)
-                if (!mViewModel.emptyMembersList.get()) {
-                    prepareSelectedMembersList(it)
-                }
-            }.doOnError {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    mViewModel.emptyMembersList.set(it.size == 0)
+                    moderatorAdapter.submitList(it)
+                    if (!mViewModel.emptyMembersList.get()) {
+                        prepareSelectedMembersList(it)
+                    }
+                }.doOnError {
 
-            }.subscribe()
+                }.subscribe()
         )
     }
 
@@ -97,11 +102,11 @@ class EkoModeratorsFragment : EkoBaseFragment(), IMemberClickListener {
             val ekoUser = it.getUser()
             if (ekoUser != null) {
                 val selectMemberItem = SelectMemberItem(
-                    ekoUser.getUserId(),
-                    ekoUser.getAvatar()?.getUrl(EkoImage.Size.MEDIUM) ?: "",
-                    ekoUser.getDisplayName() ?: getString(R.string.amity_anonymous),
-                    ekoUser.getDescription(),
-                    false
+                        ekoUser.getUserId(),
+                        ekoUser.getAvatar()?.getUrl(EkoImage.Size.MEDIUM) ?: "",
+                        ekoUser.getDisplayName() ?: getString(R.string.amity_anonymous),
+                        ekoUser.getDescription(),
+                        false
                 )
                 if (!mViewModel.membersSet.contains(selectMemberItem.id)) {
                     mViewModel.selectMembersList.add(selectMemberItem)

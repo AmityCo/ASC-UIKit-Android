@@ -39,9 +39,9 @@ class EkoExploreCommunityViewModel : EkoBaseViewModel() {
     fun getCommunityCategory(): Flowable<PagedList<EkoCommunityCategory>> {
         val communityRepository = EkoClient.newCommunityRepository()
         return communityRepository.getAllCategories()
-            .sortBy(EkoCommunityCategorySortOption.NAME)
-            .includeDeleted(false)
-            .build()
-            .query()
+                .sortBy(EkoCommunityCategorySortOption.NAME)
+                .includeDeleted(false)
+                .build()
+                .query()
     }
 }

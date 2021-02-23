@@ -12,7 +12,7 @@ class EkoEditUserProfileActivity : EkoBaseToolbarFragmentContainerActivity() {
 
     override fun initToolbar() {
         getToolBar()?.setLeftDrawable(
-            ContextCompat.getDrawable(this, R.drawable.amity_ic_arrow_back)
+                ContextCompat.getDrawable(this, R.drawable.amity_ic_arrow_back)
         )
         getToolBar()?.setLeftString(getString(R.string.amity_edit_profile))
     }
@@ -24,6 +24,6 @@ class EkoEditUserProfileActivity : EkoBaseToolbarFragmentContainerActivity() {
 
     companion object {
         fun newIntent(context: Context) =
-            Intent(context, EkoEditUserProfileActivity::class.java)
+                Intent(context, EkoEditUserProfileActivity::class.java)
     }
 }

@@ -30,9 +30,9 @@ class EkoCommunityHomeViewModelTest {
         every { EkoClient.newCommunityRepository() } returns communityRepository
         every {
             communityRepository.getCommunityCollection().withKeyword(any())
-                .sortBy(any()).includeDeleted(false)
-                .build()
-                .query()
+                    .sortBy(any()).includeDeleted(false)
+                    .build()
+                    .query()
         } returns Flowable.just(mockList)
 
         val viewModel = EkoCommunityHomeViewModel()

@@ -3,21 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.ekoapp.ekosdk.uikit.community.newsfeed.viewmodel.EkoCreatePostRoleSelectionViewModel" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/sixteen"
         android:layout_marginEnd="@dimen/sixteen"
+        android:layout_marginStart="@dimen/sixteen"
         tools:context=".newsfeed.fragment.EkoPostTargetSelectionFragment">
+
+        <TextView
+            android:id="@+id/tvCommunityLabel"
+            style="@style/TextStyleEkoBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sixteen"
+            android:text="@string/amity_community"
+            android:textColor="@color/amityColorBase"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/separator"
+            app:textColorShade="@{ColorShade.SHADE2}" />
+
+        <View
+            android:id="@+id/separator"
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/sixteen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clMyTimeline" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clMyTimeline"
@@ -25,16 +35,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/avProfile"
-                style="@style/CircularAvatarStyle"
-                backgroundColorShade="@{ColorShade.SHADE3}"
-                ekoBackgroundColor="@{@color/amityColorPrimary}"
-                android:layout_width="@dimen/forty"
-                android:layout_height="@dimen/forty"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvMyTimelineLabel"
@@ -52,26 +52,17 @@
                 app:layout_constraintTop_toTopOf="@id/avProfile"
 
                 />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avProfile"
+                style="@style/CircularAvatarStyle"
+                backgroundColorShade="@{ColorShade.SHADE3}"
+                ekoBackgroundColor="@{@color/amityColorPrimary}"
+                android:layout_width="@dimen/forty"
+                android:layout_height="@dimen/forty"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:id="@+id/separator"
-            style="@style/Divider"
-            android:layout_marginTop="@dimen/sixteen"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clMyTimeline" />
-
-        <TextView
-            android:id="@+id/tvCommunityLabel"
-            style="@style/TextStyleEkoBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sixteen"
-            android:text="@string/amity_community"
-            android:textColor="@color/amityColorBase"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/separator"
-            app:textColorShade="@{ColorShade.SHADE2}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCommunity"
@@ -82,4 +73,13 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="viewModel"
+            type="com.ekoapp.ekosdk.uikit.community.newsfeed.viewmodel.EkoCreatePostRoleSelectionViewModel" />
+    </data>
 </layout>

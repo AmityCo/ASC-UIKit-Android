@@ -20,10 +20,10 @@ class EkoCommunityHomeViewModel : EkoBaseViewModel() {
     fun searchCommunity(searchString: String): Flowable<PagedList<EkoCommunity>> {
         val communityRepository = EkoClient.newCommunityRepository()
         return communityRepository.getCommunityCollection()
-            .withKeyword(searchString)
-            .sortBy(EkoCommunitySortOption.DISPLAY_NAME)
-            .includeDeleted(false)
-            .build()
-            .query()
+                .withKeyword(searchString)
+                .sortBy(EkoCommunitySortOption.DISPLAY_NAME)
+                .includeDeleted(false)
+                .build()
+                .query()
     }
 }

@@ -31,7 +31,7 @@ class EkoCommunityMembersViewModelTest {
         every { EkoClient.newCommunityRepository() } returns communityRepository
         every {
             communityRepository.membership(any()).getCollection()
-                .filter(any()).build().query()
+                    .filter(any()).build().query()
         } returns Flowable.just(mockList)
 
         val viewModel = EkoCommunityMembersViewModel()

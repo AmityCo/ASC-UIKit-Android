@@ -9,10 +9,10 @@ import com.ekoapp.ekosdk.uikit.community.R
 import com.ekoapp.ekosdk.uikit.community.explore.listener.IEkoCommunityItemClickListener
 
 class EkoCategoryCommunityListAdapter(
-    diffUtil: EkoCommunityDiffUtil,
-    private val itemClickListener: IEkoCommunityItemClickListener
+        diffUtil: EkoCommunityDiffUtil,
+        private val itemClickListener: IEkoCommunityItemClickListener
 ) :
-    EkoBaseRecyclerViewPagedAdapter<EkoCommunity>(diffUtil) {
+        EkoBaseRecyclerViewPagedAdapter<EkoCommunity>(diffUtil) {
 
 
     override fun getLayoutId(position: Int, obj: EkoCommunity?): Int {
@@ -25,15 +25,15 @@ class EkoCategoryCommunityListAdapter(
 
     class EkoCommunityDiffUtil : DiffUtil.ItemCallback<EkoCommunity>() {
         override fun areItemsTheSame(
-            oldItem: EkoCommunity,
-            newItem: EkoCommunity
+                oldItem: EkoCommunity,
+                newItem: EkoCommunity
         ): Boolean {
             return oldItem.getCommunityId() == newItem.getCommunityId()
         }
 
         override fun areContentsTheSame(
-            oldItem: EkoCommunity,
-            newItem: EkoCommunity
+                oldItem: EkoCommunity,
+                newItem: EkoCommunity
         ): Boolean {
             return oldItem.getCommunityId() == newItem.getCommunityId()
                     && oldItem.getDisplayName() == newItem.getDisplayName()

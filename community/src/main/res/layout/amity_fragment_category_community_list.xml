@@ -3,24 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".explore.activity.EkoCategoryListActivity">
-
-        <com.ekoapp.ekosdk.uikit.common.views.list.EkoRecyclerView
-            android:id="@+id/rvCommunity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/sixteen"
-            android:layout_marginEnd="@dimen/sixteen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/emptyView"
@@ -60,6 +46,20 @@
                 android:textColor="@color/amityColorBase" />
         </LinearLayout>
 
+        <com.ekoapp.ekosdk.uikit.common.views.list.EkoRecyclerView
+            android:id="@+id/rvCommunity"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginStart="@dimen/sixteen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+    </data>
 </layout>
 

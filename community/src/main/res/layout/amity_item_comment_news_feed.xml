@@ -3,53 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <variable
-            name="readOnly"
-            type="Boolean" />
-
-        <variable
-            name="addBottomSpace"
-            type="Boolean" />
-
-        <variable
-            name="edited"
-            type="Boolean" />
-
-        <variable
-            name="avatarUrl"
-            type="String" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivAvatar"
-            style="@style/CircularAvatarStyle"
-            backgroundColorShade="@{ColorShade.SHADE3}"
-            ekoBackgroundColor="@{@color/amityColorPrimary}"
-            imageUrl="@{avatarUrl}"
-            placeHolder="@{@drawable/amity_ic_default_profile1}"
-            android:layout_width="@dimen/twenty_eight"
-            android:layout_height="@dimen/twenty_eight"
-            android:layout_marginEnd="@dimen/eight"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/btnCommentAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/ten"
+            android:background="@android:color/transparent"
+            android:src="@drawable/amity_ic_more_horizontal"
+            android:tint="@color/amityColorBase"
+            app:layout_constraintBottom_toBottomOf="@id/reply"
+            app:layout_constraintStart_toEndOf="@id/reply"
+            app:layout_constraintTop_toTopOf="@id/reply" />
 
         <TextView
             android:id="@+id/tvUserName"
             style="@style/TextStyleEkoBodyBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/eight"
             android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginStart="@dimen/eight"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/amityColorBase"
@@ -77,14 +53,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/four"
-            android:drawableStart="@drawable/amity_ic_dot"
             android:drawablePadding="@dimen/four"
+            android:drawableStart="@drawable/amity_ic_dot"
             android:text="@string/amity_edited"
             android:textColor="@color/amityColorBase"
             android:visibility="@{edited ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toEndOf="@id/tvCommentTime"
             app:layout_constraintTop_toTopOf="@id/tvCommentTime"
             app:textColorShade="@{ColorShade.SHADE1}" />
+
+        <TextView
+            android:id="@+id/reply"
+            style="@style/TextStyleEkoBodyBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/ten"
+            android:drawablePadding="@dimen/eight"
+            android:drawableStart="@drawable/amity_ic_reply"
+            android:gravity="center_vertical"
+            android:text="@string/amity_reply"
+            android:textColor="@{@color/amityColorBase}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/cbLike"
+            app:layout_constraintStart_toEndOf="@id/cbLike"
+            app:layout_constraintTop_toTopOf="@id/cbLike"
+            app:textColorShade="@{ColorShade.SHADE2}" />
+
+        <TextView
+            android:id="@+id/tvViewAllReply"
+            style="@style/TextStyleEkoBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/eight"
+            android:text="@string/amity_view_replies"
+            android:textColor="@color/amityColorBase"
+            app:layout_constraintTop_toBottomOf="@id/cbLike"
+            app:textColorShade="@{ColorShade.SHADE2}" />
+
+        <View
+            android:id="@+id/verticalDivider"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="-8dp"
+            android:layout_marginStart="14dp"
+            android:visibility="gone"
+            app:backgroundColorShade="@{ColorShade.SHADE4}"
+            app:ekoBackgroundColor="@{@color/amityColorBase}"
+            app:layout_constraintBottom_toTopOf="@id/tvViewAllReply"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
+
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/actionGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{readOnly ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="cbLike,btnCommentAction" />
 
         <com.ekoapp.ekosdk.uikit.common.views.text.EkoExpandableTextView
             android:id="@+id/tvPostComment"
@@ -100,6 +125,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvCommentTime"
             tools:text="orem ipsum dolor sit amet, consectetur. " />
 
+
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/cbLike"
             style="@style/TextStyleEkoBodyBold"
@@ -108,8 +134,8 @@
             android:button="@drawable/amity_ic_like_selector"
             android:enabled="@{readOnly ? false : true}"
             android:gravity="center_vertical"
-            android:paddingStart="@dimen/five"
             android:paddingEnd="0dp"
+            android:paddingStart="@dimen/five"
             android:text="@string/amity_like"
             app:checkBoxCheckedColor="@{@color/amityColorPrimary}"
             app:checkBoxDefaultColor="@{@color/amityColorBase}"
@@ -117,67 +143,41 @@
             app:layout_constraintStart_toStartOf="@id/tvUserName"
             app:layout_constraintTop_toBottomOf="@id/tvPostComment" />
 
-        <TextView
-            android:id="@+id/reply"
-            style="@style/TextStyleEkoBodyBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ten"
-            android:drawableStart="@drawable/amity_ic_reply"
-            android:drawablePadding="@dimen/eight"
-            android:gravity="center_vertical"
-            android:text="@string/amity_reply"
-            android:textColor="@{@color/amityColorBase}"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/cbLike"
-            app:layout_constraintStart_toEndOf="@id/cbLike"
-            app:layout_constraintTop_toTopOf="@id/cbLike"
-            app:textColorShade="@{ColorShade.SHADE2}" />
-
-
-        <ImageButton
-            android:id="@+id/btnCommentAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ten"
-            android:background="@android:color/transparent"
-            android:src="@drawable/amity_ic_more_horizontal"
-            android:tint="@color/amityColorBase"
-            app:layout_constraintBottom_toBottomOf="@id/reply"
-            app:layout_constraintStart_toEndOf="@id/reply"
-            app:layout_constraintTop_toTopOf="@id/reply" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/actionGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="@{readOnly ? View.GONE : View.VISIBLE}"
-            app:constraint_referenced_ids="cbLike,btnCommentAction" />
-
-
-        <View
-            android:id="@+id/verticalDivider"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginBottom="-8dp"
-            android:visibility="gone"
-            app:backgroundColorShade="@{ColorShade.SHADE4}"
-            app:ekoBackgroundColor="@{@color/amityColorBase}"
-            app:layout_constraintBottom_toTopOf="@id/tvViewAllReply"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            style="@style/CircularAvatarStyle"
+            backgroundColorShade="@{ColorShade.SHADE3}"
+            ekoBackgroundColor="@{@color/amityColorPrimary}"
+            imageUrl="@{avatarUrl}"
+            placeHolder="@{@drawable/amity_ic_default_profile1}"
+            android:layout_width="@dimen/twenty_eight"
+            android:layout_height="@dimen/twenty_eight"
+            android:layout_marginEnd="@dimen/eight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
-
-        <TextView
-            android:id="@+id/tvViewAllReply"
-            style="@style/TextStyleEkoBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/eight"
-            android:text="@string/amity_view_replies"
-            android:textColor="@color/amityColorBase"
-            app:layout_constraintTop_toBottomOf="@id/cbLike"
-            app:textColorShade="@{ColorShade.SHADE2}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="readOnly"
+            type="Boolean" />
+
+        <variable
+            name="addBottomSpace"
+            type="Boolean" />
+
+        <variable
+            name="edited"
+            type="Boolean" />
+
+        <variable
+            name="avatarUrl"
+            type="String" />
+    </data>
 </layout>

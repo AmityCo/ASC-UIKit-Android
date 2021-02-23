@@ -2,36 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivAvatar"
-            style="@style/CircularAvatarStyle"
-            backgroundColorShade="@{ColorShade.SHADE3}"
-            ekoBackgroundColor="@{@color/amityColorPrimary}"
-            android:layout_width="@dimen/forty"
-            android:layout_height="@dimen/forty"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivCross"
-            android:layout_width="@dimen/sixteen"
-            android:layout_height="@dimen/sixteen"
-            android:alpha="0.5"
-            android:background="@color/amityColorBase"
-            android:scaleType="centerInside"
-            android:src="@drawable/amity_ic_cross_white"
-            app:layout_constraintEnd_toEndOf="@id/ivAvatar"
-            app:layout_constraintTop_toTopOf="@id/ivAvatar"
-            app:shapeAppearanceOverlay="@style/CircleImage" />
 
         <TextView
             android:id="@+id/tvName"
@@ -47,5 +20,32 @@
             app:layout_constraintStart_toStartOf="@id/ivAvatar"
             app:layout_constraintTop_toBottomOf="@id/ivAvatar" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivCross"
+            android:layout_width="@dimen/sixteen"
+            android:layout_height="@dimen/sixteen"
+            android:alpha="0.5"
+            android:background="@color/amityColorBase"
+            android:scaleType="centerInside"
+            android:src="@drawable/amity_ic_cross_white"
+            app:layout_constraintEnd_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar"
+            app:shapeAppearanceOverlay="@style/CircleImage" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            style="@style/CircularAvatarStyle"
+            backgroundColorShade="@{ColorShade.SHADE3}"
+            ekoBackgroundColor="@{@color/amityColorPrimary}"
+            android:layout_width="@dimen/forty"
+            android:layout_height="@dimen/forty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+    </data>
 </layout>

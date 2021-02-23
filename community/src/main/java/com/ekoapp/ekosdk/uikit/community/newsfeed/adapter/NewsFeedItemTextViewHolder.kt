@@ -6,9 +6,9 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.INewsFeedItemActionLi
 import com.ekoapp.ekosdk.uikit.community.newsfeed.util.EkoTimelineType
 
 class NewsFeedItemTextViewHolder(
-    itemView: View,
-    itemActionLister: INewsFeedItemActionListener,
-    timelineType: EkoTimelineType
+        itemView: View,
+        itemActionLister: INewsFeedItemActionListener,
+        timelineType: EkoTimelineType
 ) : NewsFeedViewHolder(itemView, itemActionLister, timelineType) {
 
     override fun bind(data: EkoPost?, position: Int) {

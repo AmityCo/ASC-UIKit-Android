@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.ekoapp.ekosdk.uikit.community.members.EkoCommunityMembersViewModel" />
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,15 +11,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etSearch"
-                style="@style/SearchEditTextStyle"
-                android:layout_marginTop="@dimen/fourteen"
-                android:text="@={viewModel.searchString}"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCommunityMembers"
@@ -37,6 +21,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etSearch" />
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                style="@style/SearchEditTextStyle"
+                android:layout_marginTop="@dimen/fourteen"
+                android:text="@={viewModel.searchString}"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ekoapp.ekosdk.uikit.community.members.EkoCommunityMembersViewModel" />
+    </data>
 </layout>

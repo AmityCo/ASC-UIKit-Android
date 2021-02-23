@@ -13,7 +13,7 @@ import com.ekoapp.ekosdk.uikit.community.utils.EkoSelectMemberContract
 
 
 class EkoCommunityCreateFragment internal constructor() : EkoCommunityCreateBaseFragment(),
-    EkoAddedMemberClickListener {
+        EkoAddedMemberClickListener {
 
     private lateinit var mAdapter: EkoAddedMembersAdapter
 
@@ -35,10 +35,10 @@ class EkoCommunityCreateFragment internal constructor() : EkoCommunityCreateBase
         getBindingVariable().rvAddedMembers.layoutManager = GridLayoutManager(requireContext(), 2)
         getBindingVariable().rvAddedMembers.adapter = mAdapter
         getBindingVariable().rvAddedMembers.addItemDecoration(
-            AddedMemberItemDecoration(
-                resources.getDimensionPixelSize(R.dimen.eight),
-                resources.getDimensionPixelSize(R.dimen.twelve)
-            )
+                AddedMemberItemDecoration(
+                        resources.getDimensionPixelSize(R.dimen.eight),
+                        resources.getDimensionPixelSize(R.dimen.twelve)
+                )
         )
         mAdapter.submitList(mViewModel.selectedMembersList)
     }
@@ -69,7 +69,7 @@ class EkoCommunityCreateFragment internal constructor() : EkoCommunityCreateBase
             }
         } else {
             mViewModel.selectedMembersList[7].subTitle =
-                "${mViewModel.selectedMembersList.size - 8}"
+                    "${mViewModel.selectedMembersList.size - 8}"
         }
     }
 

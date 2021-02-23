@@ -24,9 +24,8 @@ class EkoEditCommentActivity : EkoBaseToolbarFragmentContainerActivity() {
         getToolBar()?.setLeftDrawable(ContextCompat.getDrawable(this, R.drawable.amity_ic_cross))
         val comment: EkoComment? = intent.getParcelableExtra(EXTRA_PARAM_COMMENT)
         getToolBar()?.setLeftString(
-            if (comment != null) getString(R.string.amity_edit_comment) else getString(
-                R.string.amity_add_comment
-            )
+                if (comment != null) getString(R.string.amity_edit_comment)
+                else getString(R.string.amity_add_comment)
         )
     }
 
@@ -36,9 +35,9 @@ class EkoEditCommentActivity : EkoBaseToolbarFragmentContainerActivity() {
         val ekoPost: EkoPost? = intent.getParcelableExtra(EXTRA_PARAM_NEWS_FEED)
         val commentText: String? = intent.getStringExtra(EXTRA_PARAM_COMMENT_TEXT)
         return EkoEditCommentFragment.Builder()
-            .setComment(comment)
-            .setCommentText(commentText)
-            .setNewsFeed(ekoPost).build(this)
+                .setComment(comment)
+                .setCommentText(commentText)
+                .setNewsFeed(ekoPost).build(this)
     }
 
 

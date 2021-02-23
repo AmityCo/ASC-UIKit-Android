@@ -44,25 +44,25 @@ class EkoPostCreateFragment internal constructor() : EkoBaseCreatePostFragment()
         val ekoPostSingle = mViewModel.createPost(etPost.text.toString())
 
         val disposable = ekoPostSingle
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess {
-                handleCreatePostSuccessResponse(it)
-            }
-            .doOnError {
-                updatePostMenu(true)
-                isLoading = false
-                showErrorMessage(it.message)
-            }
-            .subscribe()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess {
+                    handleCreatePostSuccessResponse(it)
+                }
+                .doOnError {
+                    updatePostMenu(true)
+                    isLoading = false
+                    showErrorMessage(it.message)
+                }
+                .subscribe()
         compositeDisposable.add(disposable)
     }
 
     private fun handleCreatePostSuccessResponse(post: EkoPost) {
         val resultIntent = Intent("postCreation")
         resultIntent.putExtra(
-            EXTRA_PARAM_NEWS_FEED_ID,
-            post.getPostId()
+                EXTRA_PARAM_NEWS_FEED_ID,
+                post.getPostId()
         )
         activity?.setResult(Activity.RESULT_OK, resultIntent)
         refresh()

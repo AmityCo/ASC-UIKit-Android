@@ -19,7 +19,7 @@ import com.google.android.material.textview.MaterialTextView
 
 
 class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickListener) :
-    EkoBaseRecyclerViewAdapter<EkoImage>() {
+        EkoBaseRecyclerViewAdapter<EkoImage>() {
 
     override fun getLayoutId(position: Int, obj: EkoImage?): Int {
         return R.layout.amity_item_post_image
@@ -41,8 +41,8 @@ class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickLis
     }
 
     class DiffCallback(
-        private val oldList: List<EkoImage>,
-        private val newList: List<EkoImage>
+            private val oldList: List<EkoImage>,
+            private val newList: List<EkoImage>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -60,12 +60,12 @@ class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickLis
 
 
     class PostImageItemViewHolder(
-        itemView: View,
-        private val itemCount: Int,
-        private val itemClickListener: IPostImageItemClickListener
+            itemView: View,
+            private val itemCount: Int,
+            private val itemClickListener: IPostImageItemClickListener
     ) :
-        RecyclerView.ViewHolder(itemView),
-        IBinder<EkoImage> {
+            RecyclerView.ViewHolder(itemView),
+            IBinder<EkoImage> {
 
         var image: ShapeableImageView = itemView.findViewById(R.id.ivFeedImage)
         var imageCount: MaterialTextView = itemView.findViewById(R.id.tvImageCount)
@@ -86,8 +86,8 @@ class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickLis
                 val imageUrl = data.getUrl(EkoImage.Size.MEDIUM)
                 if (image.tag != imageUrl) {
                     Glide.with(itemView)
-                        .load(imageUrl)
-                        .into(image)
+                            .load(imageUrl)
+                            .into(image)
                     image.tag = imageUrl
                 }
 
@@ -100,7 +100,7 @@ class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickLis
         private fun setupImageCount(position: Int) {
             if (itemCount > 4 && position == 3) {
                 imageCount.text =
-                    String.format(itemView.resources.getString(R.string.amity_image_count), itemCount - 3)
+                        String.format(itemView.resources.getString(R.string.amity_image_count), itemCount - 3)
                 imageCount.visibility = View.VISIBLE
 
             } else {
@@ -110,7 +110,7 @@ class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickLis
 
         private fun setupShape(position: Int, itemCount: Int) {
             val imageBuilder = image.shapeAppearanceModel
-                .toBuilder()
+                    .toBuilder()
             var topLeft: Float = 0.0F
             var topRight: Float = 0.0F
             var bottomLeft: Float = 0.0F
@@ -156,19 +156,19 @@ class PostImageItemAdapter(private val itemClickListener: IPostImageItemClickLis
             }
 
             image.shapeAppearanceModel = imageBuilder
-                .setTopLeftCorner(CornerFamily.ROUNDED, topLeft)
-                .setTopRightCorner(CornerFamily.ROUNDED, topRight)
-                .setBottomLeftCorner(CornerFamily.ROUNDED, bottomLeft)
-                .setBottomRightCorner(CornerFamily.ROUNDED, bottomRight)
-                .build()
+                    .setTopLeftCorner(CornerFamily.ROUNDED, topLeft)
+                    .setTopRightCorner(CornerFamily.ROUNDED, topRight)
+                    .setBottomLeftCorner(CornerFamily.ROUNDED, bottomLeft)
+                    .setBottomRightCorner(CornerFamily.ROUNDED, bottomRight)
+                    .build()
 
             image.setBackgroundColor(
-                ColorPaletteUtil.getColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.amityColorBase
-                    ), ColorShade.SHADE4
-                )
+                    ColorPaletteUtil.getColor(
+                            ContextCompat.getColor(
+                                    itemView.context,
+                                    R.color.amityColorBase
+                            ), ColorShade.SHADE4
+                    )
             )
         }
 

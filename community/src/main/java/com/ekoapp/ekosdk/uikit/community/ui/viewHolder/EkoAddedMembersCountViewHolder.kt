@@ -14,10 +14,9 @@ import com.ekoapp.ekosdk.uikit.community.databinding.AmityViewAddedMemberWithCou
 import com.ekoapp.ekosdk.uikit.community.ui.clickListener.EkoAddedMemberClickListener
 
 class EkoAddedMembersCountViewHolder(
-    itemView: View,
-    private val mClickListener: EkoAddedMemberClickListener
-) :
-    EkoAddedMembersViewHolder(itemView, mClickListener) {
+        itemView: View,
+        private val mClickListener: EkoAddedMemberClickListener
+) : EkoAddedMembersViewHolder(itemView, mClickListener) {
 
     private val layoutMember: ConstraintLayout = itemView.findViewById(R.id.layoutAddedMember)
     private val binding: AmityViewAddedMemberWithCountBinding? = DataBindingUtil.bind(itemView)
@@ -25,18 +24,23 @@ class EkoAddedMembersCountViewHolder(
     init {
         val radius = itemView.context.resources.getDimensionPixelSize(R.dimen.twenty_four).toFloat()
         layoutMember.setShape(
-            radius, radius, radius, radius, R.color.amityColorBase,
-            R.color.amityColorBase, ColorShade.SHADE4
+                radius,
+                radius,
+                radius,
+                radius,
+                R.color.amityColorBase,
+                R.color.amityColorBase,
+                ColorShade.SHADE4
         )
         binding?.ivAdd?.toCircularShape(
-            ColorPaletteUtil.getColor(
-                ContextCompat.getColor(itemView.context, R.color.amityColorBase), ColorShade.SHADE4
-            )
+                ColorPaletteUtil.getColor(
+                        ContextCompat.getColor(itemView.context, R.color.amityColorBase), ColorShade.SHADE4
+                )
         )
         binding?.tvCount?.toCircularShape(
-            ColorPaletteUtil.getColor(
-                ContextCompat.getColor(itemView.context, R.color.amityColorBase), ColorShade.SHADE4
-            )
+                ColorPaletteUtil.getColor(
+                        ContextCompat.getColor(itemView.context, R.color.amityColorBase), ColorShade.SHADE4
+                )
         )
     }
 
