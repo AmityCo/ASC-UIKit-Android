@@ -21,13 +21,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class EkoCommunityModeratorAdapter(
-    private val context: Context,
-    private val listener: IMemberClickListener,
-    private val communityMemberViewModel: EkoCommunityMembersViewModel
+        private val context: Context,
+        private val listener: IMemberClickListener,
+        private val communityMemberViewModel: EkoCommunityMembersViewModel
 ) : EkoBaseRecyclerViewPagedAdapter<EkoCommunityMembership>(diffCallBack) {
 
     override fun getLayoutId(position: Int, obj: EkoCommunityMembership?): Int =
-        R.layout.amity_item_community_membership
+            R.layout.amity_item_community_membership
 
     override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
         val itemViewModel = EkoMembershipItemViewModel()
@@ -37,16 +37,16 @@ class EkoCommunityModeratorAdapter(
     }
 
     inner class EkoModeratorViewHolder(
-        itemView: View, private val context: Context,
-        private val listener: IMemberClickListener,
-        private val itemViewModel: EkoMembershipItemViewModel
+            itemView: View, private val context: Context,
+            private val listener: IMemberClickListener,
+            private val itemViewModel: EkoMembershipItemViewModel
     ) : EkoCommunityMembersBaseViewHolder(
-        itemView,
-        context,
-        itemViewModel,
-        communityMemberViewModel
+            itemView,
+            context,
+            itemViewModel,
+            communityMemberViewModel
     ),
-        Binder<EkoCommunityMembership> {
+            Binder<EkoCommunityMembership> {
 
         private val binding: AmityItemCommunityMembershipBinding? = DataBindingUtil.bind(itemView)
 
@@ -69,49 +69,49 @@ class EkoCommunityModeratorAdapter(
 
         private fun getUser(userId: String) {
             itemViewModel.getUser(userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .firstOrError()
-                .doOnError {
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .firstOrError()
+                    .doOnError {
 
-                }
-                .doOnSuccess { ekoUser ->
-                    showBottomSheet(context, ekoUser)
-                }
-                .subscribe()
+                    }
+                    .doOnSuccess { ekoUser ->
+                        showBottomSheet(context, ekoUser)
+                    }
+                    .subscribe()
         }
 
         private fun showBottomSheet(context: Context, ekoUser: EkoUser) {
             val itemList = arrayListOf<EkoMenuItem>()
             if (itemViewModel.isModerator.get()) {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_REMOVE_MODERATOR,
-                        context.getString(R.string.amity_remove_moderator)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_REMOVE_MODERATOR,
+                                context.getString(R.string.amity_remove_moderator)
+                        )
                 )
             }
             if (ekoUser.isFlaggedByMe()) {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_UN_REPORT_USER,
-                        context.getString(R.string.amity_unreport_user)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_UN_REPORT_USER,
+                                context.getString(R.string.amity_unreport_user)
+                        )
                 )
             } else {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_REPORT_USER,
-                        context.getString(R.string.amity_report_user)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_REPORT_USER,
+                                context.getString(R.string.amity_report_user)
+                        )
                 )
             }
             if (itemViewModel.isModerator.get()) {
                 itemList.add(
-                    EkoMenuItem(
-                        EkoConstants.ID_REMOVE_USER,
-                        context.getString(R.string.amity_remove_user)
-                    )
+                        EkoMenuItem(
+                                EkoConstants.ID_REMOVE_USER,
+                                context.getString(R.string.amity_remove_user)
+                        )
                 )
             }
 
@@ -136,13 +136,13 @@ class EkoCommunityModeratorAdapter(
     companion object {
         private val diffCallBack = object : DiffUtil.ItemCallback<EkoCommunityMembership>() {
             override fun areItemsTheSame(
-                oldItem: EkoCommunityMembership,
-                newItem: EkoCommunityMembership
+                    oldItem: EkoCommunityMembership,
+                    newItem: EkoCommunityMembership
             ): Boolean = oldItem.getUserId() == newItem.getUserId()
 
             override fun areContentsTheSame(
-                oldItem: EkoCommunityMembership,
-                newItem: EkoCommunityMembership
+                    oldItem: EkoCommunityMembership,
+                    newItem: EkoCommunityMembership
             ): Boolean = oldItem == newItem
         }
     }

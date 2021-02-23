@@ -32,9 +32,9 @@ class EkoCommunityMembersViewModel : EkoBaseViewModel() {
     fun getCommunityMembers(): Flowable<PagedList<EkoCommunityMembership>> {
         val communityRepository = EkoClient.newCommunityRepository()
         return communityRepository.membership(communityId).getCollection()
-            .filter(EkoCommunityMembershipFilter.MEMBER)
-            .build()
-            .query()
+                .filter(EkoCommunityMembershipFilter.MEMBER)
+                .build()
+                .query()
     }
 
     fun getCommunityDetail(): Flowable<EkoCommunity> {
@@ -45,11 +45,11 @@ class EkoCommunityMembersViewModel : EkoBaseViewModel() {
     fun getCommunityModerators(): Flowable<PagedList<EkoCommunityMembership>> {
         val communityRepository = EkoClient.newCommunityRepository()
         return communityRepository.membership(communityId).getCollection()
-            .filter(EkoCommunityMembershipFilter.MEMBER)
-            .sortBy(EkoCommunityMembershipSortOption.FIRST_CREATED)
-            .roles(listOf(EkoConstants.MODERATOR_ROLE))
-            .build()
-            .query()
+                .filter(EkoCommunityMembershipFilter.MEMBER)
+                .sortBy(EkoCommunityMembershipSortOption.FIRST_CREATED)
+                .roles(listOf(EkoConstants.MODERATOR_ROLE))
+                .build()
+                .query()
     }
 
     fun setPropertyChangeCallback() {
@@ -88,36 +88,36 @@ class EkoCommunityMembersViewModel : EkoBaseViewModel() {
     private fun removeUsersFromCommunity(list: List<String>) {
         val communityRepository = EkoClient.newCommunityRepository()
         addDisposable(
-            communityRepository.membership(communityId)
-                .removeUsers(list)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
+                communityRepository.membership(communityId)
+                        .removeUsers(list)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
 
-                }.doOnError {
-                    if (addRemoveErrorData.value == null) {
-                        addRemoveErrorData.value = it
-                    }
-                }
-                .subscribe()
+                        }.doOnError {
+                            if (addRemoveErrorData.value == null) {
+                                addRemoveErrorData.value = it
+                            }
+                        }
+                        .subscribe()
         )
     }
 
     private fun addMembersToCommunity(list: List<String>) {
         val communityRepository = EkoClient.newCommunityRepository()
         addDisposable(
-            communityRepository.membership(communityId)
-                .addUsers(list)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
+                communityRepository.membership(communityId)
+                        .addUsers(list)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
 
-                }.doOnError {
-                    if (addRemoveErrorData.value == null) {
-                        addRemoveErrorData.value = it
-                    }
-                }
-                .subscribe()
+                        }.doOnError {
+                            if (addRemoveErrorData.value == null) {
+                                addRemoveErrorData.value = it
+                            }
+                        }
+                        .subscribe()
         )
     }
 

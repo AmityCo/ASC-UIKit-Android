@@ -3,15 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <variable
-            name="vm"
-            type="com.ekoapp.ekosdk.uikit.community.profile.viewmodel.EkoEditUserProfileViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -52,14 +43,13 @@
                 app:strokeWidth="2dp" />
         </FrameLayout>
 
-
         <TextView
             android:id="@+id/tvDisplayNameLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/sixteen"
             android:layout_marginStart="@dimen/sixteen"
             android:layout_marginTop="@dimen/sixteen"
-            android:layout_marginEnd="@dimen/sixteen"
             android:text="@string/amity_display_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/avatarView"
@@ -69,23 +59,13 @@
             android:id="@+id/tvUserNameCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/sixteen"
             android:layout_marginStart="@dimen/sixteen"
             android:layout_marginTop="@dimen/sixteen"
-            android:layout_marginEnd="@dimen/sixteen"
             android:text='@{vm.displayName.trim().length() + "/" + vm.userNameMaxTextLength}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/avatarView"
             tools:text="100/100" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDisplayName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/sixteen"
-            android:layout_marginEnd="@dimen/sixteen"
-            android:text="@={vm.displayName}"
-            android:textColor="@color/amityColorBase"
-            app:layout_constraintTop_toBottomOf="@id/tvDisplayNameLabel" />
 
         <TextView
             android:id="@+id/tvAboutLabel"
@@ -101,21 +81,40 @@
             android:id="@+id/tvAboutCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/thirty_two"
             android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginTop="@dimen/thirty_two"
             android:text='@{vm.about.trim().length() + "/" + vm.aboutMaxTextLength}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etDisplayName"
             tools:text="180/180" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginStart="@dimen/sixteen"
+            android:text="@={vm.displayName}"
+            android:textColor="@color/amityColorBase"
+            app:layout_constraintTop_toBottomOf="@id/tvDisplayNameLabel" />
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/sixteen"
             android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginStart="@dimen/sixteen"
             android:maxLength="@integer/maxLimitProfileDescription"
             android:text="@={vm.about}"
             app:layout_constraintTop_toBottomOf="@id/tvAboutLabel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="vm"
+            type="com.ekoapp.ekosdk.uikit.community.profile.viewmodel.EkoEditUserProfileViewModel" />
+    </data>
 </layout>

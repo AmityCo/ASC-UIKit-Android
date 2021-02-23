@@ -19,10 +19,14 @@ class EkoCustomToast {
                 applicationContext: Context,
                 inflater: LayoutInflater,
                 message: String,
-                messageDuration: Int = Toast.LENGTH_LONG) {
+                messageDuration: Int = Toast.LENGTH_LONG
+        ) {
 
             mBinding = AmityViewCustomToastBinding.inflate(inflater)
-            val layout = inflater.inflate(R.layout.amity_view_custom_toast, null) as ViewGroup
+            val layout = inflater.inflate(
+                    R.layout.amity_view_custom_toast,
+                    null
+            ) as ViewGroup
 
             val text: TextView = layout.findViewById(R.id.tvMessage)
 

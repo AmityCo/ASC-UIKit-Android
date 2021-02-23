@@ -17,11 +17,11 @@ import com.ekoapp.ekosdk.uikit.community.views.newsfeed.EkoNewsFeedItemHeader
 import com.ekoapp.ekosdk.user.EkoUser
 
 open class NewsFeedViewHolder(
-    itemView: View,
-    private val itemActionLister: INewsFeedItemActionListener,
-    private val timelineType: EkoTimelineType
+        itemView: View,
+        private val itemActionLister: INewsFeedItemActionListener,
+        private val timelineType: EkoTimelineType
 ) : RecyclerView.ViewHolder(itemView),
-    EkoBaseRecyclerViewPagedAdapter.Binder<EkoPost> {
+        EkoBaseRecyclerViewPagedAdapter.Binder<EkoPost> {
     val feed = itemView.findViewById<EkoExpandableTextView>(R.id.tvFeed)
     private val feedAction = itemView.findViewById<ImageButton>(R.id.btnFeedAction)
     private var headerLayout = itemView.findViewById<EkoNewsFeedItemHeader>(R.id.newsFeedHeader)
@@ -34,7 +34,7 @@ open class NewsFeedViewHolder(
             footerLayout.setFeed(data)
 
             headerLayout.setNewsFeedActionAvatarClickListener(object :
-                INewsFeedActionAvatarClickListener {
+                    INewsFeedActionAvatarClickListener {
                 override fun onClickUserAvatar(user: EkoUser) {
                     itemActionLister.onClickUserAvatar(data, user, position)
                 }
@@ -42,7 +42,7 @@ open class NewsFeedViewHolder(
             })
 
             headerLayout.setNewsFeedActionCommunityClickListener(object :
-                INewsFeedActionCommunityClickListener {
+                    INewsFeedActionCommunityClickListener {
 
                 override fun onClickCommunity(community: EkoCommunity) {
                     itemActionLister.onClickCommunity(community)
@@ -66,7 +66,7 @@ open class NewsFeedViewHolder(
             this.footerLayout.setItemClickListener(object : INewsFeedCommentItemClickListener {
                 override fun onClickItem(comment: EkoComment, position: Int) {
                     val postId =
-                        (comment.getReference() as? EkoCommentReference.Post)?.getPostId() ?: ""
+                            (comment.getReference() as? EkoCommentReference.Post)?.getPostId() ?: ""
                     itemActionLister.onClickItem(postId, position)
                 }
 
@@ -76,7 +76,7 @@ open class NewsFeedViewHolder(
             })
 
             this.footerLayout.setShowAllReplyListener(object :
-                INewsFeedCommentShowAllReplyListener {
+                    INewsFeedCommentShowAllReplyListener {
                 override fun onClickShowAllReplies(comment: EkoComment, position: Int) {
                     itemActionLister.showAllReply(data, comment, position)
                 }
@@ -84,10 +84,10 @@ open class NewsFeedViewHolder(
             })
 
             this.footerLayout.setShowMoreActionListener(object :
-                INewsFeedCommentShowMoreActionListener {
+                    INewsFeedCommentShowMoreActionListener {
                 override fun onClickNewsFeedCommentShowMoreAction(
-                    comment: EkoComment,
-                    commentPosition: Int
+                        comment: EkoComment,
+                        commentPosition: Int
                 ) {
                     itemActionLister.onCommentAction(data, comment, commentPosition)
                 }
@@ -103,8 +103,14 @@ open class NewsFeedViewHolder(
             this.feed.visibility = if (this.feed.text.isEmpty()) View.GONE else View.VISIBLE
 
 
-            footerLayout.submitComments(data.getLatestComments().filter { !it.isDeleted() }
-                .takeLast(2))
+            footerLayout.submitComments(
+                    data
+                            .getLatestComments()
+                            .filter {
+                                !it.isDeleted() && it.getState() != EkoComment.State.FAILED
+                            }
+                            .takeLast(2)
+            )
             feed.setExpandOnlyOnReadMoreClick(true)
 
             feed.setOnClickListener {

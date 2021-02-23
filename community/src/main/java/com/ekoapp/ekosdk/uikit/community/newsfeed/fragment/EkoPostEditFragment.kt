@@ -51,16 +51,16 @@ class EkoPostEditFragment internal constructor() : EkoBaseCreatePostFragment() {
     private fun updatePost() {
         updatePostMenu(false)
         val disposable = mViewModel.deleteImageOrFileInPost()
-            .andThen(mViewModel.updatePostText(etPost.text.toString()))
-            .doOnComplete {
-                mViewModel.getNewsFeed()?.let { handleEditPostSuccessResponse(it) }
-            }.doOnError {
-                updatePostMenu(true)
-                showErrorMessage(it.message)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+                .andThen(mViewModel.updatePostText(etPost.text.toString()))
+                .doOnComplete {
+                    mViewModel.getNewsFeed()?.let { handleEditPostSuccessResponse(it) }
+                }.doOnError {
+                    updatePostMenu(true)
+                    showErrorMessage(it.message)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
 
         compositeDisposable.add(disposable)
     }
@@ -68,8 +68,8 @@ class EkoPostEditFragment internal constructor() : EkoBaseCreatePostFragment() {
     private fun handleEditPostSuccessResponse(post: EkoPost) {
         val resultIntent = Intent("postCreation")
         resultIntent.putExtra(
-            EXTRA_PARAM_NEWS_FEED_ID,
-            post.getPostId()
+                EXTRA_PARAM_NEWS_FEED_ID,
+                post.getPostId()
         )
         activity?.setResult(Activity.RESULT_OK, resultIntent)
         refresh()
@@ -79,17 +79,17 @@ class EkoPostEditFragment internal constructor() : EkoBaseCreatePostFragment() {
 
     private fun getPostDetails(postId: String) {
         val disposable = mViewModel.getPostDetails(postId)
-            .firstOrError()
-            .doOnError {
-                showErrorMessage(it.message)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                setUpPostData(it)
-            }, {
-                showErrorMessage(it.message)
-            })
+                .firstOrError()
+                .doOnError {
+                    showErrorMessage(it.message)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    setUpPostData(it)
+                }, {
+                    showErrorMessage(it.message)
+                })
         compositeDisposable.add(disposable)
     }
 

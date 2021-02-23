@@ -28,15 +28,15 @@ import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.amity_fragment_news_feed.*
 
 class EkoNewsFeedFragment internal constructor() : EkoBaseFragment(),
-    AppBarLayout.OnOffsetChangedListener {
+        AppBarLayout.OnOffsetChangedListener {
 
     private lateinit var mBinding: AmityFragmentNewsFeedBinding
     private lateinit var mViewModel: EkoNewsFeedViewModel
     private val communityHomeViewModel: EkoCommunityHomeViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel = ViewModelProvider(requireActivity()).get(EkoNewsFeedViewModel::class.java)
         mBinding = DataBindingUtil.inflate(inflater, R.layout.amity_fragment_news_feed, container, false)
@@ -117,7 +117,7 @@ class EkoNewsFeedFragment internal constructor() : EkoBaseFragment(),
             return mViewModel.globalFeedFragmentDelegate!!.getGlobalFeedFragment()
 
         return EkoGlobalFeedFragment.Builder()
-            .build(activity as AppCompatActivity)
+                .build(activity as AppCompatActivity)
     }
 
     private fun addViewModelListener() {
@@ -133,16 +133,16 @@ class EkoNewsFeedFragment internal constructor() : EkoBaseFragment(),
 
     class Builder {
         private var myCommunityListPreviewFragmentDelegate: IMyCommunityListPreviewFragmentDelegate? =
-            null
+                null
         private var globalFeedFragmentDelegate: IGlobalFeedFragmentDelegate? = null
         private var createPostButtonClickListener: ICreatePostButtonClickListener? = null
 
         fun build(activity: AppCompatActivity): EkoNewsFeedFragment {
             val fragment = EkoNewsFeedFragment()
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoNewsFeedViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoNewsFeedViewModel::class.java)
             fragment.mViewModel.myCommunityListPreviewFragmentDelegate =
-                myCommunityListPreviewFragmentDelegate
+                    myCommunityListPreviewFragmentDelegate
             fragment.mViewModel.globalFeedFragmentDelegate = globalFeedFragmentDelegate
             fragment.mViewModel.createPostButtonClickListener = createPostButtonClickListener
             return fragment

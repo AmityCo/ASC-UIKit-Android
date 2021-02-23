@@ -43,9 +43,9 @@ class EkoAudioRecorderView : ConstraintLayout {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            context,
+            attrs,
+            defStyleAttr
     ) {
         init()
     }
@@ -80,7 +80,7 @@ class EkoAudioRecorderView : ConstraintLayout {
                 val currentPos = xPos?.toInt() ?: 0
                 val currentHeight = event.rawY.toInt()
                 val outsideVerticalBound =
-                    currentHeight < recordButtonHeight - mBinding.btnRecordAudio.height / 2
+                        currentHeight < recordButtonHeight - mBinding.btnRecordAudio.height / 2
                 when {
                     currentPos <= initialDltBtnPos + (mBinding.btnDelete.width / 2) && !outsideVerticalBound -> {
                         mBinding.delete = true
@@ -94,9 +94,9 @@ class EkoAudioRecorderView : ConstraintLayout {
 
                 if (mBinding.delete == true) {
                     mBinding.btnDelete.layoutParams.width =
-                        resources.getDimensionPixelSize(R.dimen.sixty_four)
+                            resources.getDimensionPixelSize(R.dimen.sixty_four)
                     mBinding.btnDelete.layoutParams.height =
-                        resources.getDimensionPixelSize(R.dimen.sixty_four)
+                            resources.getDimensionPixelSize(R.dimen.sixty_four)
                     mBinding.btnDelete.requestLayout()
                 } else {
                     resetDeleteButton()
@@ -150,7 +150,7 @@ class EkoAudioRecorderView : ConstraintLayout {
     private fun resetDeleteButton() {
         mBinding.btnDelete.layoutParams.width = resources.getDimensionPixelSize(R.dimen.forty_eight)
         mBinding.btnDelete.layoutParams.height =
-            resources.getDimensionPixelSize(R.dimen.forty_eight)
+                resources.getDimensionPixelSize(R.dimen.forty_eight)
         mBinding.btnDelete.requestLayout()
     }
 
@@ -165,8 +165,8 @@ class EkoAudioRecorderView : ConstraintLayout {
     fun circularReveal() {
         val radius = mBinding.layoutRecorder.width.coerceAtLeast(mBinding.layoutRecorder.height)
         val circularReveal = ViewAnimationUtils.createCircularReveal(
-            mBinding.layoutRecorder,
-            mBinding.layoutRecorder.width / 2, mBinding.layoutRecorder.height, 0F, radius * 1.1F
+                mBinding.layoutRecorder,
+                mBinding.layoutRecorder.width / 2, mBinding.layoutRecorder.height, 0F, radius * 1.1F
         )
         circularReveal.duration = 1500
         circularReveal.start()
@@ -242,12 +242,12 @@ class EkoAudioRecorderView : ConstraintLayout {
     private fun createAudioFile(): File {
         // Create an audio file name
         val timeStamp: String =
-            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+                SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
         return File.createTempFile(
-            "Audio_${timeStamp}_", /* prefix */
-            ".mp3", /* suffix */
-            storageDir /* directory */
+                "Audio_${timeStamp}_", /* prefix */
+                ".mp3", /* suffix */
+                storageDir /* directory */
         )
     }
 

@@ -19,9 +19,9 @@ class EkoCommunityTimelineViewModel : EkoBaseFeedViewModel() {
         if (community != null) {
             val feedRepository: EkoFeedRepository = EkoClient.newFeedRepository()
             return feedRepository.getCommunityFeed(community!!.getCommunityId())
-                .includeDeleted(false)
-                .build()
-                .query()
+                    .includeDeleted(false)
+                    .build()
+                    .query()
         } else {
             return null
         }

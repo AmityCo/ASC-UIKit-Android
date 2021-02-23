@@ -10,11 +10,10 @@ import com.ekoapp.ekosdk.uikit.community.databinding.AmityItemSelectedMemberBind
 import com.ekoapp.ekosdk.uikit.community.ui.clickListener.EkoSelectedMemberListener
 
 class EkoSelectedMemberViewHolder(
-    itemView: View,
-    private val mClickListener: EkoSelectedMemberListener
-) :
-    RecyclerView.ViewHolder(itemView),
-    EkoBaseRecyclerViewAdapter.IBinder<SelectMemberItem> {
+        itemView: View,
+        private val mClickListener: EkoSelectedMemberListener
+) : RecyclerView.ViewHolder(itemView),
+        EkoBaseRecyclerViewAdapter.IBinder<SelectMemberItem> {
 
     private val binding: AmityItemSelectedMemberBinding? = DataBindingUtil.bind(itemView)
 

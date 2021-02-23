@@ -27,11 +27,11 @@ class EkoTrendingCommunityFragment : EkoBaseFragment(), IMyCommunityItemClickLis
     private val TAG = EkoTrendingCommunityFragment::class.java.canonicalName
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
         return inflater.inflate(R.layout.amity_fragment_trending_community, container, false)
     }
 
@@ -48,26 +48,31 @@ class EkoTrendingCommunityFragment : EkoBaseFragment(), IMyCommunityItemClickLis
         adapter = EkoTrendingCommunityAdapter(this)
         rvTrendingCommunity.layoutManager = LinearLayoutManager(requireContext())
         rvTrendingCommunity.adapter = adapter
+        rvTrendingCommunity.itemAnimator = null
         rvTrendingCommunity.addItemDecoration(
-            EkoRecyclerViewItemDecoration(
-                requireContext().resources.getDimensionPixelSize(R.dimen.sixteen),
-                requireContext().resources.getDimensionPixelSize(R.dimen.zero),
-                requireContext().resources.getDimensionPixelSize(R.dimen.eight)
-            )
+                EkoRecyclerViewItemDecoration(
+                        requireContext().resources.getDimensionPixelSize(R.dimen.sixteen),
+                        requireContext().resources.getDimensionPixelSize(R.dimen.zero),
+                        requireContext().resources.getDimensionPixelSize(R.dimen.eight)
+                )
         )
-
         getTrendingCommunity()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refresh()
     }
 
     private fun getTrendingCommunity() {
         disposable.add(mViewModel.getTrendingCommunity().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                mViewModel.emptyTrendingList.set(it.size == 0)
-                adapter.submitList(it)
-            }.doOnError {
-                Log.e(TAG, "getTrendingCommunity: ${it.localizedMessage}")
-            }.subscribe()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    mViewModel.emptyTrendingList.set(it.size == 0)
+                    adapter.submitList(it)
+                }.doOnError {
+                    Log.e(TAG, "getTrendingCommunity: ${it.localizedMessage}")
+                }.subscribe()
         )
     }
 
@@ -77,8 +82,8 @@ class EkoTrendingCommunityFragment : EkoBaseFragment(), IMyCommunityItemClickLis
         else {
             if (ekoCommunity != null) {
                 val intent = EkoCommunityPageActivity.newIntent(
-                    requireContext(),
-                    ekoCommunity.getCommunityId()
+                        requireContext(),
+                        ekoCommunity.getCommunityId()
                 )
                 startActivity(intent)
             }
@@ -91,7 +96,7 @@ class EkoTrendingCommunityFragment : EkoBaseFragment(), IMyCommunityItemClickLis
         fun build(activity: AppCompatActivity): EkoTrendingCommunityFragment {
             val fragment = EkoTrendingCommunityFragment()
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
             fragment.mViewModel.trendingCommunityItemClickListener = communityItemClickListener
             return fragment
         }

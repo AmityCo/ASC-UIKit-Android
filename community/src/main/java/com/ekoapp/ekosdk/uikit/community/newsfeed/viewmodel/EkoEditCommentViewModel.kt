@@ -21,10 +21,10 @@ class EkoEditCommentViewModel : EkoBaseViewModel() {
     fun updateComment(): Single<EkoComment>? {
         if (ekoComment != null) {
             return (ekoComment?.getData() as? EkoComment.Data.TEXT)
-                ?.edit()
-                ?.text(commentText.value!!)
-                ?.build()
-                ?.apply()
+                    ?.edit()
+                    ?.text(commentText.value!!)
+                    ?.build()
+                    ?.apply()
         }
         return null
     }
@@ -35,16 +35,16 @@ class EkoEditCommentViewModel : EkoBaseViewModel() {
             return null
 
         return EkoClient.newCommentRepository().createComment(commentId)
-            .post(ekoPost!!.getPostId())
-            .with()
-            .text(commentText.value!!)
-            .build()
-            .send()
-            .map {
-                EkoClient.newFeedRepository().getPost(ekoPost!!.getPostId()).ignoreElements()
-                    .onErrorComplete()
-                it
-            }
+                .post(ekoPost!!.getPostId())
+                .with()
+                .text(commentText.value!!)
+                .build()
+                .send()
+                .map {
+                    EkoClient.newFeedRepository().getPost(ekoPost!!.getPostId()).ignoreElements()
+                            .onErrorComplete()
+                    it
+                }
     }
 
     fun deleteComment(commentId: String): Completable {

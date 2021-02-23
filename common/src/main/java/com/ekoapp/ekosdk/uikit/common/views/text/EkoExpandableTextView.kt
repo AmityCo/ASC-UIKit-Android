@@ -23,9 +23,9 @@ class EkoExpandableTextView : AppCompatTextView {
     private var expandOnlyOnReadMoreClick = false
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
+            context,
+            attrs,
+            defStyle
     ) {
         initView()
     }
@@ -95,8 +95,8 @@ class EkoExpandableTextView : AppCompatTextView {
                     var lastLine = visibleText.substring(lastLineIndex + 1)
                     if (lastLine.length > 30) {
                         lastLine = lastLine.substring(
-                            0,
-                            lastLine.length - readMoreString.length
+                                0,
+                                lastLine.length - readMoreString.length
                         ) + readMoreString
                     } else {
                         lastLine += readMoreString
@@ -104,16 +104,16 @@ class EkoExpandableTextView : AppCompatTextView {
                     displayText = visibleText.substring(0, lastLineIndex + 1) + lastLine
                 } else {
                     displayText =
-                        text?.substring(0, lastCharShown - readMoreString.length) + readMoreString
+                            text?.substring(0, lastCharShown - readMoreString.length) + readMoreString
                 }
 
                 val startIndex = displayText.indexOf(readMoreString)
                 truncatedSpannableString = SpannableString(displayText)
                 truncatedSpannableString.setSpan(
-                    getReadMoreSpan(),
-                    startIndex,
-                    startIndex + readMoreString.length,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                        getReadMoreSpan(),
+                        startIndex,
+                        startIndex + readMoreString.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
 
                 truncatedSpannableString

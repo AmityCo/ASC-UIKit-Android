@@ -2,23 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivPhoto"
-            style="@style/CreatePostImageStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/one_hundred_twenty"
-            android:src="@drawable/amity_ic_avatar_placeholder"
-            app:backgroundColorShade="@{ColorShade.SHADE4}"
-            app:ekoBackgroundColor="@{@color/amityColorBase}"
+        <ProgressBar
+            android:id="@+id/pbImageUpload"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="@dimen/eighty"
+            android:layout_height="@dimen/eight"
+            android:max="@integer/maxProgressImageUpload"
+            android:progressBackgroundTint="@android:color/transparent"
+            android:progressTint="@color/amityColorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,16 +32,14 @@
             app:layout_constraintTop_toTopOf="@id/ivPhoto"
             app:shapeAppearanceOverlay="@style/CircleImage" />
 
-        <ProgressBar
-            android:id="@+id/pbImageUpload"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="@dimen/eighty"
-            android:layout_height="@dimen/eight"
-            android:max="@integer/maxProgressImageUpload"
-            android:progressBackgroundTint="@android:color/transparent"
-            android:progressTint="@color/amityColorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivPhoto"
+            style="@style/CreatePostImageStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/one_hundred_twenty"
+            android:src="@drawable/amity_ic_avatar_placeholder"
+            app:backgroundColorShade="@{ColorShade.SHADE4}"
+            app:ekoBackgroundColor="@{@color/amityColorBase}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,4 +58,9 @@
             app:shapeAppearanceOverlay="@style/CircleImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+    </data>
 </layout>

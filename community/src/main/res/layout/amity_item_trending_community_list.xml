@@ -3,61 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <import type="android.view.View" />
-
-        <variable
-            name="ekoCommunity"
-            type="com.ekoapp.ekosdk.community.EkoCommunity" />
-
-        <variable
-            name="avatarUrl"
-            type="String" />
-
-        <variable
-            name="listener"
-            type="com.ekoapp.ekosdk.uikit.community.mycommunity.listener.IMyCommunityItemClickListener" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> listener.onCommunitySelected(ekoCommunity)}">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/ivAvatar"
-            style="@style/CircularAvatarStyle"
-            backgroundColorShade="@{ColorShade.SHADE3}"
-            ekoBackgroundColor="@{@color/amityColorPrimary}"
-            imageUrl="@{avatarUrl}"
-            placeHolder="@{@drawable/amity_ic_default_community_avatar_small}"
-            android:layout_width="@dimen/forty"
-            android:layout_height="@dimen/forty"
-            android:layout_marginStart="@dimen/sixteen"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvCount"
-            style="@style/TextStyleEkoTitleBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twelve"
-            android:textColor="@color/amityColorHighlight"
-            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
-            app:layout_constraintStart_toEndOf="@id/ivAvatar"
-            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
 
         <FrameLayout
             android:id="@+id/communityNameContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/fourteen"
-            android:paddingStart="0dp"
             android:paddingEnd="@dimen/four"
+            android:paddingStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvCount"
             app:layout_constraintTop_toTopOf="@id/ivAvatar">
@@ -77,6 +34,17 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/tvCount"
+            style="@style/TextStyleEkoTitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/twelve"
+            android:textColor="@color/amityColorHighlight"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatar"
+            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@id/ivAvatar" />
+
+        <TextView
             android:id="@+id/tvCategory"
             style="@style/TextStyleEkoCaption"
             textColorShade="@{ColorShade.SHADE1}"
@@ -84,8 +52,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingStart="0dp"
             android:paddingEnd="@dimen/four"
+            android:paddingStart="0dp"
             android:text="@string/amity_general"
             android:textColor="@color/amityColorBase"
             app:layout_constrainedWidth="true" />
@@ -107,8 +75,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:paddingStart="@dimen/four"
             android:paddingEnd="@dimen/sixteen"
+            android:paddingStart="@dimen/four"
             android:textColor="@color/amityColorBase" />
 
         <androidx.constraintlayout.helper.widget.Flow
@@ -116,8 +84,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="0dp"
             android:paddingEnd="@dimen/four"
+            android:paddingStart="0dp"
             app:constraint_referenced_ids="tvCategory,tvDot,tvMembersCount"
             app:flow_horizontalAlign="start"
             app:flow_horizontalBias="0"
@@ -130,5 +98,37 @@
             app:layout_constraintStart_toStartOf="@+id/communityNameContainer"
             app:layout_constraintTop_toBottomOf="@+id/communityNameContainer" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            style="@style/CircularAvatarStyle"
+            backgroundColorShade="@{ColorShade.SHADE3}"
+            ekoBackgroundColor="@{@color/amityColorPrimary}"
+            imageUrl="@{avatarUrl}"
+            placeHolder="@{@drawable/amity_ic_default_community_avatar_small}"
+            android:layout_width="@dimen/forty"
+            android:layout_height="@dimen/forty"
+            android:layout_marginStart="@dimen/sixteen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="ekoCommunity"
+            type="com.ekoapp.ekosdk.community.EkoCommunity" />
+
+        <variable
+            name="avatarUrl"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="com.ekoapp.ekosdk.uikit.community.mycommunity.listener.IMyCommunityItemClickListener" />
+    </data>
 </layout>

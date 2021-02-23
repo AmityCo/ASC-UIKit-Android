@@ -16,11 +16,11 @@ import com.google.android.material.shape.CornerFamily
 
 
 class EkoCreatePostImageViewHolder(
-    itemView: View,
-    val listener: ICreatePostImageActionListener,
-    private var itemChangeListener: IListItemChangeListener
+        itemView: View,
+        val listener: ICreatePostImageActionListener,
+        private var itemChangeListener: IListItemChangeListener
 ) :
-    RecyclerView.ViewHolder(itemView), EkoBaseRecyclerViewAdapter.IBinder<FeedImage> {
+        RecyclerView.ViewHolder(itemView), EkoBaseRecyclerViewAdapter.IBinder<FeedImage> {
     val container: ConstraintLayout = itemView.findViewById(R.id.container)
     var photo: ShapeableImageView = itemView.findViewById(R.id.ivPhoto)
     var removePhoto: ShapeableImageView = itemView.findViewById(R.id.ivCross)
@@ -44,13 +44,13 @@ class EkoCreatePostImageViewHolder(
 
         if (photo.tag != data!!.url.toString()) {
             Glide.with(itemView.context)
-                .load(data.url)
-                .into(photo)
+                    .load(data.url)
+                    .into(photo)
             photo.tag = data.url.toString()
         }
 
         progrssBar.visibility =
-            if (data.uploadState == FileUploadState.UPLOADING) View.VISIBLE else View.GONE
+                if (data.uploadState == FileUploadState.UPLOADING) View.VISIBLE else View.GONE
 
         if (data.uploadState == FileUploadState.UPLOADING) {
             if (progrssBar.visibility != View.VISIBLE)
@@ -67,7 +67,7 @@ class EkoCreatePostImageViewHolder(
         }
 
         errorPhoto.visibility =
-            if (data.uploadState == FileUploadState.FAILED) View.VISIBLE else View.GONE
+                if (data.uploadState == FileUploadState.FAILED) View.VISIBLE else View.GONE
 
         removePhoto.setOnClickListener {
             listener.onRemoveImage(data, position)
@@ -76,10 +76,10 @@ class EkoCreatePostImageViewHolder(
 
     private fun setupShape() {
         val shapeAppearanceModel = photo.shapeAppearanceModel
-            .toBuilder()
+                .toBuilder()
         photo.shapeAppearanceModel = shapeAppearanceModel
-            .setAllCorners(CornerFamily.ROUNDED, radius)
-            .build()
+                .setAllCorners(CornerFamily.ROUNDED, radius)
+                .build()
 
     }
 

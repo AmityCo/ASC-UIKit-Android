@@ -11,12 +11,11 @@ import com.ekoapp.ekosdk.uikit.community.ui.clickListener.EkoSelectMemberListene
 import com.ekoapp.ekosdk.user.EkoUser
 
 class EkoMemberListHeaderViewHolder(
-    itemView: View,
-    private val mClickListener: EkoSelectMemberListener,
-    private val membersSet: HashSet<String>
-) :
-    RecyclerView.ViewHolder(itemView),
-    EkoBaseRecyclerViewPagedAdapter.Binder<EkoUser> {
+        itemView: View,
+        private val mClickListener: EkoSelectMemberListener,
+        private val membersSet: HashSet<String>
+) : RecyclerView.ViewHolder(itemView),
+        EkoBaseRecyclerViewPagedAdapter.Binder<EkoUser> {
 
     private val binding: AmityItemHeaderSelectMemberBinding? = DataBindingUtil.bind(itemView)
 
@@ -25,7 +24,7 @@ class EkoMemberListHeaderViewHolder(
             if (data.getDisplayName().isNullOrEmpty()) {
                 binding?.tvHeader?.text = "#"
                 binding?.layoutMember?.smTitle?.text =
-                    itemView.context.getString(R.string.amity_anonymous)
+                        itemView.context.getString(R.string.amity_anonymous)
             } else {
                 binding?.tvHeader?.text = data.getDisplayName()!![0].toString()
                 binding?.layoutMember?.smTitle?.text = data.getDisplayName()

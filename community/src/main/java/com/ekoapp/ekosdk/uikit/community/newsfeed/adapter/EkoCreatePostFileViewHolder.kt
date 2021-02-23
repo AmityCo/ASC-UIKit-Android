@@ -11,8 +11,8 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.model.FileUploadState
 
 
 class EkoCreatePostFileViewHolder(
-    itemView: View,
-    val listener: ICreatePostFileActionListener?
+        itemView: View,
+        val listener: ICreatePostFileActionListener?
 ) : EkoBaseFeedAttachmentViewHolder(itemView) {
 
     private val removeFile: ImageView = itemView.findViewById(R.id.ivRemove)
@@ -30,7 +30,7 @@ class EkoCreatePostFileViewHolder(
             // progressBar.visibility = if(data.uploadState == FileUploadState.UPLOADING) View.VISIBLE else View.GONE
             progressBar.progress = data.progress
             layoutPreparingFile.visibility =
-                if (data.uploadState == FileUploadState.PENDING) View.VISIBLE else View.GONE
+                    if (data.uploadState == FileUploadState.PENDING) View.VISIBLE else View.GONE
             if (data.uploadState == FileUploadState.PENDING || data.uploadState == FileUploadState.FAILED) {
                 overlayView.visibility = View.VISIBLE
             } else if (overlayView.visibility == View.VISIBLE) {
@@ -38,7 +38,7 @@ class EkoCreatePostFileViewHolder(
             }
 
             errorFile.visibility =
-                if (data.uploadState == FileUploadState.FAILED) View.VISIBLE else View.GONE
+                    if (data.uploadState == FileUploadState.FAILED) View.VISIBLE else View.GONE
 
 
         }

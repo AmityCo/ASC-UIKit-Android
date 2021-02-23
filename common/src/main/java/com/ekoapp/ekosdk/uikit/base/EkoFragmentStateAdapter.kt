@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class EkoFragmentStateAdapter(fm: FragmentManager, lifeCycle: Lifecycle) :
-    FragmentStateAdapter(fm, lifeCycle) {
+class EkoFragmentStateAdapter(fm: FragmentManager, lifeCycle: Lifecycle)
+    : FragmentStateAdapter(fm, lifeCycle) {
 
     private val fragmentList: ArrayList<EkoPagerModel> = arrayListOf()
 
@@ -23,7 +23,7 @@ class EkoFragmentStateAdapter(fm: FragmentManager, lifeCycle: Lifecycle) :
     fun getTitle(position: Int): String = fragmentList[position].title
 
     data class EkoPagerModel(
-        val title: String,
-        val fragment: Fragment
+            val title: String,
+            val fragment: Fragment
     )
 }

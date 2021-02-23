@@ -25,21 +25,21 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.amity_fragment_post_target_selection.*
 
 class EkoPostTargetSelectionFragment internal constructor() : EkoBaseFragment(),
-    ICreatePostCommunitySelectionListener {
+        ICreatePostCommunitySelectionListener {
     private val mViewModel: EkoCreatePostRoleSelectionViewModel by activityViewModels()
     private lateinit var mAdapter: EkoCreatePostCommunitySelectionAdapter
     private lateinit var mBinding: AmityFragmentPostTargetSelectionBinding
     private val TAG = EkoPostTargetSelectionFragment::class.java.canonicalName
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.amity_fragment_post_target_selection,
-            container,
-            false
+                inflater,
+                R.layout.amity_fragment_post_target_selection,
+                container,
+                false
         )
         mBinding.viewModel = mViewModel
         return mBinding.root
@@ -58,10 +58,10 @@ class EkoPostTargetSelectionFragment internal constructor() : EkoBaseFragment(),
         val user = mViewModel.getUser()
         val imageURL = user.getAvatar()?.getUrl(EkoImage.Size.MEDIUM)
         Glide.with(this)
-            .load(imageURL)
-            .placeholder(R.drawable.amity_ic_default_profile_large)
-            .centerCrop()
-            .into(avProfile)
+                .load(imageURL)
+                .placeholder(R.drawable.amity_ic_default_profile_large)
+                .centerCrop()
+                .into(avProfile)
     }
 
     private fun initRecyclerView() {
@@ -69,20 +69,20 @@ class EkoPostTargetSelectionFragment internal constructor() : EkoBaseFragment(),
         rvCommunity.layoutManager = LinearLayoutManager(requireContext())
         rvCommunity.adapter = mAdapter
         rvCommunity.addItemDecoration(
-            EkoRecyclerViewItemDecoration(
-                resources.getDimensionPixelSize(R.dimen.eight),
-                0, resources.getDimensionPixelSize(R.dimen.eight)
-            )
+                EkoRecyclerViewItemDecoration(
+                        resources.getDimensionPixelSize(R.dimen.eight),
+                        0, resources.getDimensionPixelSize(R.dimen.eight)
+                )
         )
         rvCommunity.hasFixedSize()
         mViewModel.getCommunityList().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                mAdapter.submitList(it)
-                handleCommunitySectionVisibility()
-            }.doOnError {
-                Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
-            }.subscribe()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    mAdapter.submitList(it)
+                    handleCommunitySectionVisibility()
+                }.doOnError {
+                    Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
+                }.subscribe()
     }
 
     private fun handleCommunitySectionVisibility() {
@@ -99,9 +99,9 @@ class EkoPostTargetSelectionFragment internal constructor() : EkoBaseFragment(),
 
     private fun navigateToCreatePost(community: EkoCommunity?) {
         val createPost =
-            registerForActivityResult(EkoCreatePostActivity.EkoCreateCommunityPostActivityContract()) { data ->
-                activity?.finish()
-            }
+                registerForActivityResult(EkoCreatePostActivity.EkoCreateCommunityPostActivityContract()) { data ->
+                    activity?.finish()
+                }
         createPost.launch(community)
     }
 

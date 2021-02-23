@@ -29,8 +29,8 @@ class EkoAlertDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(resources.getString(title))
-            .setMessage(resources.getString(message))
+                .setTitle(resources.getString(title))
+                .setMessage(resources.getString(message))
         if (positiveButtonTitle != -1) {
             dialog.setPositiveButton(resources.getString(positiveButtonTitle!!)) { dialog, which ->
                 listener?.onClickPositiveButton()
@@ -46,9 +46,9 @@ class EkoAlertDialogFragment : DialogFragment() {
         val alertDialog = dialog.create()
         alertDialog.setOnShowListener {
             alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(ContextCompat.getColor(requireContext(), R.color.amityColorPrimary))
+                    .setTextColor(ContextCompat.getColor(requireContext(), R.color.amityColorPrimary))
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-                .setTextColor(ContextCompat.getColor(requireContext(), R.color.amityColorPrimary))
+                    .setTextColor(ContextCompat.getColor(requireContext(), R.color.amityColorPrimary))
         }
         return alertDialog
     }
@@ -65,10 +65,10 @@ class EkoAlertDialogFragment : DialogFragment() {
         const val EXTRA_PARAM_NEGATIVE_BUTTON_TITLE = "negative"
         val TAG: String = EkoAlertDialogFragment::class.java.simpleName
         fun newInstance(
-            @StringRes title: Int,
-            @StringRes message: Int,
-            @StringRes positiveButtonTitle: Int?,
-            @StringRes negativeButtonTitle: Int?
+                @StringRes title: Int,
+                @StringRes message: Int,
+                @StringRes positiveButtonTitle: Int?,
+                @StringRes negativeButtonTitle: Int?
         ): EkoAlertDialogFragment {
             val args = Bundle()
             args.putInt(EXTRA_PARAM_TITLE, title)

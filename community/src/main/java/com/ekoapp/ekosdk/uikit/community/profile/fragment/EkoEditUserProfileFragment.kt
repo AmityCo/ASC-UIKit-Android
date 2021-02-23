@@ -44,16 +44,16 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mBinding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.amity_fragment_edit_user_profile,
-                container,
-                false
-            )
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.amity_fragment_edit_user_profile,
+                        container,
+                        false
+                )
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.vm = mViewModel
         return mBinding.root
@@ -94,10 +94,10 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
     private fun setProfilePicture(profileUri: Uri?) {
         mViewModel.updateProfileUri(profileUri)
         Glide.with(requireContext())
-            .load(profileUri)
-            .placeholder(R.drawable.amity_ic_default_profile1)
-            .centerCrop()
-            .into(mBinding.ivAvatar)
+                .load(profileUri)
+                .placeholder(R.drawable.amity_ic_default_profile1)
+                .centerCrop()
+                .into(mBinding.ivAvatar)
     }
 
     override fun onFilePicked(data: Uri?) {
@@ -114,16 +114,16 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
     private fun getUserDetails() {
         mViewModel.getUser()?.also {
             disposable.add(
-                it.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        if (it != null) {
-                            mViewModel.user = it
-                            setupUserData(it)
-                        }
-                    }, {
-                        Log.d(TAG, it.message ?: "")
-                    })
+                    it.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                if (it != null) {
+                                    mViewModel.user = it
+                                    setupUserData(it)
+                                }
+                            }, {
+                                Log.d(TAG, it.message ?: "")
+                            })
             )
         }
     }
@@ -143,9 +143,9 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menuItemSaveProfile =
-            menu.add(Menu.NONE, ID_MENU_ITEM_SAVE_PROFILE, Menu.NONE, getString(R.string.amity_save))
+                menu.add(Menu.NONE, ID_MENU_ITEM_SAVE_PROFILE, Menu.NONE, getString(R.string.amity_save))
         menuItemSaveProfile?.setTitle(R.string.amity_save)
-            ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                ?.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
         updateSaveProfileMenu(mViewModel.hasProfileUpdate.value ?: false)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -166,11 +166,11 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
         menuItemSaveProfile?.isEnabled = enabled
         val s = SpannableString(getString(R.string.amity_save))
         s.setSpan(
-            ForegroundColorSpan(
-                EkoOptionMenuColorUtil.getColor(
-                    menuItemSaveProfile?.isEnabled ?: false, requireContext()
-                )
-            ), 0, s.length, 0
+                ForegroundColorSpan(
+                        EkoOptionMenuColorUtil.getColor(
+                                menuItemSaveProfile?.isEnabled ?: false, requireContext()
+                        )
+                ), 0, s.length, 0
         )
         menuItemSaveProfile?.title = s
     }
@@ -192,34 +192,34 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
 
     private fun handleErrorProfilePictureUpload() {
         Toast.makeText(
-            requireContext(),
-            getString(R.string.amity_upload_failed_profile_picture),
-            Toast.LENGTH_SHORT
+                requireContext(),
+                getString(R.string.amity_upload_failed_profile_picture),
+                Toast.LENGTH_SHORT
         ).show()
     }
 
     private fun uploadProfilePicture(uri: Uri) {
         disposable.add(
-            mViewModel.uploadProfilePicture(
-                uri
-            ).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext {
-                    mViewModel.updateImageUploadStatus(it)
-                }.doOnError {
-                    Log.d(TAG, it.message ?: "")
-                    mViewModel.errorOnUpdate()
-                }.subscribe()
+                mViewModel.uploadProfilePicture(
+                        uri
+                ).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnNext {
+                            mViewModel.updateImageUploadStatus(it)
+                        }.doOnError {
+                            Log.d(TAG, it.message ?: "")
+                            mViewModel.errorOnUpdate()
+                        }.subscribe()
         )
     }
 
     private fun showOptionTakePhoto() {
         val fragment =
-            EkoBottomSheetDialogFragment.newInstance(R.menu.eko_upload_profile_picture)
+                EkoBottomSheetDialogFragment.newInstance(R.menu.eko_upload_profile_picture)
 
         fragment.show(childFragmentManager, EkoBottomSheetDialogFragment.toString())
         fragment.setOnNavigationItemSelectedListener(object :
-            EkoBottomSheetDialogFragment.OnNavigationItemSelectedListener {
+                EkoBottomSheetDialogFragment.OnNavigationItemSelectedListener {
             override fun onItemSelected(item: MenuItem) {
                 handleUploadPhotoOption(item)
             }
@@ -237,21 +237,21 @@ class EkoEditUserProfileFragment : EkoPickerFragment() {
 
     private fun updateUser() {
         disposable.add(
-            mViewModel.updateUser().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    activity?.onBackPressed()
-                }, {
-                    Log.d(TAG, it.message ?: "")
-                    mViewModel.errorOnUpdate()
-                    context?.also {
-                        Toast.makeText(
-                            requireContext(),
-                            getText(R.string.amity_edit_profile_update_failed),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
+                mViewModel.updateUser().subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            activity?.onBackPressed()
+                        }, {
+                            Log.d(TAG, it.message ?: "")
+                            mViewModel.errorOnUpdate()
+                            context?.also {
+                                Toast.makeText(
+                                        requireContext(),
+                                        getText(R.string.amity_edit_profile_update_failed),
+                                        Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
         )
     }
 

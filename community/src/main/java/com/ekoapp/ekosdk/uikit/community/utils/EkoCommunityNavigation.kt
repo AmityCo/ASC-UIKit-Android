@@ -61,10 +61,10 @@ class EkoCommunityNavigation {
         }
 
         fun navigateToPostDetails(
-            context: Context,
-            post: EkoPost,
-            comment: EkoComment,
-            timelineType: EkoTimelineType
+                context: Context,
+                post: EkoPost,
+                comment: EkoComment,
+                timelineType: EkoTimelineType
         ) {
             var intent = Intent(context, EkoPostDetailsActivity::class.java)
             intent.putExtra(EXTRA_PARAM_NEWS_FEED_ID, post.getPostId())
@@ -79,7 +79,7 @@ class EkoCommunityNavigation {
                 previewImages.add(PreviewImage(it.getUrl(EkoImage.Size.LARGE)))
             }
             val intent =
-                EkoImagePreviewActivity.newIntent(context, position, true, ArrayList(previewImages))
+                    EkoImagePreviewActivity.newIntent(context, position, true, ArrayList(previewImages))
             context.startActivity(intent)
         }
 
@@ -95,7 +95,7 @@ class EkoCommunityNavigation {
 
         fun navigateToCommunityDetails(context: Context, community: EkoCommunity) {
             val detailIntent = EkoCommunityPageActivity
-                .newIntent(context, community.getCommunityId())
+                    .newIntent(context, community.getCommunityId())
             context.startActivity(detailIntent)
         }
     }

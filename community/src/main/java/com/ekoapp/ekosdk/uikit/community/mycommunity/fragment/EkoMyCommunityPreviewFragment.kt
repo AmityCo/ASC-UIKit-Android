@@ -28,18 +28,18 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.amity_fragment_my_community_list.*
 
 class EkoMyCommunityPreviewFragment internal constructor() : EkoBaseFragment(),
-    IMyCommunityItemClickListener {
+        IMyCommunityItemClickListener {
     lateinit var mViewModel: EkoMyCommunityListViewModel
     private val newFeedViewModel: EkoNewsFeedViewModel by activityViewModels()
     private lateinit var mAdapter: EkoMyCommunityListAdapter
     private val TAG = EkoMyCommunityPreviewFragment::class.java.canonicalName
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoMyCommunityListViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoMyCommunityListViewModel::class.java)
         return inflater.inflate(R.layout.amity_fragment_my_community_list, container, false)
     }
 
@@ -70,31 +70,34 @@ class EkoMyCommunityPreviewFragment internal constructor() : EkoBaseFragment(),
     private fun initRecyclerView() {
         mAdapter = EkoMyCommunityListAdapter(this, true)
         rvMyCommunity.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rvMyCommunity.adapter = mAdapter
         rvMyCommunity.itemAnimator = null
         rvMyCommunity.addItemDecoration(
-            EkoRecyclerViewItemDecoration(
-                0, resources.getDimensionPixelSize(R.dimen.sixteen), 0,
-                resources.getDimensionPixelSize(R.dimen.sixteen)
-            )
+                EkoRecyclerViewItemDecoration(
+                        0, resources.getDimensionPixelSize(R.dimen.sixteen), 0,
+                        resources.getDimensionPixelSize(R.dimen.sixteen)
+                )
         )
         rvMyCommunity.setHasFixedSize(true)
         getCommunityList()
     }
 
     private fun getCommunityList() {
-        disposable.add(mViewModel.getCommunityList().subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext { list ->
-                mAdapter.submitList(list)
-                newFeedViewModel.triggerEvent(
-                    EventIdentifier.EMPTY_MY_COMMUNITY,
-                    list.size == 0
-                )
-            }.doOnError {
-                Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
-            }.subscribe()
+        disposable.add(mViewModel.getCommunityList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { list ->
+                    mAdapter.submitList(list)
+                    newFeedViewModel.triggerEvent(
+                            EventIdentifier.EMPTY_MY_COMMUNITY,
+                            list.size == 0
+                    )
+                }
+                .doOnError {
+                    Log.e(TAG, "initRecyclerView: ${it.localizedMessage}")
+                }
+                .subscribe()
         )
     }
 
@@ -110,7 +113,7 @@ class EkoMyCommunityPreviewFragment internal constructor() : EkoBaseFragment(),
                 } else {
                     when (action) {
                         MotionEvent.ACTION_MOVE -> rv.parent.requestDisallowInterceptTouchEvent(
-                            false
+                                false
                         )
                     }
                     false
@@ -128,8 +131,8 @@ class EkoMyCommunityPreviewFragment internal constructor() : EkoBaseFragment(),
     override fun onCommunitySelected(ekoCommunity: EkoCommunity?) {
         if (ekoCommunity != null) {
             val detailIntent = EkoCommunityPageActivity.newIntent(
-                requireContext(),
-                ekoCommunity.getCommunityId()
+                    requireContext(),
+                    ekoCommunity.getCommunityId()
             )
             startActivity(detailIntent)
         } else {
@@ -147,7 +150,7 @@ class EkoMyCommunityPreviewFragment internal constructor() : EkoBaseFragment(),
         fun build(activity: AppCompatActivity): EkoMyCommunityPreviewFragment {
             val fragment = EkoMyCommunityPreviewFragment()
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoMyCommunityListViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoMyCommunityListViewModel::class.java)
             fragment.mViewModel.myCommunityItemClickListener = myCommunityItemClickListener
             return fragment
         }

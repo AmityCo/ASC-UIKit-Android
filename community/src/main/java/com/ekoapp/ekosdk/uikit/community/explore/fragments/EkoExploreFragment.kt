@@ -23,13 +23,13 @@ class EkoExploreFragment internal constructor() : Fragment() {
     lateinit var mViewModel: EkoExploreCommunityViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel =
-            ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(EkoExploreCommunityViewModel::class.java)
         val binding: AmityFragmentExploreBinding = DataBindingUtil.inflate(
-            inflater, R.layout.amity_fragment_explore, container, false
+                inflater, R.layout.amity_fragment_explore, container, false
         )
         binding.viewModel = mViewModel
         return binding.root
@@ -100,7 +100,7 @@ class EkoExploreFragment internal constructor() : Fragment() {
         fun build(activity: AppCompatActivity): EkoExploreFragment {
             val fragment = EkoExploreFragment()
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoExploreCommunityViewModel::class.java)
             fragment.mViewModel.recommendedFragmentDelegate = recommendedFragmentDelegate
             fragment.mViewModel.trendingFragmentDelegate = trendingFragmentDelegate
             fragment.mViewModel.categoryPreviewFragmentDelegate = categoryPreviewFragmentDelegate

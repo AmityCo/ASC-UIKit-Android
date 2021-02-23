@@ -15,9 +15,9 @@ class EkoUserTimelineViewModel : EkoBaseFeedViewModel() {
     override fun getFeed(): Flowable<PagedList<EkoPost>> {
         val feedRepository: EkoFeedRepository = EkoClient.newFeedRepository()
         return feedRepository.getUserFeed(userId)
-            .includeDeleted(false)
-            .build()
-            .query()
+                .includeDeleted(false)
+                .build()
+                .query()
     }
 
     fun otherUser(user: EkoUser): Boolean {

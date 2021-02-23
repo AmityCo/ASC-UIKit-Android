@@ -12,8 +12,8 @@ abstract class EkoBaseFeedAttachmentAdapter() : EkoBaseRecyclerViewAdapter<FileA
     }
 
     class DiffCallback(
-        private val oldList: List<FileAttachment>,
-        private val newList: List<FileAttachment>
+            private val oldList: List<FileAttachment>,
+            private val newList: List<FileAttachment>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

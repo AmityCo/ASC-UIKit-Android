@@ -16,10 +16,10 @@ class EkoCategoryCommunityListViewModel : EkoBaseViewModel() {
 
     fun getCommunityByCategory(parentCategoryId: String): Flowable<PagedList<EkoCommunity>> {
         return communityRepository
-            .getCommunityCollection()
-            .categoryId(parentCategoryId)
-            .includeDeleted(false)
-            .build()
-            .query()
+                .getCommunityCollection()
+                .categoryId(parentCategoryId)
+                .includeDeleted(false)
+                .build()
+                .query()
     }
 }

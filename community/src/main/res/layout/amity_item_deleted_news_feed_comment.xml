@@ -2,13 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,8 +37,8 @@
             textColorShade="@{ColorShade.SHADE2}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/four"
             android:layout_marginEnd="@dimen/sixteen"
+            android:layout_marginStart="@dimen/four"
             android:textColor="@color/amityColorBase"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/ivRemove"
@@ -53,4 +46,11 @@
             app:layout_constraintTop_toTopOf="@id/ivRemove" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+    </data>
 </layout>

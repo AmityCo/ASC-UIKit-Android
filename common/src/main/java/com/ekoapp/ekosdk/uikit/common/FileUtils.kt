@@ -22,11 +22,11 @@ class FileUtils {
             var result: String? = null
             if (uri.scheme == "content") {
                 val cursor =
-                    context.contentResolver.query(uri, null, null, null, null)
+                        context.contentResolver.query(uri, null, null, null, null)
                 try {
                     if (cursor != null && cursor.moveToFirst()) {
                         result =
-                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                                cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                     }
                 } finally {
                     cursor!!.close()
@@ -43,8 +43,8 @@ class FileUtils {
         }
 
         fun getPathFromUri(
-            context: Context,
-            uri: Uri
+                context: Context,
+                uri: Uri
         ): String? {
             return if (isFile(uri)) {
                 getPathFromFile(context, uri)
@@ -65,27 +65,27 @@ class FileUtils {
         }
 
         private fun getPathFromFile(
-            context: Context,
-            uri: Uri
+                context: Context,
+                uri: Uri
         ): String? {
             return uri.path
         }
 
         private fun isDocument(
-            context: Context,
-            uri: Uri
+                context: Context,
+                uri: Uri
         ): Boolean {
             return DocumentsContract.isDocumentUri(context, uri)
         }
 
         private fun getPathFromContent(
-            context: Context,
-            uri: Uri
+                context: Context,
+                uri: Uri
         ): String? {
             val projection =
-                arrayOf(MediaStore.Images.Media.DATA)
+                    arrayOf(MediaStore.Images.Media.DATA)
             val cursor =
-                context.contentResolver.query(uri, projection, null, null, null)
+                    context.contentResolver.query(uri, projection, null, null, null)
             val index = cursor!!.getColumnIndex(MediaStore.Images.Media.DATA)
             cursor.moveToFirst()
             val path = cursor.getString(index)
@@ -94,8 +94,8 @@ class FileUtils {
         }
 
         private fun getPathFromDocument(
-            context: Context,
-            uri: Uri
+                context: Context,
+                uri: Uri
         ): String? {
             val fileName = getName(context.contentResolver, uri)
             var inputStream: InputStream? = null
@@ -130,7 +130,7 @@ class FileUtils {
                 return file.name
             }
             val cursor =
-                contentResolver.query(uri, null, null, null, null, null)
+                    contentResolver.query(uri, null, null, null, null, null)
             try {
                 if (cursor != null && cursor.moveToFirst()) {
                     return cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
@@ -155,7 +155,7 @@ class FileUtils {
                 return file.length().toInt()
             }
             val cursor =
-                contentResolver.query(uri, null, null, null, null, null)
+                    contentResolver.query(uri, null, null, null, null, null)
             try {
                 if (cursor != null && cursor.moveToFirst()) {
                     val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
@@ -177,20 +177,20 @@ class FileUtils {
                 return "$bytes B"
             }
             val exp =
-                (Math.log(bytes.toDouble()) / Math.log(unit.toDouble())).toInt()
+                    (Math.log(bytes.toDouble()) / Math.log(unit.toDouble())).toInt()
             val pre =
-                (if (si) "kMGTPE" else "KMGTPE")[exp - 1].toString() + if (si) "" else "i"
+                    (if (si) "kMGTPE" else "KMGTPE")[exp - 1].toString() + if (si) "" else "i"
             return String.format(
-                "%.2f %sB",
-                bytes / Math.pow(unit.toDouble(), exp.toDouble()),
-                pre
+                    "%.2f %sB",
+                    bytes / Math.pow(unit.toDouble(), exp.toDouble()),
+                    pre
             )
         }
 
         fun isFileTypeDoc(fileExtension: String): Boolean {
             return fileExtension.equals("doc", ignoreCase = true) || fileExtension.equals(
-                "docx",
-                ignoreCase = true
+                    "docx",
+                    ignoreCase = true
             )
         }
 

@@ -18,9 +18,9 @@ class EkoAvatarView : ConstraintLayout {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
-        context,
-        attrs,
-        defStyle
+            context,
+            attrs,
+            defStyle
     ) {
         parseStyle(attrs)
     }
@@ -55,12 +55,12 @@ class EkoAvatarView : ConstraintLayout {
         image_avatar.layoutParams.width = style.avatarWidth
         if (style.avatarDrawable != -1) {
             Glide.with(context).load(style.avatarDrawable)
-                .into(image_avatar)
+                    .into(image_avatar)
         } else if (style.avatarUrl != null) {
             Glide.with(context)
-                .load(style.avatarUrl)
-                .centerCrop()
-                .into(image_avatar)
+                    .load(style.avatarUrl)
+                    .centerCrop()
+                    .into(image_avatar)
         } else {
             Glide.with(context).load(R.drawable.amity_ic_avatar_placeholder).into(image_avatar)
         }

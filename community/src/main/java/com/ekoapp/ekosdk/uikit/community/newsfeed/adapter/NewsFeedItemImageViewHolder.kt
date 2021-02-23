@@ -14,10 +14,10 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.util.EkoTimelineType
 
 
 class NewsFeedItemImageViewHolder(
-    itemView: View,
-    itemActionLister: INewsFeedItemActionListener,
-    private val imageClickListener: INewsFeedImageClickListener?,
-    timelineType: EkoTimelineType
+        itemView: View,
+        itemActionLister: INewsFeedItemActionListener,
+        private val imageClickListener: INewsFeedImageClickListener?,
+        timelineType: EkoTimelineType
 ) : NewsFeedViewHolder(itemView, itemActionLister, timelineType), IPostImageItemClickListener {
     private val imageRecyclerView = itemView.findViewById<RecyclerView>(R.id.rvImages)
     val space = itemView.context.resources.getDimensionPixelSize(R.dimen.eight)

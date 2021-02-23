@@ -12,10 +12,10 @@ class EkoUserProfileActivity : EkoBaseToolbarFragmentContainerActivity() {
 
     override fun initToolbar() {
         getToolBar()?.setLeftDrawable(
-            ContextCompat.getDrawable(
-                this,
-                R.drawable.amity_ic_arrow_back
-            )
+                ContextCompat.getDrawable(
+                        this,
+                        R.drawable.amity_ic_arrow_back
+                )
         )
     }
 
@@ -26,11 +26,11 @@ class EkoUserProfileActivity : EkoBaseToolbarFragmentContainerActivity() {
 
     companion object {
         private const val EXTRA_PARAM_USER_ID =
-            "com.ekoapp.ekosdk.uikit.community.profile.activity.userid"
+                "com.ekoapp.ekosdk.uikit.community.profile.activity.userid"
 
         fun newIntent(context: Context, id: String) =
-            Intent(context, EkoUserProfileActivity::class.java).apply {
-                putExtra(EXTRA_PARAM_USER_ID, id)
-            }
+                Intent(context, EkoUserProfileActivity::class.java).apply {
+                    putExtra(EXTRA_PARAM_USER_ID, id)
+                }
     }
 }

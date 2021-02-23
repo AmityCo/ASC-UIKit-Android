@@ -54,8 +54,8 @@ open class EkoBaseFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             context?.let {
                 val status = ContextCompat.checkSelfPermission(
-                    it,
-                    permission
+                        it,
+                        permission
                 )
                 return (status == PackageManager.PERMISSION_GRANTED)
             }
@@ -66,9 +66,9 @@ open class EkoBaseFragment : Fragment() {
     fun requestPermission(permission: String, requestCode: Int) {
         (activity as? Activity)?.let {
             ActivityCompat.requestPermissions(
-                it, arrayOf(
-                    permission
-                ), requestCode
+                    it,
+                    arrayOf(permission),
+                    requestCode
             )
         }
     }
@@ -76,8 +76,9 @@ open class EkoBaseFragment : Fragment() {
     fun requestPermission(permission: Array<String>, requestCode: Int) {
         (activity as? Activity)?.let {
             ActivityCompat.requestPermissions(
-                it,
-                permission, requestCode
+                    it,
+                    permission,
+                    requestCode
             )
         }
 

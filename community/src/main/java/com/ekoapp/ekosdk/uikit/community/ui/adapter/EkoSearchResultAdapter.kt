@@ -10,8 +10,8 @@ import com.ekoapp.ekosdk.uikit.community.ui.clickListener.EkoSelectMemberListene
 import com.ekoapp.ekosdk.uikit.community.ui.viewHolder.EkoMemberListItemViewHolder
 import com.ekoapp.ekosdk.user.EkoUser
 
-class EkoSearchResultAdapter(private val listener: EkoSelectMemberListener) :
-    EkoBaseRecyclerViewPagedAdapter<EkoUser>(diffCallback) {
+class EkoSearchResultAdapter(private val listener: EkoSelectMemberListener)
+    : EkoBaseRecyclerViewPagedAdapter<EkoUser>(diffCallback) {
 
     private val selectedMemberSet = HashSet<String>()
 

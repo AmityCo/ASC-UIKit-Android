@@ -34,11 +34,11 @@ class EkoEditUserProfileViewModel : EkoBaseViewModel() {
 
     fun updateUser(): Single<EkoUser> {
         val updateUserBuilder = EkoClient.updateUser()
-            .displayName(displayName.value!!)
-            .description(about.value!!)
+                .displayName(displayName.value!!)
+                .description(about.value!!)
 
-        if (profileImage != null) {
-            updateUserBuilder.avatar(profileImage!!)
+        if (!avatarImageUrl.isNullOrBlank()) {
+            updateUserBuilder.avatarCustomUrl(avatarImageUrl.orEmpty())
         }
         return updateUserBuilder.build().update()
     }
@@ -80,7 +80,7 @@ class EkoEditUserProfileViewModel : EkoBaseViewModel() {
 
     private fun getCurrentProfileUrl(): String {
         return user!!.getAvatar()
-            ?.getUrl(EkoImage.Size.SMALL) ?: ""
+                ?.getUrl(EkoImage.Size.SMALL) ?: ""
     }
 
     fun checkProfileUpdate() {

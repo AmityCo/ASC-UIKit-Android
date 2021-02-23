@@ -10,17 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvMyCommunity"
-            style="@style/TextStyleEkoTitleBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/sixteen"
-            android:text="@string/amity_my_community"
-            android:textColor="@color/amityColorBase"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/ivMore"
             android:layout_width="@dimen/twenty_four"
@@ -31,6 +20,17 @@
             android:src="@drawable/amity_ic_chevron_right"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvMyCommunity" />
+
+        <TextView
+            android:id="@+id/tvMyCommunity"
+            style="@style/TextStyleEkoTitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/sixteen"
+            android:text="@string/amity_my_community"
+            android:textColor="@color/amityColorBase"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMyCommunity"

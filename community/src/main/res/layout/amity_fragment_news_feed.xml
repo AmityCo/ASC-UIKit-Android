@@ -3,17 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <variable
-            name="viewModel"
-            type="com.ekoapp.ekosdk.uikit.community.newsfeed.viewmodel.EkoNewsFeedViewModel" />
-    </data>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -23,6 +12,105 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".newsfeed.fragment.EkoNewsFeedFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <FrameLayout
+                    android:id="@+id/globalFeedContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                <ImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/eleven"
+                    android:src="@drawable/amity_ic_xmlid"
+                    app:layout_constraintBottom_toTopOf="@id/tvEmptyGlobalFeed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEmptyGlobalFeed"
+                    style="@style/TextStyleEkoHeadline"
+                    textColorShade="@{ColorShade.SHADE2}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/eleven"
+                    android:text="@string/amity_empty_feed"
+                    android:textColor="@color/amityColorBase"
+                    app:layout_constraintBottom_toTopOf="@id/tvFindCommunity"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvFindCommunity"
+                    style="@style/TextStyleEkoBody"
+                    textColorShade="@{ColorShade.SHADE2}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/amity_find_community"
+                    android:textColor="@color/amityColorBase"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                <TextView
+                    android:id="@+id/tvCreateCommunity"
+                    style="@style/TextStyleEkoBody"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sixteen"
+                    android:text="@string/amity_create_community"
+                    android:textColor="@color/amityColorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnExplore" />
+
+                <View
+                    android:id="@+id/divider"
+                    style="@style/Divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/twelve"
+                    android:visibility="@{viewModel.emptyCommunityList ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.emptyGlobalFeed &amp;&amp; viewModel.emptyCommunityList ? View.GONE : View.VISIBLE}"
+                    app:constraint_referenced_ids="globalFeedContainer" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.emptyCommunityList &amp;&amp; viewModel.emptyGlobalFeed ? View.VISIBLE : View.GONE}"
+                    app:constraint_referenced_ids="ivIcon,tvEmptyGlobalFeed,tvFindCommunity,btnExplore,tvCreateCommunity" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnExplore"
+                    style="@style/EkoMaterialButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/twelve"
+                    android:paddingHorizontal="@dimen/twenty_four"
+                    android:text="@string/amity_explore_community"
+                    app:icon="@drawable/amity_ic_search"
+                    app:iconGravity="textStart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvFindCommunity" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBar"
@@ -63,105 +151,6 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <View
-                    android:id="@+id/divider"
-                    style="@style/Divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/twelve"
-                    android:visibility="@{viewModel.emptyCommunityList ? View.GONE : View.VISIBLE}"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <FrameLayout
-                    android:id="@+id/globalFeedContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="@{viewModel.emptyGlobalFeed &amp;&amp; viewModel.emptyCommunityList ? View.GONE : View.VISIBLE}"
-                    app:constraint_referenced_ids="globalFeedContainer" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="@{viewModel.emptyCommunityList &amp;&amp; viewModel.emptyGlobalFeed ? View.VISIBLE : View.GONE}"
-                    app:constraint_referenced_ids="ivIcon,tvEmptyGlobalFeed,tvFindCommunity,btnExplore,tvCreateCommunity" />
-
-                <ImageView
-                    android:id="@+id/ivIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/eleven"
-                    android:src="@drawable/amity_ic_xmlid"
-                    app:layout_constraintBottom_toTopOf="@id/tvEmptyGlobalFeed"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvEmptyGlobalFeed"
-                    style="@style/TextStyleEkoHeadline"
-                    textColorShade="@{ColorShade.SHADE2}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/eleven"
-                    android:text="@string/amity_empty_feed"
-                    android:textColor="@color/amityColorBase"
-                    app:layout_constraintBottom_toTopOf="@id/tvFindCommunity"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvFindCommunity"
-                    style="@style/TextStyleEkoBody"
-                    textColorShade="@{ColorShade.SHADE2}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/amity_find_community"
-                    android:textColor="@color/amityColorBase"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnExplore"
-                    style="@style/EkoMaterialButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/twelve"
-                    android:paddingHorizontal="@dimen/twenty_four"
-                    android:text="@string/amity_explore_community"
-                    app:icon="@drawable/amity_ic_search"
-                    app:iconGravity="textStart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvFindCommunity" />
-
-                <TextView
-                    android:id="@+id/tvCreateCommunity"
-                    style="@style/TextStyleEkoBody"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/sixteen"
-                    android:text="@string/amity_create_community"
-                    android:textColor="@color/amityColorPrimary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btnExplore" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabCreatePost"
                 style="@style/EkoFabButtonStyle"
@@ -174,5 +163,16 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="viewModel"
+            type="com.ekoapp.ekosdk.uikit.community.newsfeed.viewmodel.EkoNewsFeedViewModel" />
+    </data>
 
 </layout>

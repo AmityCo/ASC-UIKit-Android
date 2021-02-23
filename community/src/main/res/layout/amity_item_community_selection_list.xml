@@ -3,38 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="community"
-            type="com.ekoapp.ekosdk.community.EkoCommunity" />
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/avCommunityProfile"
-            style="@style/CircularAvatarStyle"
-            ekoFillColor="@{@color/amityColorPrimary}"
-            ekoFillShade="@{ColorShade.SHADE3}"
-            android:layout_width="@dimen/forty"
-            android:layout_height="@dimen/forty"
-            android:padding="@dimen/six"
-            android:scaleType="centerInside"
-            android:src="@drawable/amity_ic_default_community_avatar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout
             android:id="@+id/communityNameContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/eight"
             android:layout_marginEnd="@dimen/eight"
+            android:layout_marginStart="@dimen/eight"
             app:layout_constraintBottom_toBottomOf="@id/avCommunityProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/avCommunityProfile"
@@ -54,5 +32,27 @@
                 tools:text="Community Name" />
         </FrameLayout>
 
+        <ImageView
+            android:id="@+id/avCommunityProfile"
+            style="@style/CircularAvatarStyle"
+            ekoFillColor="@{@color/amityColorPrimary}"
+            ekoFillShade="@{ColorShade.SHADE3}"
+            android:layout_width="@dimen/forty"
+            android:layout_height="@dimen/forty"
+            android:padding="@dimen/six"
+            android:scaleType="centerInside"
+            android:src="@drawable/amity_ic_default_community_avatar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <variable
+            name="community"
+            type="com.ekoapp.ekosdk.community.EkoCommunity" />
+    </data>
 </layout>

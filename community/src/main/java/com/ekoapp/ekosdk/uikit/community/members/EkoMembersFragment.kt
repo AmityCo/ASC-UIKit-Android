@@ -36,8 +36,8 @@ class EkoMembersFragment : EkoBaseFragment(), IMemberClickListener {
     private lateinit var mAdapter: EkoCommunityMembersAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.amity_fragment_members, container, false)
@@ -52,8 +52,8 @@ class EkoMembersFragment : EkoBaseFragment(), IMemberClickListener {
         initRecyclerView()
 
         etSearch.setShape(
-            null, null, null, null,
-            R.color.amityColorBase, null, ColorShade.SHADE4
+                null, null, null, null,
+                R.color.amityColorBase, null, ColorShade.SHADE4
         )
     }
 
@@ -74,7 +74,7 @@ class EkoMembersFragment : EkoBaseFragment(), IMemberClickListener {
         rvCommunityMembers.layoutManager = LinearLayoutManager(requireContext())
         rvCommunityMembers.adapter = mAdapter
         rvCommunityMembers.addItemDecoration(
-            EkoRecyclerViewItemDecoration(requireContext().resources.getDimensionPixelSize(R.dimen.sixteen))
+                EkoRecyclerViewItemDecoration(requireContext().resources.getDimensionPixelSize(R.dimen.sixteen))
         )
     }
 
@@ -94,14 +94,14 @@ class EkoMembersFragment : EkoBaseFragment(), IMemberClickListener {
 
     private fun getCommunityDetail() {
         disposable.add(mViewModel.getCommunityDetail()
-            .firstOrError()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess { community ->
-                getCommunityMembers(community)
-            }.doOnError {
-                Log.e(TAG, "getCommunityDetail: ${it.localizedMessage}")
-            }.subscribe()
+                .firstOrError()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess { community ->
+                    getCommunityMembers(community)
+                }.doOnError {
+                    Log.e(TAG, "getCommunityDetail: ${it.localizedMessage}")
+                }.subscribe()
         )
     }
 
@@ -110,17 +110,17 @@ class EkoMembersFragment : EkoBaseFragment(), IMemberClickListener {
         mViewModel.isJoined.set(community.isJoined())
         mViewModel.communityId = community.getCommunityId()
         mViewModel.getCommunityMembers()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext {
-                mViewModel.emptyMembersList.set(it.size == 0)
-                mAdapter.submitList(it)
-                if (!mViewModel.emptyMembersList.get()) {
-                    prepareSelectedMembersList(it)
-                }
-            }.doOnError {
-                Log.e(TAG, "getCommunityMembers: ${it.localizedMessage}")
-            }.subscribe()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    mViewModel.emptyMembersList.set(it.size == 0)
+                    mAdapter.submitList(it)
+                    if (!mViewModel.emptyMembersList.get()) {
+                        prepareSelectedMembersList(it)
+                    }
+                }.doOnError {
+                    Log.e(TAG, "getCommunityMembers: ${it.localizedMessage}")
+                }.subscribe()
     }
 
     private fun prepareSelectedMembersList(list: PagedList<EkoCommunityMembership>) {
@@ -128,11 +128,11 @@ class EkoMembersFragment : EkoBaseFragment(), IMemberClickListener {
             val ekoUser = it.getUser()
             if (ekoUser != null) {
                 val selectMemberItem = SelectMemberItem(
-                    ekoUser.getUserId(),
-                    ekoUser.getAvatar()?.getUrl(EkoImage.Size.MEDIUM) ?: "",
-                    ekoUser.getDisplayName() ?: getString(R.string.amity_anonymous),
-                    ekoUser.getDescription(),
-                    false
+                        ekoUser.getUserId(),
+                        ekoUser.getAvatar()?.getUrl(EkoImage.Size.MEDIUM) ?: "",
+                        ekoUser.getDisplayName() ?: getString(R.string.amity_anonymous),
+                        ekoUser.getDescription(),
+                        false
                 )
                 if (!mViewModel.membersSet.contains(selectMemberItem.id)) {
                     mViewModel.selectMembersList.add(selectMemberItem)

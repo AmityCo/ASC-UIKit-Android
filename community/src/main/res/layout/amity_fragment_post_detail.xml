@@ -2,16 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <RelativeLayout
         android:id="@+id/parentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
         tools:visibility="visible">
+
+        <View
+            android:id="@+id/composeBarDivider"
+            style="@style/Divider"
+            android:layout_below="@id/topLayout" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/topLayout"
@@ -34,22 +35,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.ekoapp.ekosdk.uikit.community.views.newsfeed.EkoNewsFeedItemHeader
-                        android:id="@+id/newsFeedHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/sixteen"
-                        android:layout_marginEnd="@dimen/sixteen"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/tvFeed"
                         style="@style/TextStyleEkoBody"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/sixteen"
                         android:layout_marginStart="@dimen/sixteen"
                         android:layout_marginTop="@dimen/sixteen"
-                        android:layout_marginEnd="@dimen/sixteen"
                         android:autoLink="web"
                         android:textColor="@color/amityColorBase"
                         android:textColorLink="@color/amityColorHighlight"
@@ -59,9 +52,9 @@
                         android:id="@+id/rvNewsFeed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/sixteen"
                         android:layout_marginStart="@dimen/sixteen"
                         android:layout_marginTop="@dimen/margin_16dp"
-                        android:layout_marginEnd="@dimen/sixteen"
                         app:layout_constraintTop_toBottomOf="@id/tvFeed" />
 
                     <com.ekoapp.ekosdk.uikit.community.views.newsfeed.EkoNewsFeedItemFooter
@@ -70,25 +63,32 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_16dp"
                         app:layout_constraintTop_toBottomOf="@id/rvNewsFeed" />
+
+                    <com.ekoapp.ekosdk.uikit.community.views.newsfeed.EkoNewsFeedItemHeader
+                        android:id="@+id/newsFeedHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/sixteen"
+                        android:layout_marginStart="@dimen/sixteen"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 
-        <View
-            android:id="@+id/composeBarDivider"
-            style="@style/Divider"
-            android:layout_below="@id/topLayout" />
-
         <com.ekoapp.ekosdk.uikit.community.views.EkoCommentComposeBar
             android:id="@+id/commentComposeBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/sixteen"
-            android:layout_marginTop="@dimen/eight"
+            android:layout_marginBottom="@dimen/eight"
             android:layout_marginEnd="@dimen/sixteen"
-            android:layout_marginBottom="@dimen/eight" />
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginTop="@dimen/eight" />
     </RelativeLayout>
+
+    <data>
+
+    </data>
 </layout>

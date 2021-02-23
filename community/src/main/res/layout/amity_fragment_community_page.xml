@@ -2,17 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="com.ekoapp.ekosdk.uikit.community.detailpage.EkoCommunityDetailViewModel" />
-    </data>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
@@ -22,6 +11,13 @@
             android:id="@+id/layoutParent"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.ekoapp.ekosdk.uikit.components.EkoTabLayout
+                android:id="@+id/ccDetailTab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/twelve"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBar"
@@ -47,26 +43,13 @@
                         app:layout_collapseMode="parallax"
                         app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/ivAvatar"
-                            backgroundColorShade="@{ColorShade.SHADE3}"
-                            ekoBackgroundColor="@{@color/amityColorPrimary}"
-                            imageUrl="@{viewModel.avatarUrl}"
-                            placeHolder="@{@drawable/amity_ic_default_community_avatar}"
-                            android:layout_width="@dimen/sixty_four"
-                            android:layout_height="@dimen/sixty_four"
-                            android:layout_marginStart="@dimen/seventeen"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:shapeAppearanceOverlay="@style/CircleImage" />
-
                         <FrameLayout
                             android:id="@+id/communityNameContainer"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/sixteen"
                             android:layout_marginStart="@dimen/twelve"
                             android:layout_marginTop="@dimen/ten"
-                            android:layout_marginEnd="@dimen/sixteen"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/ivAvatar"
                             app:layout_constraintTop_toTopOf="@id/ivAvatar">
@@ -77,9 +60,9 @@
                                 safeText="@{viewModel.name}"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:drawableStart="@{viewModel.isPublic() ? null : @drawable/amity_ic_lock2}"
                                 android:drawableEnd="@{viewModel.isOfficial() ? @drawable/amity_ic_verified : null}"
                                 android:drawablePadding="@dimen/four"
+                                android:drawableStart="@{viewModel.isPublic() ? null : @drawable/amity_ic_lock2}"
                                 android:ellipsize="end"
                                 android:maxLines="3"
                                 android:textColor="@color/amityColorBase" />
@@ -206,18 +189,24 @@
                             app:layout_constraintStart_toStartOf="@id/tvDescription"
                             app:layout_constraintTop_toBottomOf="@id/tvDescription" />
 
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/ivAvatar"
+                            backgroundColorShade="@{ColorShade.SHADE3}"
+                            ekoBackgroundColor="@{@color/amityColorPrimary}"
+                            imageUrl="@{viewModel.avatarUrl}"
+                            placeHolder="@{@drawable/amity_ic_default_community_avatar}"
+                            android:layout_width="@dimen/sixty_four"
+                            android:layout_height="@dimen/sixty_four"
+                            android:layout_marginStart="@dimen/seventeen"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/CircleImage" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             </com.google.android.material.appbar.AppBarLayout>
-
-            <com.ekoapp.ekosdk.uikit.components.EkoTabLayout
-                android:id="@+id/ccDetailTab"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/twelve"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabCreatePost"
@@ -233,5 +222,16 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <data>
+
+        <import type="com.ekoapp.ekosdk.uikit.common.views.ColorShade" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ekoapp.ekosdk.uikit.community.detailpage.EkoCommunityDetailViewModel" />
+    </data>
 
 </layout>

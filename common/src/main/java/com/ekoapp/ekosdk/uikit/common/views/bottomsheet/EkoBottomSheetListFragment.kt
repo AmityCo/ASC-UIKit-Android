@@ -22,9 +22,9 @@ class EkoBottomSheetListFragment private constructor() : BottomSheetDialogFragme
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.amity_bottom_sheet, container, false)
     }
@@ -44,10 +44,10 @@ class EkoBottomSheetListFragment private constructor() : BottomSheetDialogFragme
     companion object {
         private const val ARG_LIST = "ARG_LIST"
         fun newInstance(list: ArrayList<EkoMenuItem>): EkoBottomSheetListFragment =
-            EkoBottomSheetListFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelableArrayList(ARG_LIST, list)
+                EkoBottomSheetListFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelableArrayList(ARG_LIST, list)
+                    }
                 }
-            }
     }
 }

@@ -17,8 +17,8 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class EkoPickerActivity<T : ViewDataBinding, V : EkoBaseViewModel> :
-    EkoBaseActivity<T, V>() {
+abstract class EkoPickerActivity<T : ViewDataBinding, V : EkoBaseViewModel>
+    : EkoBaseActivity<T, V>() {
     private var photoUri: Uri? = null
 
     abstract fun onImagePicked(data: Uri?)
@@ -31,32 +31,32 @@ abstract class EkoPickerActivity<T : ViewDataBinding, V : EkoBaseViewModel> :
 
     fun pickImage() {
         val pickImagePermission =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it) {
-                    val pickImage = registerForActivityResult(EkoPickImageContract()) { data ->
-                        onImagePicked(data)
+                registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                    if (it) {
+                        val pickImage = registerForActivityResult(EkoPickImageContract()) { data ->
+                            onImagePicked(data)
+                        }
+                        pickImage.launch(getString(R.string.amity_choose_image))
+                    } else {
+                        Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                     }
-                    pickImage.launch(getString(R.string.amity_choose_image))
-                } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
-            }
         pickImagePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     }
 
     fun pickFile() {
         val pickFilePermission =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                if (it) {
-                    val pickFile = registerForActivityResult(EkoPickFileContract()) { data ->
-                        onFilePicked(data)
+                registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                    if (it) {
+                        val pickFile = registerForActivityResult(EkoPickFileContract()) { data ->
+                            onFilePicked(data)
+                        }
+                        pickFile.launch("")
+                    } else {
+                        Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                     }
-                    pickFile.launch("")
-                } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
-            }
 
         //pickFilePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
@@ -64,28 +64,28 @@ abstract class EkoPickerActivity<T : ViewDataBinding, V : EkoBaseViewModel> :
     fun takePicture() {
 
         val cameraPermission =
-            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-                var permissionGranted = false
-                permissions.entries.forEach {
-                    permissionGranted = it.value
+                registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                    var permissionGranted = false
+                    permissions.entries.forEach {
+                        permissionGranted = it.value
+                    }
+                    if (permissionGranted) {
+                        val takePhoto =
+                                registerForActivityResult(ActivityResultContracts.TakePicture()) {
+                                    if (it) {
+                                        onPhotoClicked(photoUri)
+                                    }
+                                }
+                        createPhotoUri()
+                        takePhoto.launch(photoUri)
+                    }
                 }
-                if (permissionGranted) {
-                    val takePhoto =
-                        registerForActivityResult(ActivityResultContracts.TakePicture()) {
-                            if (it) {
-                                onPhotoClicked(photoUri)
-                            }
-                        }
-                    createPhotoUri()
-                    takePhoto.launch(photoUri)
-                }
-            }
 
         cameraPermission.launch(
-            arrayOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
+                arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
         )
     }
 
@@ -100,9 +100,9 @@ abstract class EkoPickerActivity<T : ViewDataBinding, V : EkoBaseViewModel> :
 
         photoFile?.also {
             photoUri = FileProvider.getUriForFile(
-                this,
-                packageName,
-                it
+                    this,
+                    packageName,
+                    it
             )
         }
     }
@@ -111,12 +111,12 @@ abstract class EkoPickerActivity<T : ViewDataBinding, V : EkoBaseViewModel> :
     private fun createImageFile(): File {
         // Create an image file name
         val timeStamp: String =
-            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+                SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
+                "JPEG_${timeStamp}_", /* prefix */
+                ".jpg", /* suffix */
+                storageDir /* directory */
         )
     }
 }

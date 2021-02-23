@@ -34,7 +34,7 @@ import kotlinx.android.synthetic.main.amity_fragment_user_profile_page.refreshLa
 const val ARG_USER_ID = "com.ekoapp.ekosdk.uikit.community.profile.userid"
 
 class EkoUserProfilePageFragment internal constructor() : EkoBaseFragment(),
-    AppBarLayout.OnOffsetChangedListener {
+        AppBarLayout.OnOffsetChangedListener {
     private var TAG = EkoUserProfilePageFragment::class.java.canonicalName
 
     lateinit var mViewModel: EkoUserProfileViewModel
@@ -48,23 +48,23 @@ class EkoUserProfilePageFragment internal constructor() : EkoBaseFragment(),
         mViewModel.userId = requireArguments().getString(ARG_USER_ID)
 
         fragmentStateAdapter = EkoFragmentStateAdapter(
-            childFragmentManager,
-            requireActivity().lifecycle
+                childFragmentManager,
+                requireActivity().lifecycle
         )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         mViewModel = ViewModelProvider(requireActivity()).get(EkoUserProfileViewModel::class.java)
         mBinding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.amity_fragment_user_profile_page,
-                container,
-                false
-            )
+                DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.amity_fragment_user_profile_page,
+                        container,
+                        false
+                )
         return mBinding.root
     }
 
@@ -139,28 +139,28 @@ class EkoUserProfilePageFragment internal constructor() : EkoBaseFragment(),
         mBinding.userProfileHeader.setIsLoggedInUser(mViewModel.isLoggedInUser())
         mViewModel.getUser()?.let {
             disposable.add(
-                it
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ result ->
-                        mBinding.userProfileHeader.setUserData(result)
-                        fabCreatePost.visibility =
-                            if (mViewModel.isLoggedInUser()) View.VISIBLE else View.GONE
-                    }, {
-                        Log.d(TAG, it.message ?: "")
-                    })
+                    it
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ result ->
+                                mBinding.userProfileHeader.setUserData(result)
+                                fabCreatePost.visibility =
+                                        if (mViewModel.isLoggedInUser()) View.VISIBLE else View.GONE
+                            }, {
+                                Log.d(TAG, it.message ?: "")
+                            })
             )
         }
     }
 
     private fun initTabLayout() {
         fragmentStateAdapter.setFragmentList(
-            arrayListOf(
-                EkoFragmentStateAdapter.EkoPagerModel(
-                    getString(R.string.amity_timeline),
-                    getTimeLineFragment()
+                arrayListOf(
+                        EkoFragmentStateAdapter.EkoPagerModel(
+                                getString(R.string.amity_timeline),
+                                getTimeLineFragment()
+                        )
                 )
-            )
         )
         tabLayout.setAdapter(fragmentStateAdapter)
     }
@@ -172,7 +172,7 @@ class EkoUserProfilePageFragment internal constructor() : EkoBaseFragment(),
             return EkoMyFeedFragment()
         } else {
             return EkoUserFeedFragment.Builder().userId(mViewModel.userId!!)
-                .build(activity as AppCompatActivity)
+                    .build(activity as AppCompatActivity)
         }
     }
 
@@ -190,7 +190,7 @@ class EkoUserProfilePageFragment internal constructor() : EkoBaseFragment(),
             }
 
             fragment.mViewModel =
-                ViewModelProvider(activity).get(EkoUserProfileViewModel::class.java)
+                    ViewModelProvider(activity).get(EkoUserProfileViewModel::class.java)
             fragment.mViewModel.feedFragmentDelegate = feedFragmentDelegate
             fragment.mViewModel.editUserProfileClickListener = editUserProfileClickListener
             return fragment

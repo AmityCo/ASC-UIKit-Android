@@ -29,9 +29,9 @@ class EkoToolBar : MaterialToolbar {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            context,
+            attrs,
+            defStyleAttr
     ) {
         init()
     }
@@ -61,8 +61,8 @@ class EkoToolBar : MaterialToolbar {
     fun setLeftDrawable(value: Drawable?, color: Int? = null) {
         mBinding.leftDrawable = value
         if (color != null && mBinding.leftDrawable != null) {
-            mBinding.leftDrawable!!.colorFilter =
-                PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+            mBinding.leftDrawable?.colorFilter =
+                    PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
         }
 
     }
@@ -79,16 +79,16 @@ class EkoToolBar : MaterialToolbar {
     private fun toggleRightTextColor(value: Boolean) {
         if (value) {
             tv_right.setTextColor(
-                ColorPaletteUtil.getColor(
-                    ContextCompat.getColor(context, R.color.amityColorHighlight),
-                    ColorShade.DEFAULT
-                )
+                    ColorPaletteUtil.getColor(
+                            ContextCompat.getColor(context, R.color.amityColorHighlight),
+                            ColorShade.DEFAULT
+                    )
             )
         } else {
             tv_right.setTextColor(
-                ColorPaletteUtil.getColor(
-                    ContextCompat.getColor(context, R.color.amityColorHighlight), ColorShade.SHADE2
-                )
+                    ColorPaletteUtil.getColor(
+                            ContextCompat.getColor(context, R.color.amityColorHighlight), ColorShade.SHADE2
+                    )
             )
         }
     }
@@ -96,8 +96,8 @@ class EkoToolBar : MaterialToolbar {
     fun setRightDrawable(value: Drawable?, color: Int? = null) {
         mBinding.rightDrawable = value
         if (color != null && mBinding.rightDrawable != null) {
-            mBinding.rightDrawable!!.colorFilter =
-                PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+            mBinding.rightDrawable?.colorFilter =
+                    PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
         }
     }
 

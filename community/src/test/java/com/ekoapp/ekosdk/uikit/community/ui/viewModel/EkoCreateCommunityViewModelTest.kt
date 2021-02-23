@@ -60,7 +60,7 @@ class EkoCreateCommunityViewModelTest {
         every { EkoClient.newCommunityRepository() } returns communityRepository
         every {
             communityRepository.createCommunity(any())
-                .isPublic(any()).description(any()).userIds(any()).build().create()
+                    .isPublic(any()).description(any()).userIds(any()).build().create()
         } returns Single.just(ekoCommunity)
 
         val viewModel = EkoCreateCommunityViewModel()
@@ -78,7 +78,7 @@ class EkoCreateCommunityViewModelTest {
         every { EkoClient.newCommunityRepository() } returns communityRepository
         every {
             communityRepository.updateCommunity(any())
-                .displayName(any()).isPublic(any()).description(any()).build().update()
+                    .displayName(any()).isPublic(any()).description(any()).build().update()
         } returns Single.just(ekoCommunity)
 
         val viewModel = EkoCreateCommunityViewModel()

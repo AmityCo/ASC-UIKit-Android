@@ -4,9 +4,9 @@ import androidx.databinding.Observable
 import androidx.lifecycle.ViewModel
 import com.ekoapp.ekosdk.EkoClient
 import com.ekoapp.ekosdk.permission.EkoPermission
+import com.ekoapp.ekosdk.uikit.utils.Event
 import com.ekoapp.ekosdk.uikit.model.EventIdentifier
 import com.ekoapp.ekosdk.uikit.model.EventType
-import com.ekoapp.ekosdk.uikit.utils.Event
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -18,25 +18,26 @@ import io.reactivex.disposables.Disposable
  */
 open class EkoBaseViewModel : ViewModel() {
 
-    private val compositeDisposable: CompositeDisposable by lazy {
+    protected val compositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }
 
     val onEventReceived: Event<EventType> = Event()
 
     fun checkModeratorPermissionAtCommunity(
-        permission: EkoPermission,
-        communityId: String
+            permission: EkoPermission,
+            communityId: String
     ): Flowable<Boolean> {
-        return EkoClient.hasPermission(permission).atCommunity(communityId).check()
+        return EkoClient.hasPermission(permission).atCommunity(communityId)
+                .check()
     }
 
     fun checkModeratorPermissionAtChannel(
-        permission: EkoPermission,
-        channelId: String
+            permission: EkoPermission,
+            channelId: String
     ): Flowable<Boolean> {
         return EkoClient.hasPermission(permission).atChannel(channelId)
-            .check()
+                .check()
     }
 
     fun checkPermissionAtGlobal(permission: EkoPermission): Flowable<Boolean> {
@@ -61,11 +62,11 @@ open class EkoBaseViewModel : ViewModel() {
      */
     @Suppress("UNCHECKED_CAST")
     fun <T : Observable> T.addOnPropertyChanged(callback: (T) -> Unit) =
-        object : Observable.OnPropertyChangedCallback() {
-            @Suppress("UNCHECKED_CAST")
-            override fun onPropertyChanged(observable: Observable?, i: Int) =
-                callback(observable as T)
-        }.also { addOnPropertyChangedCallback(it) }
+            object : Observable.OnPropertyChangedCallback() {
+                @Suppress("UNCHECKED_CAST")
+                override fun onPropertyChanged(observable: Observable?, i: Int) =
+                        callback(observable as T)
+            }.also { addOnPropertyChangedCallback(it) }
 
     /**
      * add disposable to [compositeDisposable] to dispose later

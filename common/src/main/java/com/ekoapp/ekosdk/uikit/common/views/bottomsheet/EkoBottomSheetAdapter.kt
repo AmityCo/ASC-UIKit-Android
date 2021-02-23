@@ -1,6 +1,7 @@
 package com.ekoapp.ekosdk.uikit.common.views.bottomsheet
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -8,12 +9,15 @@ import com.ekoapp.ekosdk.uikit.R
 import com.ekoapp.ekosdk.uikit.databinding.AmityItemBottomSheetBinding
 import com.ekoapp.ekosdk.uikit.model.EkoMenuItem
 
-class EkoBottomSheetAdapter(private val list: List<EkoMenuItem>,
-                            private val listener: IEkoMenuItemClickListener?) : RecyclerView.Adapter<EkoBottomSheetAdapter.BottomSheetViewHolder>() {
+class EkoBottomSheetAdapter(
+        private val list: List<EkoMenuItem>,
+        private val listener: IEkoMenuItemClickListener?
+) : RecyclerView.Adapter<EkoBottomSheetAdapter.BottomSheetViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomSheetViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding: AmityItemBottomSheetBinding = DataBindingUtil.inflate(inflater, R.layout.amity_item_bottom_sheet, parent, false)
+        val binding: AmityItemBottomSheetBinding =
+                DataBindingUtil.inflate(inflater, R.layout.amity_item_bottom_sheet, parent, false)
         return BottomSheetViewHolder(binding, listener)
     }
 
@@ -32,8 +36,12 @@ class EkoBottomSheetAdapter(private val list: List<EkoMenuItem>,
             if (item != null) {
                 binding.menuItem = item
                 binding.listener = listener
-                binding.alertColor = item.title == itemView.context.getString(R.string.amity_remove_user)
+                binding.alertColor = isTitleEqualRemove(item, itemView)
             }
         }
+    }
+
+    private fun isTitleEqualRemove(item: EkoMenuItem, itemView: View): Boolean {
+        return item.title == itemView.context.getString(R.string.amity_remove_user)
     }
 }

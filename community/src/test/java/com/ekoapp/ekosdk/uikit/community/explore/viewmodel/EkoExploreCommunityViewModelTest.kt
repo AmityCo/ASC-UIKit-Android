@@ -68,8 +68,8 @@ class EkoExploreCommunityViewModelTest {
         every { EkoClient.newCommunityRepository() } returns communityRepository
         every {
             communityRepository.getAllCategories().sortBy(EkoCommunityCategorySortOption.NAME)
-                .includeDeleted(false)
-                .build().query()
+                    .includeDeleted(false)
+                    .build().query()
         } returns Flowable.just(mockList)
 
         val viewModel = EkoExploreCommunityViewModel()

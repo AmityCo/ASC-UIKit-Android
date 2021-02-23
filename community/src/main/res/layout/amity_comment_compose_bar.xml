@@ -14,29 +14,43 @@
         android:layout_height="wrap_content"
         tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avProfile"
-            style="@style/CircularAvatarStyle"
-            backgroundColorShade="@{ColorShade.SHADE3}"
-            ekoBackgroundColor="@{@color/amityColorPrimary}"
-            android:layout_width="@dimen/twenty_eight"
-            android:layout_height="@dimen/twenty_eight"
-            android:layout_marginBottom="@dimen/four"
-            android:src="@drawable/amity_ic_default_profile1"
+        <Button
+            android:id="@+id/btnPost"
+            style="@style/TextStyleEkoBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="0dp"
+            android:text="@string/amity_post_caps"
+            app:buttonDisabledTextColor="@{@color/amityColorHighlight}"
+            app:buttonDisabledTextColorShade="@{ColorShade.SHADE2}"
+            app:buttonEnabledTextColor="@{@color/amityColorHighlight}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
         <RelativeLayout
             android:id="@+id/layoutPostComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/eight"
             android:layout_marginEnd="@dimen/eight"
+            android:layout_marginStart="@dimen/eight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnPost"
             app:layout_constraintStart_toEndOf="@id/avProfile"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivExpand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/etPostComment"
+                android:layout_alignEnd="@+id/etPostComment"
+                android:layout_marginBottom="@dimen/four"
+                android:padding="5dp"
+                android:src="@drawable/amity_ic_expand_comment_box" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPostComment"
@@ -48,8 +62,8 @@
                 android:inputType="textMultiLine"
                 android:maxLines="8"
                 android:minHeight="@dimen/forty"
-                android:paddingStart="@dimen/eight"
                 android:paddingEnd="@dimen/thirty"
+                android:paddingStart="@dimen/eight"
                 android:textColor="@color/amityColorBase"
                 android:textColorHint="@color/amityColorBase"
                 app:colorShade="@{ColorShade.SHADE4}"
@@ -57,33 +71,19 @@
                 app:roundedCorner="@{true}"
                 app:textColorHintShade="@{ColorShade.SHADE2}" />
 
-            <ImageView
-                android:id="@+id/ivExpand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/etPostComment"
-                android:layout_alignBottom="@+id/etPostComment"
-                android:layout_marginBottom="@dimen/four"
-                android:padding="5dp"
-                android:src="@drawable/amity_ic_expand_comment_box" />
-
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btnPost"
-            style="@style/TextStyleEkoBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:padding="0dp"
-            android:text="@string/amity_post_caps"
-            app:buttonDisabledTextColor="@{@color/amityColorHighlight}"
-            app:buttonDisabledTextColorShade="@{ColorShade.SHADE2}"
-            app:buttonEnabledTextColor="@{@color/amityColorHighlight}"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/avProfile"
+            style="@style/CircularAvatarStyle"
+            backgroundColorShade="@{ColorShade.SHADE3}"
+            ekoBackgroundColor="@{@color/amityColorPrimary}"
+            android:layout_width="@dimen/twenty_eight"
+            android:layout_height="@dimen/twenty_eight"
+            android:layout_marginBottom="@dimen/four"
+            android:src="@drawable/amity_ic_default_profile1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </merge>
 </layout>

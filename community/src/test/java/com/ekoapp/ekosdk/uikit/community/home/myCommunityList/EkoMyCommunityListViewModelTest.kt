@@ -27,9 +27,9 @@ class EkoMyCommunityListViewModelTest {
         every { EkoClient.newCommunityRepository() } returns communityRepository
         every {
             communityRepository.getCommunityCollection().withKeyword(any())
-                .filter(EkoCommunityFilter.MEMBER).sortBy(EkoCommunitySortOption.DISPLAY_NAME)
-                .includeDeleted(false)
-                .build().query()
+                    .filter(EkoCommunityFilter.MEMBER).sortBy(EkoCommunitySortOption.DISPLAY_NAME)
+                    .includeDeleted(false)
+                    .build().query()
         } returns Flowable.just(mockList)
 
         val viewModel = EkoMyCommunityListViewModel()

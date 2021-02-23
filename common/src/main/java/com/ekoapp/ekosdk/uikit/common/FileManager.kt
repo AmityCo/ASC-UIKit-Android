@@ -40,98 +40,103 @@ class FileManager {
                 val client = EkoOkHttp.newBuilder().build()
 
                 val fetchConfiguration = FetchConfiguration.Builder(mContext)
-                    .setDownloadConcurrentLimit(10)
-                    .enableLogging(true)
-                    .setHttpDownloader(
-                        OkHttpDownloader(
-                            client,
-                            Downloader.FileDownloaderType.PARALLEL
+                        .setDownloadConcurrentLimit(10)
+                        .enableLogging(true)
+                        .setHttpDownloader(
+                                OkHttpDownloader(
+                                        client,
+                                        Downloader.FileDownloaderType.PARALLEL
+                                )
                         )
-                    )
-                    .enableRetryOnNetworkGain(true)
-                    .setNotificationManager(object : DefaultFetchNotificationManager(mContext) {
+                        .enableRetryOnNetworkGain(true)
+                        .setNotificationManager(object : DefaultFetchNotificationManager(mContext) {
 
-                        override fun getFetchInstanceForNamespace(namespace: String): Fetch {
-                            return Fetch.getDefaultInstance()
-                        }
-
-                        override fun shouldUpdateNotification(downloadNotification: DownloadNotification): Boolean {
-                            if (downloadNotification.status == Status.CANCELLED) {
-                                return true
-                            } else {
-                                return super.shouldUpdateNotification(downloadNotification)
-                            }
-                        }
-
-                        override fun updateNotification(
-                            notificationBuilder: NotificationCompat.Builder,
-                            downloadNotification: DownloadNotification, context: Context
-                        ) {
-                            super.updateNotification(
-                                notificationBuilder,
-                                downloadNotification,
-                                context
-                            )
-
-                            notificationBuilder
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                                .setContentTitle(downloadNotification.title)
-                                .setOngoing(downloadNotification.isOnGoingNotification)
-                                .setOnlyAlertOnce(true)
-                                .setAutoCancel(true)
-                                .clearActions()
-
-                            if (downloadNotification.isCompleted) {
-                                notificationBuilder.setContentText("Download complete.")
-                            } else if (downloadNotification.isDownloading)
-                                Toast.makeText(context, "Downloading file...", Toast.LENGTH_SHORT)
-                                    .show()
-                            else {
-                                // do nothing
+                            override fun getFetchInstanceForNamespace(namespace: String): Fetch {
+                                return Fetch.getDefaultInstance()
                             }
 
-                            if (downloadNotification.isFailed || downloadNotification.isCompleted) {
-                                notificationBuilder.setProgress(0, 0, false)
-                            } else {
-                                val progressIndeterminate =
-                                    downloadNotification.progressIndeterminate
-                                val maxProgress =
-                                    if (downloadNotification.progressIndeterminate) 0 else 100
-                                val progress =
-                                    if (downloadNotification.progress < 0) 0 else downloadNotification.progress
-                                notificationBuilder.setProgress(
-                                    maxProgress,
-                                    progress,
-                                    progressIndeterminate
+                            override fun shouldUpdateNotification(downloadNotification: DownloadNotification): Boolean {
+                                if (downloadNotification.status == Status.CANCELLED) {
+                                    return true
+                                } else {
+                                    return super.shouldUpdateNotification(downloadNotification)
+                                }
+                            }
+
+                            override fun updateNotification(
+                                    notificationBuilder: NotificationCompat.Builder,
+                                    downloadNotification: DownloadNotification,
+                                    context: Context
+                            ) {
+                                super.updateNotification(
+                                        notificationBuilder,
+                                        downloadNotification,
+                                        context
                                 )
-                            }
 
-                            val file = File(filePath)
-                            val uri = if (isAndroidQAndAbove()) {
-                                FileProvider.getUriForFile(
-                                    context,
-                                    context.packageName + ".UikitCommonProvider",
-                                    file
+                                notificationBuilder
+                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                        .setContentTitle(downloadNotification.title)
+                                        .setOngoing(downloadNotification.isOnGoingNotification)
+                                        .setOnlyAlertOnce(true)
+                                        .setAutoCancel(true)
+                                        .clearActions()
+
+                                if (downloadNotification.isCompleted) {
+                                    notificationBuilder.setContentText("Download complete.")
+                                } else if (downloadNotification.isDownloading)
+                                    Toast.makeText(
+                                            context,
+                                            "Downloading file...",
+                                            Toast.LENGTH_SHORT
+                                    ).show()
+                                else {
+                                    // do nothing
+                                }
+
+                                if (downloadNotification.isFailed || downloadNotification.isCompleted) {
+                                    notificationBuilder.setProgress(0, 0, false)
+                                } else {
+                                    val progressIndeterminate =
+                                            downloadNotification.progressIndeterminate
+                                    val maxProgress =
+                                            if (downloadNotification.progressIndeterminate) 0 else 100
+                                    val progress =
+                                            if (downloadNotification.progress < 0) 0
+                                            else downloadNotification.progress
+                                    notificationBuilder.setProgress(
+                                            maxProgress,
+                                            progress,
+                                            progressIndeterminate
+                                    )
+                                }
+
+                                val file = File(filePath)
+                                val uri = if (isAndroidQAndAbove()) {
+                                    FileProvider.getUriForFile(
+                                            context,
+                                            context.packageName + ".UikitCommonProvider",
+                                            file
+                                    )
+                                } else {
+                                    Uri.fromFile(file)
+                                }
+                                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                intent.setDataAndType(uri, mimeType)
+
+                                mPendingIntent = PendingIntent.getActivity(
+                                        mContext,
+                                        0,
+                                        intent,
+                                        PendingIntent.FLAG_UPDATE_CURRENT
                                 )
-                            } else {
-                                Uri.fromFile(file)
+                                notificationBuilder.setContentIntent(mPendingIntent)
                             }
-                            val intent = Intent(Intent.ACTION_GET_CONTENT)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                            intent.setDataAndType(uri, mimeType)
-
-                            mPendingIntent = PendingIntent.getActivity(
-                                mContext,
-                                0,
-                                intent,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                            )
-                            notificationBuilder.setContentIntent(mPendingIntent)
-                        }
-                    })
-                    .build()
+                        })
+                        .build()
 
                 val request = Request(url, filePath)
                 request.priority = Priority.HIGH
@@ -160,33 +165,33 @@ class FileManager {
                                         val values = ContentValues()
                                         values.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
                                         values.put(
-                                            MediaStore.MediaColumns.RELATIVE_PATH,
-                                            Environment.DIRECTORY_DOWNLOADS
+                                                MediaStore.MediaColumns.RELATIVE_PATH,
+                                                Environment.DIRECTORY_DOWNLOADS
                                         )
                                         val fileUri = mContext.contentResolver.insert(
-                                            MediaStore.Downloads.EXTERNAL_CONTENT_URI, values
+                                                MediaStore.Downloads.EXTERNAL_CONTENT_URI, values
                                         )
                                         if (fileUri != null) {
                                             mContext.contentResolver.openOutputStream(fileUri)
-                                                ?.use { outputStream ->
-                                                    val bos = BufferedOutputStream(outputStream)
-                                                    val bytes = download.total.toInt()
-                                                    val buffer = BufferedInputStream(
-                                                        FileInputStream(
-                                                            File(download.file)
+                                                    ?.use { outputStream ->
+                                                        val bos = BufferedOutputStream(outputStream)
+                                                        val bytes = download.total.toInt()
+                                                        val buffer = BufferedInputStream(
+                                                                FileInputStream(
+                                                                        File(download.file)
+                                                                )
                                                         )
-                                                    )
-                                                    bos.write(buffer.readBytes(), 0, bytes)
-                                                    bos.flush()
-                                                    bos.close()
-                                                }
+                                                        bos.write(buffer.readBytes(), 0, bytes)
+                                                        bos.flush()
+                                                        bos.close()
+                                                    }
                                             values.clear()
                                             values.put(MediaStore.Files.FileColumns.IS_PENDING, 0)
                                             mContext.contentResolver.update(
-                                                fileUri,
-                                                values,
-                                                null,
-                                                null
+                                                    fileUri,
+                                                    values,
+                                                    null,
+                                                    null
                                             )
                                         }
                                     }
@@ -207,25 +212,25 @@ class FileManager {
                     }
 
                     override fun onDownloadBlockUpdated(
-                        download: Download,
-                        downloadBlock: DownloadBlock,
-                        totalBlocks: Int
+                            download: Download,
+                            downloadBlock: DownloadBlock,
+                            totalBlocks: Int
                     ) {
 
                     }
 
                     override fun onStarted(
-                        download: Download,
-                        downloadBlocks: List<DownloadBlock>,
-                        totalBlocks: Int
+                            download: Download,
+                            downloadBlocks: List<DownloadBlock>,
+                            totalBlocks: Int
                     ) {
 
                     }
 
                     override fun onProgress(
-                        download: Download,
-                        etaInMilliSeconds: Long,
-                        downloadedBytesPerSecond: Long
+                            download: Download,
+                            etaInMilliSeconds: Long,
+                            downloadedBytesPerSecond: Long
                     ) {
 
                     }
@@ -263,7 +268,7 @@ class FileManager {
                 context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
             } else {
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    .toString()
+                        .toString()
             }
         }
 
@@ -285,10 +290,10 @@ class FileManager {
                 val client = EkoOkHttp.newBuilder().build()
 
                 val fetchConfiguration = FetchConfiguration.Builder(context)
-                    .setDownloadConcurrentLimit(10)
-                    .enableLogging(true)
-                    .setHttpDownloader(OkHttpDownloader(client))
-                    .build()
+                        .setDownloadConcurrentLimit(10)
+                        .enableLogging(true)
+                        .setHttpDownloader(OkHttpDownloader(client))
+                        .build()
                 val request = Request(url, file.absolutePath)
                 request.priority = Priority.HIGH
                 request.networkType = NetworkType.ALL
@@ -308,8 +313,8 @@ class FileManager {
                                     put(MediaStore.Files.FileColumns.DISPLAY_NAME, file.name)
                                     put(MediaStore.Files.FileColumns.MIME_TYPE, ".mp3")
                                     put(
-                                        MediaStore.Files.FileColumns.RELATIVE_PATH,
-                                        Environment.DIRECTORY_DOWNLOADS
+                                            MediaStore.Files.FileColumns.RELATIVE_PATH,
+                                            Environment.DIRECTORY_DOWNLOADS
                                     )
                                     put(MediaStore.Files.FileColumns.IS_PENDING, 1)
                                 }
@@ -327,9 +332,9 @@ class FileManager {
                     }
 
                     override fun onDownloadBlockUpdated(
-                        download: Download,
-                        downloadBlock: DownloadBlock,
-                        totalBlocks: Int
+                            download: Download,
+                            downloadBlock: DownloadBlock,
+                            totalBlocks: Int
                     ) {
                     }
 
@@ -344,9 +349,9 @@ class FileManager {
                     }
 
                     override fun onProgress(
-                        download: Download,
-                        etaInMilliSeconds: Long,
-                        downloadedBytesPerSecond: Long
+                            download: Download,
+                            etaInMilliSeconds: Long,
+                            downloadedBytesPerSecond: Long
                     ) {
                         listener.onProgressUpdate(download.progress)
                     }
@@ -361,9 +366,9 @@ class FileManager {
                     }
 
                     override fun onStarted(
-                        download: Download,
-                        downloadBlocks: List<DownloadBlock>,
-                        totalBlocks: Int
+                            download: Download,
+                            downloadBlocks: List<DownloadBlock>,
+                            totalBlocks: Int
                     ) {
                     }
 

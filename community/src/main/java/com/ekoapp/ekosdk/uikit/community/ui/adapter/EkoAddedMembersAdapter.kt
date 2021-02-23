@@ -12,7 +12,7 @@ import com.ekoapp.ekosdk.uikit.community.ui.viewHolder.EkoAddedMembersViewHolder
 import com.ekoapp.ekosdk.uikit.community.utils.SelectMemberItemDiffCallBack
 
 class EkoAddedMembersAdapter(private val listener: EkoAddedMemberClickListener) :
-    EkoBaseRecyclerViewAdapter<SelectMemberItem>() {
+        EkoBaseRecyclerViewAdapter<SelectMemberItem>() {
     override fun getLayoutId(position: Int, obj: SelectMemberItem?): Int {
         return when (obj?.name) {
             "ADD" -> R.layout.amity_view_added_member_with_add_icon
@@ -30,8 +30,8 @@ class EkoAddedMembersAdapter(private val listener: EkoAddedMemberClickListener) 
         return when (viewType) {
             R.layout.amity_view_added_member_with_count -> EkoAddedMembersCountViewHolder(view, listener)
             R.layout.amity_view_added_member_with_add_icon -> EkoAddedMemberWithAddButtonViewHolder(
-                view,
-                listener
+                    view,
+                    listener
             )
             else -> EkoAddedMembersViewHolder(view, listener)
         }

@@ -13,11 +13,13 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.INewsFeedItemActionLi
 import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.IPostFileItemClickListener
 import com.ekoapp.ekosdk.uikit.community.newsfeed.util.EkoTimelineType
 
-class EkoNewsFeedAdapter(private val timelineType: EkoTimelineType,
-                         private val itemActionListener: INewsFeedItemActionListener,
-                         private val imageClickListener: INewsFeedImageClickListener?,
-                         private val loadMoreFilesClickListener: EkoPostViewFileAdapter.ILoadMoreFilesClickListener?,
-                         private val fileItemClickListener: IPostFileItemClickListener?) : EkoBaseRecyclerViewPagedAdapter<EkoPost>(diffCallBack) {
+class EkoNewsFeedAdapter(
+        private val timelineType: EkoTimelineType,
+        private val itemActionListener: INewsFeedItemActionListener,
+        private val imageClickListener: INewsFeedImageClickListener?,
+        private val loadMoreFilesClickListener: EkoPostViewFileAdapter.ILoadMoreFilesClickListener?,
+        private val fileItemClickListener: IPostFileItemClickListener?
+) : EkoBaseRecyclerViewPagedAdapter<EkoPost>(diffCallBack) {
 
     override fun getLayoutId(position: Int, obj: EkoPost?): Int {
         return obj?.let { ekoPost ->
@@ -100,7 +102,10 @@ class EkoNewsFeedAdapter(private val timelineType: EkoTimelineType,
 
         }
 
-        private fun areContentSame(oldComments: List<EkoComment>, newComments: List<EkoComment>): Boolean {
+        private fun areContentSame(
+                oldComments: List<EkoComment>,
+                newComments: List<EkoComment>
+        ): Boolean {
             for ((index, _) in oldComments.withIndex()) {
                 if (oldComments[index].getData() != newComments[index].getData()
                         || oldComments[index].getReactionCount() != newComments[index].getReactionCount()

@@ -21,7 +21,7 @@ object ScreenUtils {
 
     private fun getScreenWidthHeight(context: Context): Point {
         val wm =
-            context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+                context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
         val point = Point()
         display.getRealSize(point)

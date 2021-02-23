@@ -11,28 +11,28 @@ import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.INewsFeedCommentShowA
 import com.ekoapp.ekosdk.uikit.community.newsfeed.listener.INewsFeedCommentShowMoreActionListener
 
 class EkoNewsFeedCommentAdapter(
-    val itemClickListener: INewsFeedCommentItemClickListener?,
-    private val showAllReplyListener: INewsFeedCommentShowAllReplyListener?,
-    private val showMoreActionListener: INewsFeedCommentShowMoreActionListener?,
-    private val preExpandCommentId: String? = null,
-    var readOnlyMode: Boolean = false
+        val itemClickListener: INewsFeedCommentItemClickListener?,
+        private val showAllReplyListener: INewsFeedCommentShowAllReplyListener?,
+        private val showMoreActionListener: INewsFeedCommentShowMoreActionListener?,
+        private val preExpandCommentId: String? = null,
+        var readOnlyMode: Boolean = false
 ) : EkoBaseRecyclerViewAdapter<EkoComment>() {
     var subItemCount: Int? = null
 
 
     constructor(
-        itemCount: Int,
-        itemClickListener: INewsFeedCommentItemClickListener?,
-        showAllReplyListener: INewsFeedCommentShowAllReplyListener?,
-        showMoreActionListener: INewsFeedCommentShowMoreActionListener?,
-        preExpandCommentId: String? = null,
-        readOnlyMode: Boolean = false
+            itemCount: Int,
+            itemClickListener: INewsFeedCommentItemClickListener?,
+            showAllReplyListener: INewsFeedCommentShowAllReplyListener?,
+            showMoreActionListener: INewsFeedCommentShowMoreActionListener?,
+            preExpandCommentId: String? = null,
+            readOnlyMode: Boolean = false
     ) : this(
-        itemClickListener,
-        showAllReplyListener,
-        showMoreActionListener,
-        preExpandCommentId,
-        readOnlyMode
+            itemClickListener,
+            showAllReplyListener,
+            showMoreActionListener,
+            preExpandCommentId,
+            readOnlyMode
     ) {
         this.subItemCount = itemCount
     }
@@ -55,11 +55,11 @@ class EkoNewsFeedCommentAdapter(
             EkoNewsFeedCommentDeletedViewHolder(view)
         else {
             EkoNewsFeedCommentViewHolder(
-                view,
-                subItemCount,
-                itemClickListener,
-                showAllReplyListener,
-                showMoreActionListener, preExpandCommentId, readOnlyMode
+                    view,
+                    subItemCount,
+                    itemClickListener,
+                    showAllReplyListener,
+                    showMoreActionListener, preExpandCommentId, readOnlyMode
             )
         }
     }
@@ -69,8 +69,8 @@ class EkoNewsFeedCommentAdapter(
     }
 
     class EkoNewsFeedCommentDiffUtil(
-        private val oldList: List<EkoComment>,
-        private val newList: List<EkoComment>
+            private val oldList: List<EkoComment>,
+            private val newList: List<EkoComment>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size
